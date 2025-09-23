@@ -51,7 +51,7 @@ const MenuBar = () => {
                   </MenubarItem>
                 ))}
                 <MenubarItem asChild className="p-0">
-                  <Button className="w-full bg-lime-neon text-black hover:bg-lime-neon/90 rounded-none shadow-cta-inner-glow font-montserrat-extra-thin">
+                  <Button className="w-full bg-lime-neon text-black hover:bg-lime-neon/90 rounded-none shadow-cta-inner-glow font-roboto-regular">
                     Chat With Us
                   </Button>
                 </MenubarItem>
@@ -65,7 +65,7 @@ const MenuBar = () => {
                 <Link to={link.path}>{link.name}</Link>
               </Button>
             ))}
-            <Button className="bg-lime-neon text-black hover:bg-lime-neon/90 rounded-full px-6 py-2 shadow-cta-inner-glow font-montserrat-extra-thin">
+            <Button className="bg-lime-neon text-black hover:bg-lime-neon/90 rounded-full px-6 py-2 shadow-cta-inner-glow font-roboto-regular">
               Chat With Us
             </Button>
           </nav>

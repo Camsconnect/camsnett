@@ -20,6 +20,7 @@ export default {
     extend: {
       fontFamily: {
         'roboto-thin': ['Roboto', 'sans-serif'],
+        'roboto-regular': ['Roboto', 'sans-serif'], // Added Roboto Regular
         'roboto-medium': ['Roboto', 'sans-serif'],
         'montserrat-extra-thin': ['Montserrat', 'sans-serif'],
       },
