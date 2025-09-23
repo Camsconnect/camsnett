@@ -33,7 +33,7 @@ const MenuBar = () => {
 
       <div className="container relative mx-auto max-w-screen-md flex h-14 items-center justify-between rounded-full bg-menubar/10 px-6 shadow-outer-glass backdrop-blur-3xl border border-menubar-border/15 shadow-inner-glass-bottom shadow-inner-glass-stroke supports-[backdrop-filter]:bg-menubar/10">
         <Link to="/" className="text-lg font-bold text-white">
-          My App
+          Camsnett
         </Link>
         {isMobile ? (
           <Menubar className="border-none bg-transparent">
