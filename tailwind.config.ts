@@ -63,8 +63,8 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         menubar: {
-          DEFAULT: "hsl(240 10% 15%)", // Dark purplish grey
-          foreground: "hsl(0 0% 98%)", // Off-white
+          DEFAULT: "hsl(0 0% 98%)", // Changed to off-white for a lighter glass effect
+          foreground: "hsl(240 10% 15%)", // Dark purplish grey for contrast
         },
         lime: {
           50: '#f7fee7',
