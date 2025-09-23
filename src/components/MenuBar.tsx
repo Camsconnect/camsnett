@@ -39,12 +39,12 @@ const MenuBar = () => {
           <Menubar className="border-none bg-transparent">
             <MenubarMenu>
               <MenubarTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-menubar-foreground">
+                <Button variant="ghost" size="icon" className="text-white">
                   <MenuIcon className="h-5 w-5" />
                   <span className="sr-only">Toggle menu</span>
                 </Button>
               </MenubarTrigger>
-              <MenubarContent align="end" className="bg-menubar/80 text-menubar-foreground border border-menubar-border/15 backdrop-blur-xl">
+              <MenubarContent align="end" className="bg-menubar/80 text-white border border-menubar-border/15 backdrop-blur-xl">
                 {navLinks.map((link) => (
                   <MenubarItem key={link.name} asChild>
                     <Link to={link.path}>{link.name}</Link>
@@ -61,7 +61,7 @@ const MenuBar = () => {
         ) : (
           <nav className="flex items-center space-x-4">
             {navLinks.map((link) => (
-              <Button key={link.name} variant="ghost" asChild className="text-menubar-foreground hover:bg-menubar-border/10">
+              <Button key={link.name} variant="ghost" asChild className="text-white hover:bg-menubar-border/10">
                 <Link to={link.path}>{link.name}</Link>
               </Button>
             ))}
