@@ -63,8 +63,9 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         menubar: {
-          DEFAULT: "hsl(0 0% 98%)", // Changed to off-white for a lighter glass effect
-          foreground: "hsl(240 10% 15%)", // Dark purplish grey for contrast
+          DEFAULT: "hsl(var(--menubar-background))", // Dark charcoal base
+          foreground: "hsl(var(--menubar-foreground))", // Dark text
+          border: "hsl(var(--menubar-border))", // White base for border
         },
         lime: {
           50: '#f7fee7',
@@ -78,6 +79,7 @@ export default {
           800: '#3f6212',
           900: '#365314',
           950: '#1a2e05',
+          neon: '#B6FF2E', // New neon lime for CTA
         }
       },
       borderRadius: {
@@ -106,6 +108,18 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      backdropBlur: {
+        '3xl': '30px', // Custom strong blur
+      },
+      boxShadow: {
+        'outer-glass': '0 10px 40px rgba(0,0,0,0.35)', // Soft outer drop shadow
+        'inner-glass-bottom': 'inset 0 2px 14px rgba(0,0,0,0.35)', // Inner shadow for depth
+        'inner-glass-stroke': 'inset 0 0 0 1px rgba(255,255,255,0.08)', // Subtle inner white stroke
+        'cta-inner-glow': 'inset 0 0 8px rgba(182, 255, 46, 0.6)', // CTA inner glow
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
     },
   },

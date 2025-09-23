@@ -26,7 +26,12 @@ const MenuBar = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full flex justify-center py-4">
-      <div className="container mx-auto max-w-screen-md flex h-14 items-center justify-between rounded-full bg-menubar px-6 shadow-lg backdrop-blur-lg supports-[backdrop-filter]:bg-menubar/60">
+      {/* Soft purple backlight */}
+      <div className="absolute inset-0 -z-10 flex items-center justify-center pointer-events-none">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-radial from-[#7B2CFF] to-[#4429B9] rounded-full opacity-50 blur-3xl" style={{ transform: 'translate(20%, -20%)' }}></div>
+      </div>
+
+      <div className="container relative mx-auto max-w-screen-md flex h-14 items-center justify-between rounded-full bg-menubar/10 px-6 shadow-outer-glass backdrop-blur-3xl border border-menubar-border/15 shadow-inner-glass-bottom shadow-inner-glass-stroke supports-[backdrop-filter]:bg-menubar/10">
         <Link to="/" className="text-lg font-bold text-menubar-foreground">
           My App
         </Link>
@@ -39,14 +44,14 @@ const MenuBar = () => {
                   <span className="sr-only">Toggle menu</span>
                 </Button>
               </MenubarTrigger>
-              <MenubarContent align="end" className="bg-menubar text-menubar-foreground border-menubar">
+              <MenubarContent align="end" className="bg-menubar/80 text-menubar-foreground border border-menubar-border/15 backdrop-blur-xl">
                 {navLinks.map((link) => (
                   <MenubarItem key={link.name} asChild>
                     <Link to={link.path}>{link.name}</Link>
                   </MenubarItem>
                 ))}
                 <MenubarItem asChild className="p-0">
-                  <Button className="w-full bg-lime-500 text-black hover:bg-lime-600 rounded-none">
+                  <Button className="w-full bg-lime-neon text-black hover:bg-lime-neon/90 rounded-none shadow-cta-inner-glow">
                     Chat With Us
                   </Button>
                 </MenubarItem>
@@ -56,11 +61,11 @@ const MenuBar = () => {
         ) : (
           <nav className="flex items-center space-x-4">
             {navLinks.map((link) => (
-              <Button key={link.name} variant="ghost" asChild className="text-menubar-foreground hover:bg-menubar/20">
+              <Button key={link.name} variant="ghost" asChild className="text-menubar-foreground hover:bg-menubar-border/10">
                 <Link to={link.path}>{link.name}</Link>
               </Button>
             ))}
-            <Button className="bg-lime-500 text-black hover:bg-lime-600 rounded-full px-6 py-2">
+            <Button className="bg-lime-neon text-black hover:bg-lime-neon/90 rounded-full px-6 py-2 shadow-cta-inner-glow">
               Chat With Us
             </Button>
           </nav>
