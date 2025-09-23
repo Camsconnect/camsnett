@@ -65,7 +65,6 @@ export default {
         menubar: {
           DEFAULT: "hsl(var(--menubar-background))", // Dark charcoal base
           foreground: "hsl(var(--menubar-foreground))", // Dark text
-          border: "hsl(var(--menubar-border))", // White base for border
         },
         lime: {
           50: '#f7fee7',
