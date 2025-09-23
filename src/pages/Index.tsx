@@ -6,7 +6,7 @@ import HeroSection from "@/components/HeroSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col">
       <MenuBar />
       <main className="flex-grow">
         <HeroSection />

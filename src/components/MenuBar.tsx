@@ -25,7 +25,7 @@ const MenuBar = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full flex justify-center py-4">
       <div className="container mx-auto max-w-screen-md flex h-14 items-center justify-between rounded-full bg-menubar px-6 shadow-lg backdrop-blur supports-[backdrop-filter]:bg-menubar/60">
         <Link to="/" className="text-lg font-bold text-menubar-foreground">
           My App

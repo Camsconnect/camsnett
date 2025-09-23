@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button";
 const HeroSection = () => {
   return (
     <section
-      className="relative w-full py-20 md:py-32 lg:py-48 bg-cover bg-center text-white flex items-center justify-center"
+      className="relative w-full min-h-screen pt-[88px] bg-cover bg-center text-white flex flex-col items-center justify-center"
       style={{ backgroundImage: "url('/hero-background.jpeg')" }}
     >
       {/* Overlay to improve text readability */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
-      <div className="container relative z-10 text-center px-4 md:px-6">
+      <div className="container relative z-10 text-center px-4 md:px-6 flex-grow flex flex-col items-center justify-center">
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight mb-6 drop-shadow-lg">
           Welcome to Your Awesome App
         </h1>
