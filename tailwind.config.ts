@@ -19,11 +19,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        'roboto-thin': ['Roboto', 'sans-serif'],
-        'roboto-regular': ['Roboto', 'sans-serif'],
-        'roboto-medium': ['Roboto', 'sans-serif'],
-        'montserrat-extra-thin': ['Montserrat', 'sans-serif'],
-        'montserrat-thin': ['Montserrat', 'sans-serif'], // Added Montserrat Thin
+        sans: ['Montserrat', 'sans-serif'], // Set Montserrat as default sans font
       },
       colors: {
         border: "hsl(var(--border))",
