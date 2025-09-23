@@ -21,6 +21,7 @@ export default {
       fontFamily: {
         'roboto-thin': ['Roboto', 'sans-serif'],
         'roboto-medium': ['Roboto', 'sans-serif'],
+        'montserrat-extra-thin': ['Montserrat', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

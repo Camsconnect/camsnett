@@ -32,7 +32,7 @@ const MenuBar = () => {
       </div>
 
       <div className="container relative mx-auto max-w-screen-md flex h-14 items-center justify-between rounded-full bg-menubar/10 px-6 shadow-outer-glass backdrop-blur-3xl border border-menubar-border/15 shadow-inner-glass-bottom shadow-inner-glass-stroke supports-[backdrop-filter]:bg-menubar/10">
-        <Link to="/" className="text-lg font-roboto-medium text-white">
+        <Link to="/" className="text-lg font-montserrat-extra-thin text-white">
           Camsnett
         </Link>
         {isMobile ? (
@@ -47,11 +47,11 @@ const MenuBar = () => {
               <MenubarContent align="end" className="bg-menubar/80 text-white border border-menubar-border/15 backdrop-blur-xl">
                 {navLinks.map((link) => (
                   <MenubarItem key={link.name} asChild>
-                    <Link to={link.path} className="font-roboto-thin">{link.name}</Link>
+                    <Link to={link.path} className="font-montserrat-extra-thin">{link.name}</Link>
                   </MenubarItem>
                 ))}
                 <MenubarItem asChild className="p-0">
-                  <Button className="w-full bg-lime-neon text-black hover:bg-lime-neon/90 rounded-none shadow-cta-inner-glow font-roboto-medium">
+                  <Button className="w-full bg-lime-neon text-black hover:bg-lime-neon/90 rounded-none shadow-cta-inner-glow font-montserrat-extra-thin">
                     Chat With Us
                   </Button>
                 </MenubarItem>
@@ -61,11 +61,11 @@ const MenuBar = () => {
         ) : (
           <nav className="flex items-center space-x-4">
             {navLinks.map((link) => (
-              <Button key={link.name} variant="ghost" asChild className="text-white hover:bg-menubar-border/10 font-roboto-thin">
+              <Button key={link.name} variant="ghost" asChild className="text-white hover:bg-menubar-border/10 font-montserrat-extra-thin">
                 <Link to={link.path}>{link.name}</Link>
               </Button>
             ))}
-            <Button className="bg-lime-neon text-black hover:bg-lime-neon/90 rounded-full px-6 py-2 shadow-cta-inner-glow font-roboto-medium">
+            <Button className="bg-lime-neon text-black hover:bg-lime-neon/90 rounded-full px-6 py-2 shadow-cta-inner-glow font-montserrat-extra-thin">
               Chat With Us
             </Button>
           </nav>
