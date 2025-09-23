@@ -20,9 +20,10 @@ export default {
     extend: {
       fontFamily: {
         'roboto-thin': ['Roboto', 'sans-serif'],
-        'roboto-regular': ['Roboto', 'sans-serif'], // Added Roboto Regular
+        'roboto-regular': ['Roboto', 'sans-serif'],
         'roboto-medium': ['Roboto', 'sans-serif'],
         'montserrat-extra-thin': ['Montserrat', 'sans-serif'],
+        'montserrat-thin': ['Montserrat', 'sans-serif'], // Added Montserrat Thin
       },
       colors: {
         border: "hsl(var(--border))",

@@ -12,10 +12,10 @@ const HeroSection = () => {
       {/* Overlay to improve text readability */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="container relative z-10 text-center px-4 md:px-6 flex-grow flex flex-col items-center justify-center">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight mb-6 drop-shadow-lg">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-montserrat-thin tracking-tight leading-tight mb-6 drop-shadow-lg">
           Your Online business success starts here
         </h1>
-        <p className="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto mb-10 opacity-90 drop-shadow-md">
+        <p className="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto mb-10 opacity-90 drop-shadow-md font-montserrat-thin">
           From Modern website design to Business Apps, SEO, Social media growth and management and marketing creating sales and graphics design for content and marketing
         </p>
         <Button size="lg" className="bg-white text-emerald-700 hover:bg-gray-100 hover:text-emerald-800 text-lg px-8 py-3 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105">
