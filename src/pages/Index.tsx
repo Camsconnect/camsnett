@@ -1,16 +1,17 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+"use client";
 
 import { MadeWithDyad } from "@/components/made-with-dyad";
+import MenuBar from "@/components/MenuBar";
+import HeroSection from "@/components/HeroSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">
-          Start building your amazing project here!
-        </p>
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <MenuBar />
+      <main className="flex-grow">
+        <HeroSection />
+        {/* You can add more sections here later */}
+      </main>
       <MadeWithDyad />
     </div>
   );
