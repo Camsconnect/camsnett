@@ -18,6 +18,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        'roboto-thin': ['Roboto', 'sans-serif'],
+        'roboto-medium': ['Roboto', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -64,7 +68,7 @@ export default {
         },
         menubar: {
           DEFAULT: "hsl(var(--menubar-background))", // Dark charcoal base
-          foreground: "hsl(var(--menubar-foreground))", // Dark text
+          foreground: "hsl(var(--menubar-foreground))", // Light text for dark mode
           border: "hsl(var(--menubar-border))", // White base for border
         },
         lime: {
