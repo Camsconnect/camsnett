@@ -30,7 +30,7 @@ const SubBrandsSection = () => {
             key={brand.name}
             className="relative z-10 flex flex-col items-center p-8 rounded-xl bg-menubar/10 text-white shadow-outer-glass backdrop-blur-3xl border border-menubar-border/15 shadow-inner-glass-bottom shadow-inner-glass-stroke supports-[backdrop-filter]:bg-menubar/10 text-center"
           >
-            <img src={brand.logo} alt={`${brand.name} logo`} className="h-24 object-contain mb-6" />
+            <img src={brand.logo} alt={`${brand.name} logo`} className="w-full h-48 object-cover rounded-md mb-6" />
             <h3 className="text-2xl font-semibold mb-2">{brand.name}</h3>
             <p className="text-lg opacity-90">{brand.description}</p>
           </div>
