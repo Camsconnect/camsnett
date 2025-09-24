@@ -9,6 +9,7 @@ import Pricing from "./pages/Pricing";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import About from "./pages/About";
+import InteractiveBackground from "./components/InteractiveBackground"; // Import the new component
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <InteractiveBackground /> {/* Render the interactive background */}
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/pricing" element={<Pricing />} />

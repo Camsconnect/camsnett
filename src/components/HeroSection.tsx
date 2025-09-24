@@ -8,12 +8,6 @@ const HeroSection = () => {
     <section
       className="relative w-full min-h-screen pt-[88px] text-white flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Soft violet glow (bottom left) */}
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-radial from-[#5B2EFF] to-transparent rounded-full opacity-20 blur-3xl transform translate-x-[-20%] translate-y-[20%]"></div>
-
-      {/* Faint cyan/blue highlight (top right) */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-radial from-[#1E90FF] to-transparent rounded-full opacity-20 blur-3xl transform translate-x-[20%] translate-y-[-20%]"></div>
-
       {/* Very soft radial gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/10 to-black/30"></div>
 
