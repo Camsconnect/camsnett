@@ -2,7 +2,7 @@
 
 import React from "react";
 import MenuBar from "@/components/MenuBar";
-import { MadeWithDyad } = from "@/components/made-with-dyad";
+import { MadeWithDyad } from "@/components/made-with-dyad";
 
 const About = () => {
   return (
