@@ -11,7 +11,7 @@ const Index = () => {
       <MenuBar />
       <main className="flex-grow">
         <HeroSection />
-        <div className="container mx-auto px-4 py-16">
+        <div className="container mx-auto px-4 py-16 max-w-5xl">
           <PricingCard />
         </div>
         {/* You can add more sections here later */}
