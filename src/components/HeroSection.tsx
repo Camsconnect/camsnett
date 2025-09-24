@@ -8,9 +8,6 @@ const HeroSection = () => {
     <section
       className="relative w-full min-h-screen pt-[88px] text-white flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Base dark gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0A0C12] to-[#000000]"></div>
-
       {/* Soft violet glow (bottom left) */}
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-radial from-[#5B2EFF] to-transparent rounded-full opacity-20 blur-3xl transform translate-x-[-20%] translate-y-[20%]"></div>
 

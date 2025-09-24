@@ -4,52 +4,52 @@
 
 @layer base {
   :root {
-    --background: 140 20% 95%; /* Very light green/off-white */
-    --foreground: 140 20% 15%; /* Dark green */
+    /* Removed --background, now applied directly to body */
+    --foreground: 140 20% 90%; /* Light green for text on dark background */
 
-    --card: 140 20% 100%; /* White */
-    --card-foreground: 140 20% 15%; /* Dark green */
+    --card: 140 20% 10%; /* Very dark green */
+    --card-foreground: 140 20% 90%; /* Light green */
 
-    --popover: 140 20% 100%; /* White */
-    --popover-foreground: 140 20% 15%; /* Dark green */
+    --popover: 140 20% 10%; /* Very dark green */
+    --popover-foreground: 140 20% 90%; /* Light green */
 
-    --primary: 140 40% 30%; /* Medium dark green */
-    --primary-foreground: 140 20% 98%; /* Light green/off-white */
+    --primary: 140 40% 60%; /* Medium light green */
+    --primary-foreground: 140 20% 10%; /* Very dark green */
 
-    --secondary: 140 20% 85%; /* Light muted green */
-    --secondary-foreground: 140 20% 15%; /* Dark green */
+    --secondary: 140 15% 20%; /* Dark muted green */
+    --secondary-foreground: 140 20% 90%; /* Light green */
 
-    --muted: 140 20% 85%; /* Light muted green */
-    --muted-foreground: 140 10% 40%; /* Grayish green */
+    --muted: 140 15% 20%; /* Dark muted green */
+    --muted-foreground: 140 10% 60%; /* Grayish light green */
 
-    --accent: 140 20% 85%; /* Light muted green */
-    --accent-foreground: 140 20% 15%; /* Dark green */
+    --accent: 140 15% 20%; /* Dark muted green */
+    --accent-foreground: 140 20% 90%; /* Light green */
 
-    --destructive: 0 84.2% 60.2%; /* Red */
+    --destructive: 0 62.8% 30.6%; /* Red */
     --destructive-foreground: 210 40% 98%; /* Off-white */
 
-    --border: 140 15% 70%; /* Light green border */
-    --input: 140 15% 70%; /* Light green input border */
-    --ring: 140 40% 30%; /* Medium dark green ring */
+    --border: 140 15% 25%; /* Dark green border */
+    --input: 140 15% 25%; /* Dark green input border */
+    --ring: 140 40% 60%; /* Medium light green ring */
 
     --radius: 0.5rem;
 
-    --sidebar-background: 140 20% 98%; /* Light green sidebar */
-    --sidebar-foreground: 140 5.3% 26.1%; /* Darker green sidebar text */
-    --sidebar-primary: 140 5.9% 10%; /* Very dark green sidebar primary */
-    --sidebar-primary-foreground: 140 0% 98%; /* Off-white sidebar primary text */
-    --sidebar-accent: 140 4.8% 95.9%; /* Light green sidebar accent */
-    --sidebar-accent-foreground: 140 5.9% 10%; /* Very dark green sidebar accent text */
-    --sidebar-border: 140 13% 91%; /* Light green sidebar border */
+    --sidebar-background: 140 5.9% 10%; /* Very dark green sidebar */
+    --sidebar-foreground: 140 4.8% 95.9%; /* Light green sidebar text */
+    --sidebar-primary: 140 76.3% 48%; /* Vibrant green sidebar primary */
+    --sidebar-primary-foreground: 140 0% 100%; /* White sidebar primary text */
+    --sidebar-accent: 140 3.7% 15.9%; /* Dark green sidebar accent */
+    --sidebar-accent-foreground: 140 4.8% 95.9%; /* Light green sidebar accent text */
+    --sidebar-border: 140 3.7% 15.9%; /* Dark green sidebar border */
     --sidebar-ring: 140 91.2% 59.8%; /* Vibrant green sidebar ring */
 
     --menubar-background: 220 10% 5%; /* Dark charcoal base */
-    --menubar-foreground: 240 10% 15%; /* Dark purplish grey for contrast */
+    --menubar-foreground: 240 10% 90%; /* Light text for dark mode */
     --menubar-border: 0 0% 100%; /* White base for border */
   }
 
   .dark {
-    --background: 140 20% 10%; /* Very dark green */
+    /* Removed --background, now applied directly to body */
     --foreground: 140 20% 90%; /* Light green */
 
     --card: 140 20% 10%; /* Very dark green */
@@ -100,6 +100,6 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-gradient-to-br from-[#0A0C12] to-[#000000] text-foreground font-sans min-h-screen;
   }
 }
