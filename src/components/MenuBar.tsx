@@ -10,7 +10,7 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { Button } from "@/components/ui/button";
-import { MenuIcon } from "lucide-react";
+import { Brain, MenuIcon } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const MenuBar = () => {
@@ -32,7 +32,8 @@ const MenuBar = () => {
       </div>
 
       <div className="container relative mx-auto max-w-screen-md flex h-14 items-center justify-between rounded-full bg-menubar/10 px-6 shadow-outer-glass backdrop-blur-3xl border border-menubar-border/15 shadow-inner-glass-bottom shadow-inner-glass-stroke supports-[backdrop-filter]:bg-menubar/10">
-        <Link to="/" className="text-lg font-thin text-white">
+        <Link to="/" className="flex items-center gap-2 text-lg font-thin text-white">
+          <Brain className="h-5 w-5" />
           Camsnett
         </Link>
         {isMobile ? (
