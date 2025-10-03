@@ -7,6 +7,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import aboutUsImage from "@/assets/about-us-image.jpeg";
 
 const AboutUsSection = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,7 @@ const AboutUsSection = () => {
       <div className="flex flex-col md:flex-row items-center gap-12">
         <div className="w-full md:w-1/2">
           <img
-            src="/about-us-image.jpeg"
+            src={aboutUsImage}
             alt="A diverse team of freelancers working in a modern office space"
             className="rounded-lg object-cover w-full h-full shadow-lg"
           />

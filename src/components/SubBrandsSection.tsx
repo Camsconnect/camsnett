@@ -1,21 +1,24 @@
 "use client";
 
 import React from "react";
+import camsConnectLogo from "@/assets/cams-connect-logo.png";
+import camsnettCoLogo from "@/assets/camsnett-co-logo.png";
+import camsnettListingsLogo from "@/assets/camsnett-listings-logo.png";
 
 const subBrands = [
   {
     name: "CAMS-CONNECT",
-    logo: "/cams-connect-logo.png",
+    logo: camsConnectLogo,
     description: "Seamless communication solutions for your business.",
   },
   {
     name: "CAMSNETT CO CREATIVE MINDS",
-    logo: "/camsnett-co-logo.png",
+    logo: camsnettCoLogo,
     description: "Innovative design and marketing strategies.",
   },
   {
     name: "camsnett listings",
-    logo: "/camsnett-listings-logo.png",
+    logo: camsnettListingsLogo,
     description: "Get listed, get leads, get sales with our powerful listings.",
   },
 ];
