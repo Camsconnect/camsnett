@@ -18,7 +18,7 @@ const HeroSection = () => {
         <p className="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto mb-10 opacity-90 drop-shadow-md font-thin">
           From modern website design to business apps, SEO, social media growth and management, marketing strategies, and graphic design, we help businesses stand out. We create professional branding that gives your business a unique image, builds trust, and generates quality leads.
         </p>
-        <Button size="lg" className="bg-white text-emerald-700 hover:bg-gray-100 hover:text-emerald-800 text-lg px-8 py-3 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105">
+        <Button size="lg" className="bg-white text-blue-700 hover:bg-gray-100 hover:text-blue-800 text-lg px-8 py-3 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105">
           Get Started
         </Button>
       </div>
