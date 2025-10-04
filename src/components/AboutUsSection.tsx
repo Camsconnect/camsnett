@@ -64,7 +64,7 @@ const AboutUsSection = () => {
               <CollapsibleTrigger asChild>
                 <Button
                   variant="outline"
-                  className="bg-transparent border-lime-neon text-lime-neon hover:bg-lime-neon hover:text-black rounded-full px-8 py-3 text-lg transition-colors duration-300"
+                  className="bg-transparent border-lime-neon text-lime-neon hover:bg-lime-neon hover:text-black rounded-full px-6 py-3 text-lg transition-colors duration-300"
                 >
                   {isOpen ? "Read Less" : "Read More"}
                 </Button>

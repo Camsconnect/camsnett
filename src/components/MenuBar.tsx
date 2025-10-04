@@ -66,7 +66,7 @@ const MenuBar = () => {
                 <Link to={link.path}>{link.name}</Link>
               </Button>
             ))}
-            <Button className="bg-lime-neon text-black hover:bg-lime-neon/90 rounded-full px-6 py-2 shadow-cta-inner-glow font-normal">
+            <Button className="bg-lime-neon text-black hover:bg-lime-neon/90 rounded-full px-4 py-2 shadow-cta-inner-glow font-normal">
               Chat With Us
             </Button>
           </nav>

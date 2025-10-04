@@ -54,7 +54,7 @@ const ServicesSection = () => {
               </p>
               <Button
                 variant="outline"
-                className="bg-transparent border-lime-neon text-lime-neon hover:bg-lime-neon hover:text-black rounded-full px-6 py-2 text-base transition-colors duration-300 mt-6"
+                className="bg-transparent border-lime-neon text-lime-neon hover:bg-lime-neon hover:text-black rounded-full px-4 py-2 text-base transition-colors duration-300 mt-6"
               >
                 Learn More
               </Button>
