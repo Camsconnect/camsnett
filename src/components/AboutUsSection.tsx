@@ -13,7 +13,7 @@ const AboutUsSection = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative z-10 w-full rounded-xl bg-menubar/10 p-8 text-white shadow-outer-glass backdrop-blur-3xl border border-menubar-border/15 shadow-inner-glass-bottom shadow-inner-glass-stroke supports-[backdrop-filter]:bg-menubar/10">
+    <div className="relative z-10 w-full rounded-xl bg-card p-8 text-foreground border shadow-sm">
       <h2 className="text-4xl font-thin mb-8 text-center">About Us</h2>
       <div className="flex flex-col md:flex-row items-center gap-12">
         <div className="w-full md:w-1/2">

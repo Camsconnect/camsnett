@@ -40,14 +40,14 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section className="w-full text-white">
+    <section className="w-full text-foreground">
       <h2 className="text-4xl font-thin text-center mb-12">Our Services</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {services.map((service, i) => (
           <div
             key={i}
-            className="relative z-10 w-full rounded-xl bg-menubar/10 text-left shadow-outer-glass backdrop-blur-3xl border border-menubar-border/15 shadow-inner-glass-bottom shadow-inner-glass-stroke supports-[backdrop-filter]:bg-menubar/10 flex flex-col overflow-hidden"
+            className="relative z-10 w-full rounded-xl bg-card text-left border shadow-sm flex flex-col overflow-hidden"
           >
             <img
               src={service.image}

@@ -26,14 +26,20 @@ const subBrands = [
 const SubBrandsSection = () => {
   return (
     <section className="container mx-auto px-4 py-16 max-w-7xl">
-      <h2 className="text-4xl font-thin text-white text-center mb-12">Our Ecosystem</h2>
+      <h2 className="text-4xl font-thin text-foreground text-center mb-12">
+        Our Ecosystem
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {subBrands.map((brand) => (
           <div
             key={brand.name}
-            className="relative z-10 flex flex-col items-center p-8 rounded-xl bg-menubar/10 text-white shadow-outer-glass backdrop-blur-3xl border border-menubar-border/15 shadow-inner-glass-bottom shadow-inner-glass-stroke supports-[backdrop-filter]:bg-menubar/10 text-center"
+            className="relative z-10 flex flex-col items-center p-8 rounded-xl bg-card text-foreground border shadow-sm text-center"
           >
-            <img src={brand.logo} alt={`${brand.name} logo`} className="w-full h-48 object-cover rounded-md mb-6" />
+            <img
+              src={brand.logo}
+              alt={`${brand.name} logo`}
+              className="w-full h-48 object-cover rounded-md mb-6"
+            />
             <h3 className="text-2xl font-semibold mb-2">{brand.name}</h3>
             <p className="text-lg opacity-90">{brand.description}</p>
           </div>
