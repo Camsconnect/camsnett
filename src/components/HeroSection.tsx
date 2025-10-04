@@ -21,11 +21,11 @@ const HeroSection = () => {
           <div className="flex flex-col gap-4 sm:flex-row">
             <Button
               size="lg"
-              className="bg-foreground text-background hover:bg-foreground/90 px-8 text-lg rounded-full"
+              className="bg-foreground text-background hover:bg-foreground/90 px-6 text-lg rounded-full"
             >
               Get Started
             </Button>
-            <Button size="lg" variant="outline" className="px-8 text-lg rounded-full">
+            <Button size="lg" variant="outline" className="px-6 text-lg rounded-full">
               Learn More
             </Button>
           </div>
