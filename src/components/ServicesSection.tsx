@@ -41,7 +41,7 @@ const services = [
 const ServicesSection = () => {
   return (
     <section className="w-full text-foreground">
-      <h2 className="text-4xl font-thin text-center mb-12">Our Services</h2>
+      <h2 className="text-4xl font-light text-center mb-12">Our Services</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {services.map((service, i) => (
@@ -57,7 +57,7 @@ const ServicesSection = () => {
             <div className="p-6 flex flex-col flex-grow">
               <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
               <div className="flex-grow">
-                <p className="text-base opacity-80 font-thin leading-relaxed">
+                <p className="text-base opacity-80 font-light leading-relaxed">
                   {service.description}
                 </p>
                 {service.features && (
@@ -65,7 +65,7 @@ const ServicesSection = () => {
                     <p className="text-base opacity-90 font-normal mb-2">
                       Our service includes:
                     </p>
-                    <ul className="list-disc list-inside space-y-2 text-base opacity-80 font-thin leading-relaxed">
+                    <ul className="list-disc list-inside space-y-2 text-base opacity-80 font-light leading-relaxed">
                       {service.features.map((feature, index) => (
                         <li key={index}>{feature}</li>
                       ))}

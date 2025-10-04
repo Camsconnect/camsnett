@@ -26,7 +26,7 @@ const subBrands = [
 const SubBrandsSection = () => {
   return (
     <section className="container mx-auto px-4 py-16 max-w-7xl">
-      <h2 className="text-4xl font-thin text-foreground text-center mb-12">
+      <h2 className="text-4xl font-light text-foreground text-center mb-12">
         Our Ecosystem
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

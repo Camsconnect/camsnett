@@ -29,7 +29,7 @@ const MenuBar = () => {
       <div className="container relative mx-auto max-w-screen-md flex h-14 items-center justify-between rounded-full bg-background/80 backdrop-blur-sm border border-border px-6 shadow-sm">
         <Link
           to="/"
-          className="flex items-center gap-2 text-lg font-thin text-foreground"
+          className="flex items-center gap-2 text-lg font-light text-foreground"
         >
           <Brain className="h-5 w-5" />
           Camsnett
@@ -49,7 +49,7 @@ const MenuBar = () => {
               >
                 {navLinks.map((link) => (
                   <MenubarItem key={link.name} asChild>
-                    <Link to={link.path} className="font-thin">
+                    <Link to={link.path} className="font-light">
                       {link.name}
                     </Link>
                   </MenubarItem>
@@ -69,7 +69,7 @@ const MenuBar = () => {
                 key={link.name}
                 variant="ghost"
                 asChild
-                className="text-foreground hover:bg-accent font-thin"
+                className="text-foreground hover:bg-accent font-light"
               >
                 <Link to={link.path}>{link.name}</Link>
               </Button>

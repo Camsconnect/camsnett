@@ -14,7 +14,7 @@ const AboutUsSection = () => {
 
   return (
     <div className="relative z-10 w-full rounded-xl bg-card p-8 text-foreground border shadow-sm">
-      <h2 className="text-4xl font-thin mb-8 text-center">About Us</h2>
+      <h2 className="text-4xl font-light mb-8 text-center">About Us</h2>
       <div className="flex flex-col md:flex-row items-center gap-12">
         <div className="w-full md:w-1/2">
           <img
