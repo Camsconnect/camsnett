@@ -25,7 +25,7 @@ const ServicesSection = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Service Card 1: Social Media */}
         <div className="relative z-10 w-full rounded-xl bg-menubar/10 p-6 text-left shadow-outer-glass backdrop-blur-3xl border border-menubar-border/15 shadow-inner-glass-bottom shadow-inner-glass-stroke supports-[backdrop-filter]:bg-menubar/10 flex flex-col">
           <Collapsible
