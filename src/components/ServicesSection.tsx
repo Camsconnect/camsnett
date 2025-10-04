@@ -2,38 +2,38 @@
 
 import React from "react";
 import socialMediaImage from "@/assets/social-media-service.jpeg";
-import { Button } from "@/components/ui/button";
 
 const services = [
   {
-    title: "Social Media Growth, Management & Marketing",
+    title: "Social Media Management",
+    price: "From $500",
+    duration: "4 weeks",
     description:
       "We help businesses grow and stand out online through strategic content, consistent branding, and performance-driven marketing.",
     image: socialMediaImage,
-    features: [
-      "Professional Graphics Design – Eye-catching visuals that reflect your brand.",
-      "Social Media Management – Consistent posting schedules tailored for growth.",
-      "Branding & Strategy – Building a strong, recognizable presence.",
-      "Consultancy – Expert guidance to sharpen your online voice.",
-      "Targeted Ads – Smart campaigns designed to maximize ROI and outperform competitors.",
-    ],
   },
   {
-    title: "Web Design & Development",
+    title: "Web Design (up to 6 pages)",
+    price: "From $1,500",
+    duration: "3 weeks",
     description:
-      "Modern, responsive websites that capture your brand and convert visitors into customers.",
+      "Modern, responsive websites that capture your brand and convert visitors into customers. Fully optimized for performance and SEO.",
     image: socialMediaImage,
   },
   {
     title: "Branding & Graphic Design",
+    price: "From $1,000",
+    duration: "2 weeks",
     description:
-      "Crafting unique brand identities and stunning visuals that tell your story.",
+      "Crafting unique brand identities and stunning visuals that tell your story, from logos to complete brand guidelines.",
     image: socialMediaImage,
   },
   {
     title: "Business App Development",
+    price: "From $5,000",
+    duration: "8 weeks",
     description:
-      "Custom applications to streamline your operations and enhance customer engagement.",
+      "Custom applications to streamline your operations, enhance customer engagement, and drive business growth.",
     image: socialMediaImage,
   },
 ];
@@ -43,43 +43,25 @@ const ServicesSection = () => {
     <section className="w-full text-foreground">
       <h2 className="text-4xl font-light text-center mb-12">Our Services</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {services.map((service, i) => (
-          <div
-            key={i}
-            className="relative z-10 w-full rounded-xl bg-card text-left border shadow-sm flex flex-col overflow-hidden"
-          >
-            <img
-              src={service.image}
-              alt={service.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-6 flex flex-col flex-grow">
-              <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-              <div className="flex-grow">
-                <p className="text-base opacity-80 font-light leading-relaxed">
-                  {service.description}
-                </p>
-                {service.features && (
-                  <div className="mt-4">
-                    <p className="text-base opacity-90 font-normal mb-2">
-                      Our service includes:
-                    </p>
-                    <ul className="list-disc list-inside space-y-2 text-base opacity-80 font-light leading-relaxed">
-                      {service.features.map((feature, index) => (
-                        <li key={index}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-              <Button
-                variant="outline"
-                className="bg-transparent border-brand-400 text-brand-400 hover:bg-brand-400 hover:text-primary-foreground rounded-full px-6 py-2 transition-colors duration-300 mt-6"
-              >
-                Learn More
-              </Button>
+          <div key={i} className="group cursor-pointer text-left">
+            <div className="overflow-hidden rounded-xl mb-4">
+              <img
+                src={service.image}
+                alt={service.title}
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+              />
             </div>
+            <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+            <div className="flex items-center text-sm text-muted-foreground mb-3">
+              <span>{service.price}</span>
+              <span className="mx-2">|</span>
+              <span>{service.duration}</span>
+            </div>
+            <p className="text-base text-muted-foreground font-light leading-relaxed">
+              {service.description}
+            </p>
           </div>
         ))}
       </div>
