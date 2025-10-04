@@ -7,7 +7,7 @@ const HeroSection = () => {
   return (
     <section className="w-full min-h-screen flex items-center pt-28 pb-12">
       <div className="container px-4 md:px-6 grid gap-10 lg:grid-cols-2 lg:gap-16 items-center">
-        <div className="flex flex-col justify-center space-y-6 text-left">
+        <div className="flex flex-col justify-center space-y-6 text-left order-2 lg:order-1">
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
             Your Online business success starts here
           </h1>
@@ -29,7 +29,7 @@ const HeroSection = () => {
             </Button>
           </div>
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center order-1 lg:order-2">
           <div className="bg-muted p-4 rounded-2xl shadow-md">
             <img
               alt="Hero"
