@@ -35,7 +35,7 @@ const HeroSection = () => {
             alt="Hero"
             className="rounded-xl object-cover"
             src={heroImage}
-            width="600"
+            width="700"
           />
         </div>
       </div>
