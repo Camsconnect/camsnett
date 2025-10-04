@@ -21,8 +21,25 @@ const services = [
   },
   {
     icon: <Users className="h-10 w-10 text-lime-neon mb-4" />,
-    title: "Social Media Management",
-    description: "Growing your audience and building a strong community around your brand with strategic social media management.",
+    title: "Social Media Growth, Management & Marketing",
+    description: (
+      <div className="space-y-4 text-base opacity-80 font-thin leading-relaxed">
+        <p>
+          We help businesses grow and stand out online through strategic content, consistent branding, and performance-driven marketing.
+        </p>
+        <p>Our service includes:</p>
+        <ul className="list-none space-y-2">
+          <li>🎨 Professional Graphics Design – Eye-catching visuals that reflect your brand.</li>
+          <li>📅 Social Media Management – Consistent posting schedules tailored for growth.</li>
+          <li>🧠 Branding & Strategy – Building a strong, recognizable presence.</li>
+          <li>📝 Consultancy – Expert guidance to sharpen your online voice.</li>
+          <li>📢 Targeted Ads – Smart campaigns designed to maximize ROI and outperform competitors.</li>
+        </ul>
+        <p>
+          When you come to us, we don’t just execute — we listen, analyze your current position, and craft strategies that go beyond your expectations. Our priority is to connect your brand with its audience, build lasting relationships, and turn engagement into real leads and sales.
+        </p>
+      </div>
+    ),
   },
   {
     icon: <Palette className="h-10 w-10 text-lime-neon mb-4" />,
@@ -48,9 +65,13 @@ const ServicesSection = () => {
           >
             {service.icon}
             <h3 className="text-2xl font-semibold mb-3">{service.title}</h3>
-            <p className="text-base opacity-80 font-thin leading-relaxed">
-              {service.description}
-            </p>
+            {typeof service.description === 'string' ? (
+              <p className="text-base opacity-80 font-thin leading-relaxed">
+                {service.description}
+              </p>
+            ) : (
+              service.description
+            )}
           </div>
         ))}
       </div>
