@@ -70,20 +70,20 @@ export default {
           foreground: "hsl(var(--menubar-foreground))", // Light text for dark mode
           border: "hsl(var(--menubar-border))", // White base for border
         },
-        lime: {
-          50: '#f7fee7',
-          100: '#ecfccb',
-          200: '#d9f99d',
-          300: '#bef264',
-          400: '#a3e635',
-          500: '#84cc16',
-          600: '#65a30d',
-          700: '#4d7c0f',
-          800: '#3f6212',
-          900: '#365314',
-          950: '#1a2e05',
-          neon: '#B6FF2E', // New neon lime for CTA
-        }
+        brand: {
+          50: '#e9f3f2',
+          100: '#d3e7e5',
+          200: '#a8d0cb',
+          300: '#7cbab1',
+          400: '#51a598',
+          500: '#388c7e',
+          600: '#2f7469',
+          700: '#225751',
+          800: '#1e4a45',
+          900: '#193d39',
+          950: '#0f2523',
+          neon: '#225751',
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -119,7 +119,7 @@ export default {
         'outer-glass': '0 10px 40px rgba(0,0,0,0.35)', // Soft outer drop shadow
         'inner-glass-bottom': 'inset 0 2px 14px rgba(0,0,0,0.35)', // Inner shadow for depth
         'inner-glass-stroke': 'inset 0 0 0 1px rgba(255,255,255,0.08)', // Subtle inner white stroke
-        'cta-inner-glow': 'inset 0 0 8px rgba(182, 255, 46, 0.6)', // CTA inner glow
+        'cta-inner-glow': 'inset 0 0 8px rgba(34, 87, 81, 0.6)', // CTA inner glow
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

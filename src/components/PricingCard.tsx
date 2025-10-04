@@ -10,7 +10,7 @@ const PricingCard = () => {
         Explore packages tailored for modern business online operation and
         reaching more customers and branding
       </p>
-      <p className="text-2xl font-semibold text-lime-neon">from $60/month</p>
+      <p className="text-2xl font-semibold text-brand-neon">from $60/month</p>
     </div>
   );
 };
