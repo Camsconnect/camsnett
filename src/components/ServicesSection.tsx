@@ -2,6 +2,7 @@
 
 import React from "react";
 import socialMediaImage from "@/assets/social-media-service.jpeg";
+import webDesignImage from "@/assets/web-design-service.jpeg";
 
 const services = [
   {
@@ -18,7 +19,7 @@ const services = [
     duration: "3 weeks",
     description:
       "Modern, responsive websites that capture your brand and convert visitors into customers. Fully optimized for performance and SEO.",
-    image: socialMediaImage,
+    image: webDesignImage,
   },
   {
     title: "Branding & Graphic Design",
