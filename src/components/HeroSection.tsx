@@ -19,22 +19,20 @@ const HeroSection = () => {
             businesses stand out. We create professional branding that gives your
             business a unique image, builds trust, and generates quality leads.
           </p>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <Button
-                size="lg"
-                className="bg-foreground text-background hover:bg-foreground/90 px-6 text-lg rounded-full"
-              >
-                Get Started
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="px-6 text-lg rounded-full"
-              >
-                Learn More
-              </Button>
-            </div>
+          <div className="flex flex-wrap items-center gap-4">
+            <Button
+              size="lg"
+              className="bg-foreground text-background hover:bg-foreground/90 px-6 text-lg rounded-full"
+            >
+              Get Started
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="px-6 text-lg rounded-full"
+            >
+              Learn More
+            </Button>
             <div className="flex items-center gap-3">
               <span className="text-muted-foreground font-light text-sm">
                 Follow us
@@ -43,23 +41,23 @@ const HeroSection = () => {
                 <a
                   href="#"
                   aria-label="Facebook"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="h-8 w-8 rounded-full border border-muted-foreground flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
                 >
-                  <Facebook className="h-5 w-5" />
+                  <Facebook className="h-4 w-4" />
                 </a>
                 <a
                   href="#"
                   aria-label="Instagram"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="h-8 w-8 rounded-full border border-muted-foreground flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
                 >
-                  <Instagram className="h-5 w-5" />
+                  <Instagram className="h-4 w-4" />
                 </a>
                 <a
                   href="#"
                   aria-label="LinkedIn"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="h-8 w-8 rounded-full border border-muted-foreground flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
                 >
-                  <Linkedin className="h-5 w-5" />
+                  <Linkedin className="h-4 w-4" />
                 </a>
               </div>
             </div>
