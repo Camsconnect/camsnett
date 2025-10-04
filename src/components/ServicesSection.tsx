@@ -22,19 +22,19 @@ const services = [
     title: "Web Design & Development",
     description:
       "Modern, responsive websites that capture your brand and convert visitors into customers.",
-    image: "/placeholder.svg",
+    image: socialMediaImage,
   },
   {
     title: "Branding & Graphic Design",
     description:
       "Crafting unique brand identities and stunning visuals that tell your story.",
-    image: "/placeholder.svg",
+    image: socialMediaImage,
   },
   {
     title: "Business App Development",
     description:
       "Custom applications to streamline your operations and enhance customer engagement.",
-    image: "/placeholder.svg",
+    image: socialMediaImage,
   },
 ];
 
