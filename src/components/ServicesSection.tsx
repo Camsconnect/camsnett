@@ -10,6 +10,13 @@ const services = [
     description:
       "We help businesses grow and stand out online through strategic content, consistent branding, and performance-driven marketing.",
     image: socialMediaImage,
+    features: [
+      "Professional Graphics Design – Eye-catching visuals that reflect your brand.",
+      "Social Media Management – Consistent posting schedules tailored for growth.",
+      "Branding & Strategy – Building a strong, recognizable presence.",
+      "Consultancy – Expert guidance to sharpen your online voice.",
+      "Targeted Ads – Smart campaigns designed to maximize ROI and outperform competitors.",
+    ],
   },
   {
     title: "Web Design & Development",
@@ -49,9 +56,23 @@ const ServicesSection = () => {
             />
             <div className="p-6 flex flex-col flex-grow">
               <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-              <p className="text-base opacity-80 font-thin leading-relaxed flex-grow">
-                {service.description}
-              </p>
+              <div className="flex-grow">
+                <p className="text-base opacity-80 font-thin leading-relaxed">
+                  {service.description}
+                </p>
+                {service.features && (
+                  <div className="mt-4">
+                    <p className="text-base opacity-90 font-normal mb-2">
+                      Our service includes:
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 text-base opacity-80 font-thin leading-relaxed">
+                      {service.features.map((feature, index) => (
+                        <li key={index}>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
               <Button
                 variant="outline"
                 className="bg-transparent border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-black rounded-full px-6 py-2 transition-colors duration-300 mt-6"
