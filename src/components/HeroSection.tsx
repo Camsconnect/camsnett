@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
+import heroImage from "@/assets/hero-image.png";
 
 const HeroSection = () => {
   return (
@@ -30,14 +31,12 @@ const HeroSection = () => {
           </div>
         </div>
         <div className="flex items-center justify-center order-1 lg:order-2">
-          <div className="bg-muted p-4 rounded-2xl shadow-md">
-            <img
-              alt="Hero"
-              className="rounded-xl object-cover"
-              src="/placeholder.svg"
-              width="550"
-            />
-          </div>
+          <img
+            alt="Hero"
+            className="rounded-xl object-cover"
+            src={heroImage}
+            width="550"
+          />
         </div>
       </div>
     </section>
