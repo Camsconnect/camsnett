@@ -7,8 +7,8 @@ import heroImage from "@/assets/hero-image.png";
 const HeroSection = () => {
   return (
     <section className="w-full min-h-screen flex items-center pt-28 pb-12">
-      <div className="container px-4 md:px-6 grid gap-10 lg:grid-cols-2 lg:gap-16 items-center max-w-screen-2xl">
-        <div className="flex flex-col justify-center space-y-6 text-left order-2 lg:order-1">
+      <div className="container px-4 md:px-6 grid gap-10 lg:grid-cols-5 lg:gap-16 items-center max-w-screen-2xl">
+        <div className="lg:col-span-2 flex flex-col justify-center space-y-6 text-left order-2 lg:order-1">
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
             Your Online business success starts here
           </h1>
@@ -30,12 +30,11 @@ const HeroSection = () => {
             </Button>
           </div>
         </div>
-        <div className="flex items-center justify-center order-1 lg:order-2">
+        <div className="lg:col-span-3 flex items-center justify-center order-1 lg:order-2">
           <img
             alt="Hero"
-            className="rounded-xl object-cover"
+            className="rounded-xl object-cover w-full"
             src={heroImage}
-            width="700"
           />
         </div>
       </div>
