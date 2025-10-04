@@ -36,6 +36,22 @@ const services = [
       "Custom applications to streamline your operations, enhance customer engagement, and drive business growth.",
     image: socialMediaImage,
   },
+  {
+    title: "Videography",
+    price: "From $1,200",
+    duration: "1-2 weeks",
+    description:
+      "Professional video production to showcase your brand, products, or services. From concept to final cut, we create compelling visual stories.",
+    image: socialMediaImage,
+  },
+  {
+    title: "3D Modeling & Animation",
+    price: "From $2,500",
+    duration: "4-6 weeks",
+    description:
+      "Bring your ideas to life with stunning 3D models and animations. Perfect for product visualization, architectural walkthroughs, and more.",
+    image: socialMediaImage,
+  },
 ];
 
 const ServicesSection = () => {
@@ -43,7 +59,7 @@ const ServicesSection = () => {
     <section className="w-full text-foreground">
       <h2 className="text-4xl font-light text-center mb-12">Our Services</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {services.map((service, i) => (
           <div key={i} className="group cursor-pointer text-left">
             <div className="overflow-hidden rounded-xl mb-4">
