@@ -3,6 +3,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-image.png";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 const HeroSection = () => {
   return (
@@ -18,16 +19,50 @@ const HeroSection = () => {
             businesses stand out. We create professional branding that gives your
             business a unique image, builds trust, and generates quality leads.
           </p>
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <Button
-              size="lg"
-              className="bg-foreground text-background hover:bg-foreground/90 px-6 text-lg rounded-full"
-            >
-              Get Started
-            </Button>
-            <Button size="lg" variant="outline" className="px-6 text-lg rounded-full">
-              Learn More
-            </Button>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <Button
+                size="lg"
+                className="bg-foreground text-background hover:bg-foreground/90 px-6 text-lg rounded-full"
+              >
+                Get Started
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="px-6 text-lg rounded-full"
+              >
+                Learn More
+              </Button>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="text-muted-foreground font-light text-sm">
+                Follow us
+              </span>
+              <div className="flex items-center gap-2">
+                <a
+                  href="#"
+                  aria-label="Facebook"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Facebook className="h-5 w-5" />
+                </a>
+                <a
+                  href="#"
+                  aria-label="Instagram"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Instagram className="h-5 w-5" />
+                </a>
+                <a
+                  href="#"
+                  aria-label="LinkedIn"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Linkedin className="h-5 w-5" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
         <div className="lg:col-span-3 flex items-center justify-center order-1 lg:order-2">
