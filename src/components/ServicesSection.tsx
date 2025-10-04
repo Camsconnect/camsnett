@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Users } from "lucide-react";
+import socialMediaImage from "@/assets/social-media-service.jpeg";
 
 const services = [
   {
@@ -31,18 +32,24 @@ const services = [
 const ServicesSection = () => {
   return (
     <div className="relative z-10 w-full rounded-xl bg-menubar/10 p-8 text-white shadow-outer-glass backdrop-blur-3xl border border-menubar-border/15 shadow-inner-glass-bottom shadow-inner-glass-stroke supports-[backdrop-filter]:bg-menubar/10">
-      <div className="grid grid-cols-1 gap-8">
-        {services.map((service, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-start p-6 rounded-lg bg-black/20 border border-white/10 transition-all duration-300 hover:border-lime-neon/50 hover:bg-black/40"
-          >
-            {service.icon}
-            <h3 className="text-2xl font-semibold mb-3">{service.title}</h3>
-            {service.description}
+      {services.map((service, index) => (
+        <div key={index} className="flex flex-col md:flex-row items-center gap-12">
+          <div className="w-full md:w-1/2">
+            <img
+              src={socialMediaImage}
+              alt="Business owner welcoming a customer to their shop"
+              className="rounded-lg object-cover w-full h-full shadow-lg"
+            />
           </div>
-        ))}
-      </div>
+          <div className="w-full md:w-1/2">
+            <div className="flex flex-col items-start">
+              {service.icon}
+              <h3 className="text-2xl font-semibold mb-3">{service.title}</h3>
+              {service.description}
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
