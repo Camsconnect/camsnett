@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 const HeroSection = () => {
   return (
     <section className="w-full min-h-screen flex items-center pt-28 pb-12">
-      <div className="container px-4 md:px-6 grid gap-10 lg:grid-cols-2 lg:gap-16 items-center">
+      <div className="container px-4 md:px-6 grid gap-10 lg:grid-cols-2 lg:gap-16 items-center max-w-screen-2xl">
         <div className="flex flex-col justify-center space-y-6 text-left order-2 lg:order-1">
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
             Your Online business success starts here
