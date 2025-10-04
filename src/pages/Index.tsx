@@ -6,6 +6,7 @@ import HeroSection from "@/components/HeroSection";
 import PricingCard from "@/components/PricingCard";
 import SubBrandsSection from "@/components/SubBrandsSection";
 import AboutUsSection from "@/components/AboutUsSection";
+import ServicesSection from "@/components/ServicesSection";
 
 const Index = () => {
   return (
@@ -15,6 +16,7 @@ const Index = () => {
         <HeroSection />
         <div className="container mx-auto px-4 py-16 max-w-5xl space-y-16">
           <AboutUsSection />
+          <ServicesSection />
           <PricingCard />
         </div>
         <SubBrandsSection />
