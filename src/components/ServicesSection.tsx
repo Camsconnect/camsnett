@@ -40,8 +40,8 @@ const services = [
   },
   {
     title: "Videography",
-    price: "From $1,200",
-    duration: "1-2 weeks",
+    price: "From $300",
+    duration: "1 week",
     description:
       "Professional video production to showcase your brand, products, or services. From concept to final cut, we create compelling visual stories.",
     image: socialMediaImage,
