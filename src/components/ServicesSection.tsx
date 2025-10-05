@@ -6,6 +6,7 @@ import webDesignImage from "@/assets/web-design-service.jpeg";
 import brandingGraphicsImage from "@/assets/branding-graphics-service.png";
 import businessAppImage from "@/assets/business-app-service.jpeg";
 import videographyImage from "@/assets/videography-service.jpeg";
+import threeDModelingImage from "@/assets/3d-modeling-service.jpeg";
 import { Button } from "@/components/ui/button";
 
 const services = [
@@ -55,7 +56,7 @@ const services = [
     duration: "2-4 weeks",
     description:
       "Bring your ideas to life with stunning 3D models and animations. Perfect for product visualization, architectural walkthroughs, and more.",
-    image: socialMediaImage,
+    image: threeDModelingImage,
   },
 ];
 
