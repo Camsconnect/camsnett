@@ -3,6 +3,7 @@
 import React from "react";
 import socialMediaImage from "@/assets/social-media-service.jpeg";
 import webDesignImage from "@/assets/web-design-service.jpeg";
+import brandingGraphicsImage from "@/assets/branding-graphics-service.png";
 import { Button } from "@/components/ui/button";
 
 const services = [
@@ -28,7 +29,7 @@ const services = [
     duration: "Printing and delivery",
     description:
       "Crafting unique brand identities and stunning visuals that tell your story, from logos to complete brand guidelines.",
-    image: socialMediaImage,
+    image: brandingGraphicsImage,
   },
   {
     title: "Business App Development",
