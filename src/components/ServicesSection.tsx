@@ -3,6 +3,7 @@
 import React from "react";
 import socialMediaImage from "@/assets/social-media-service.jpeg";
 import webDesignImage from "@/assets/web-design-service.jpeg";
+import { Button } from "@/components/ui/button";
 
 const services = [
   {
@@ -62,23 +63,31 @@ const ServicesSection = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {services.map((service, i) => (
-          <div key={i} className="group cursor-pointer text-left">
+          <div key={i} className="group text-left flex flex-col">
             <div className="overflow-hidden rounded-xl mb-4">
               <img
                 src={service.image}
                 alt={service.title}
-                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
               />
             </div>
-            <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-            <div className="flex items-center text-sm text-muted-foreground mb-3">
-              <span>{service.price}</span>
-              <span className="mx-2">|</span>
-              <span>{service.duration}</span>
+            <div className="flex flex-col flex-grow">
+              <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+              <div className="flex items-center text-sm text-muted-foreground mb-3">
+                <span>{service.price}</span>
+                <span className="mx-2">|</span>
+                <span>{service.duration}</span>
+              </div>
+              <p className="text-base text-muted-foreground font-light leading-relaxed flex-grow mb-4">
+                {service.description}
+              </p>
+              <Button
+                variant="outline"
+                className="mt-auto w-fit rounded-full px-6"
+              >
+                Learn More
+              </Button>
             </div>
-            <p className="text-base text-muted-foreground font-light leading-relaxed">
-              {service.description}
-            </p>
           </div>
         ))}
       </div>
