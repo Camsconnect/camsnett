@@ -32,8 +32,8 @@ const services = [
   },
   {
     title: "Business App Development",
-    price: "From $5,000",
-    duration: "8 weeks",
+    price: "From $300",
+    duration: "3 weeks",
     description:
       "Custom applications to streamline your operations, enhance customer engagement, and drive business growth.",
     image: socialMediaImage,
