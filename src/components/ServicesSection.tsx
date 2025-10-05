@@ -7,8 +7,8 @@ import webDesignImage from "@/assets/web-design-service.jpeg";
 const services = [
   {
     title: "Social Media Management",
-    price: "From $500",
-    duration: "4 weeks",
+    price: "From $60 per month",
+    duration: "Weekly reports",
     description:
       "We help businesses grow and stand out online through strategic content, consistent branding, and performance-driven marketing.",
     image: socialMediaImage,
