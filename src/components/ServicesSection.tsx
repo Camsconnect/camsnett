@@ -5,6 +5,7 @@ import socialMediaImage from "@/assets/social-media-service.jpeg";
 import webDesignImage from "@/assets/web-design-service.jpeg";
 import brandingGraphicsImage from "@/assets/branding-graphics-service.png";
 import businessAppImage from "@/assets/business-app-service.jpeg";
+import videographyImage from "@/assets/videography-service.jpeg";
 import { Button } from "@/components/ui/button";
 
 const services = [
@@ -46,7 +47,7 @@ const services = [
     duration: "1 week",
     description:
       "Professional video production to showcase your brand, products, or services. From concept to final cut, we create compelling visual stories.",
-    image: socialMediaImage,
+    image: videographyImage,
   },
   {
     title: "3D Modeling & Animation",
