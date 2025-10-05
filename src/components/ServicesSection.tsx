@@ -4,6 +4,7 @@ import React from "react";
 import socialMediaImage from "@/assets/social-media-service.jpeg";
 import webDesignImage from "@/assets/web-design-service.jpeg";
 import brandingGraphicsImage from "@/assets/branding-graphics-service.png";
+import businessAppImage from "@/assets/business-app-service.jpeg";
 import { Button } from "@/components/ui/button";
 
 const services = [
@@ -37,7 +38,7 @@ const services = [
     duration: "3 weeks",
     description:
       "Custom applications to streamline your operations, enhance customer engagement, and drive business growth.",
-    image: socialMediaImage,
+    image: businessAppImage,
   },
   {
     title: "Videography",
