@@ -48,8 +48,8 @@ const services = [
   },
   {
     title: "3D Modeling & Animation",
-    price: "From $2,500",
-    duration: "4-6 weeks",
+    price: "From $1500",
+    duration: "2-4 weeks",
     description:
       "Bring your ideas to life with stunning 3D models and animations. Perfect for product visualization, architectural walkthroughs, and more.",
     image: socialMediaImage,
