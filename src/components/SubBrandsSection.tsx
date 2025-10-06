@@ -25,7 +25,7 @@ const subBrands = [
 
 const SubBrandsSection = () => {
   return (
-    <section className="container mx-auto px-4 py-16 max-w-screen-2xl">
+    <section>
       <h2 className="text-4xl font-light text-foreground text-center mb-12">
         Our Ecosystem
       </h2>
