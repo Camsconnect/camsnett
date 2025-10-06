@@ -16,12 +16,12 @@ const Index = () => {
       <main className="flex-grow pt-28">
         <SearchBar />
         <HeroSection />
+        <SubBrandsSection />
         <div className="container mx-auto px-4 py-16 max-w-screen-2xl space-y-16">
           <AboutUsSection />
           <ServicesSection />
           <PricingCard />
         </div>
-        <SubBrandsSection />
       </main>
       <MadeWithDyad />
     </div>
