@@ -9,6 +9,7 @@ import Pricing from "./pages/Pricing";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import About from "./pages/About";
+import SocialMediaManagement from "./pages/SocialMediaManagement";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,10 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/about" element={<About />} />
+          <Route
+            path="/services/social-media-management"
+            element={<SocialMediaManagement />}
+          />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

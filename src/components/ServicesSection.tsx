@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Link } from "react-router-dom";
 import socialMediaImage from "@/assets/social-media-service.jpeg";
 import webDesignImage from "@/assets/web-design-service.jpeg";
 import brandingGraphicsImage from "@/assets/branding-graphics-service.png";
@@ -17,6 +18,7 @@ const services = [
     description:
       "We help businesses grow and stand out online through strategic content, consistent branding, and performance-driven marketing.",
     image: socialMediaImage,
+    link: "/services/social-media-management",
   },
   {
     title: "Web Design (up to 6 pages)",
@@ -86,10 +88,15 @@ const ServicesSection = () => {
                 {service.description}
               </p>
               <Button
+                asChild={!!service.link}
                 variant="outline"
                 className="mt-auto w-fit rounded-full px-6"
               >
-                Learn More
+                {service.link ? (
+                  <Link to={service.link}>Learn More</Link>
+                ) : (
+                  <span>Learn More</span>
+                )}
               </Button>
             </div>
           </div>
