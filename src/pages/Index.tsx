@@ -3,7 +3,6 @@
 import { MadeWithDyad } from "@/components/made-with-dyad";
 import MenuBar from "@/components/MenuBar";
 import HeroSection from "@/components/HeroSection";
-import PricingCard from "@/components/PricingCard";
 import SubBrandsSection from "@/components/SubBrandsSection";
 import AboutUsSection from "@/components/AboutUsSection";
 import ServicesSection from "@/components/ServicesSection";
@@ -20,7 +19,6 @@ const Index = () => {
           <AboutUsSection />
           <ServicesSection />
           <SubBrandsSection />
-          <PricingCard />
         </div>
       </main>
       <MadeWithDyad />
