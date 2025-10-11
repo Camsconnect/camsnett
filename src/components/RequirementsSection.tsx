@@ -114,7 +114,10 @@ const RequirementsSection = () => {
         ))}
       </div>
       <div className="mt-12">
-        <Button onClick={handleDownloadPdf}>
+        <Button
+          onClick={handleDownloadPdf}
+          className="animate-breathing-glow"
+        >
           <Download className="mr-2 h-4 w-4" />
           Download Requirements PDF
         </Button>

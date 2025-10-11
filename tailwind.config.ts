@@ -107,10 +107,19 @@ export default {
             height: "0",
           },
         },
+        "breathing-glow": {
+          "0%, 100%": {
+            boxShadow: "0 0 10px hsl(var(--sidebar-primary)), 0 0 15px hsl(var(--sidebar-primary))",
+          },
+          "50%": {
+            boxShadow: "0 0 25px hsl(var(--sidebar-primary)), 0 0 40px hsl(var(--sidebar-primary))",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "breathing-glow": "breathing-glow 4s ease-in-out infinite",
       },
       backdropBlur: {
         '3xl': '30px', // Custom strong blur
