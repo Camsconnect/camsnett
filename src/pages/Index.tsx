@@ -7,6 +7,7 @@ import SubBrandsSection from "@/components/SubBrandsSection";
 import AboutUsSection from "@/components/AboutUsSection";
 import ServicesSection from "@/components/ServicesSection";
 import SearchBar from "@/components/SearchBar";
+import TechnologyStackSection from "@/components/TechnologyStackSection";
 
 const Index = () => {
   return (
@@ -22,6 +23,7 @@ const Index = () => {
         <div className="container mx-auto px-4 py-16 max-w-screen-2xl space-y-16">
           <AboutUsSection />
           <ServicesSection />
+          <TechnologyStackSection />
           <SubBrandsSection />
         </div>
       </main>
