@@ -26,10 +26,11 @@ const tiers = [
     description: "Ideal for growing businesses ready to scale their engagement and reach.",
     features: [
       "Everything in Basic, plus:",
-      "Instagram management",
+      "Instagram & TikTok management",
       "Audience engagement & moderation",
+      "Paid ad campaign management",
+      "Full branding kit design (business cards, invoices, etc.)",
       "Monthly analytics report",
-      "Targeted ad campaign setup",
     ],
     cta: "Choose Standard",
     popular: true,
