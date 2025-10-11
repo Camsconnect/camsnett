@@ -24,7 +24,7 @@ const TechnologyStackSection = () => {
     <section className="w-full text-foreground text-center">
       <h2 className="text-4xl font-light mb-12">Our Tech & Tools</h2>
       <div
-        className="w-full max-w-4xl mx-auto flex flex-nowrap overflow-hidden [mask-image:_linear_gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
+        className="w-full max-w-3xl mx-auto flex flex-nowrap overflow-hidden [mask-image:_linear_gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
       >
         <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 animate-infinite-scroll">
           {technologies.map((tech) => (
