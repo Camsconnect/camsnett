@@ -28,11 +28,11 @@ const TechnologyStackSection = () => {
       >
         <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 animate-infinite-scroll">
           {technologies.map((tech) => (
-            <li key={tech.name} className="h-24">
+            <li key={tech.name}>
               <img
                 src={tech.logo}
                 alt={tech.name}
-                className="h-full w-auto object-contain"
+                className="h-32 w-auto object-contain"
               />
             </li>
           ))}
@@ -42,11 +42,11 @@ const TechnologyStackSection = () => {
           aria-hidden="true"
         >
           {technologies.map((tech) => (
-            <li key={tech.name} className="h-24">
+            <li key={tech.name}>
               <img
                 src={tech.logo}
                 alt={tech.name}
-                className="h-full w-auto object-contain"
+                className="h-32 w-auto object-contain"
               />
             </li>
           ))}
