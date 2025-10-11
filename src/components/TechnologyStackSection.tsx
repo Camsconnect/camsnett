@@ -1,6 +1,14 @@
 "use client";
 
 import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import openAiLogo from "@/assets/openai-logo.png";
 import canvaLogo from "@/assets/canva-logo.png";
 import illustratorLogo from "@/assets/illustrator-logo.png";
@@ -23,34 +31,37 @@ const TechnologyStackSection = () => {
   return (
     <section className="w-full text-foreground text-center">
       <h2 className="text-4xl font-light mb-12">Our Tech & Tools</h2>
-      <div
-        className="w-full max-w-3xl mx-auto flex flex-nowrap overflow-hidden [mask-image:_linear_gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
-      >
-        <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 animate-infinite-scroll">
-          {technologies.map((tech) => (
-            <li key={tech.name}>
-              <img
-                src={tech.logo}
-                alt={tech.name}
-                className="h-32 object-contain"
-              />
-            </li>
-          ))}
-        </ul>
-        <ul
-          className="flex items-center justify-center md:justify-start [&_li]:mx-8 animate-infinite-scroll"
-          aria-hidden="true"
+      <div className="w-full max-w-3xl mx-auto">
+        <Carousel
+          opts={{
+            align: "center",
+            loop: true,
+          }}
+          className="w-full"
         >
-          {technologies.map((tech) => (
-            <li key={tech.name}>
-              <img
-                src={tech.logo}
-                alt={tech.name}
-                className="h-32 object-contain"
-              />
-            </li>
-          ))}
-        </ul>
+          <CarouselContent className="-ml-4">
+            {technologies.map((tech, index) => (
+              <CarouselItem
+                key={index}
+                className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/5"
+              >
+                <div className="p-1">
+                  <Card className="shadow-lg">
+                    <CardContent className="flex aspect-square items-center justify-center p-6 bg-white rounded-lg">
+                      <img
+                        src={tech.logo}
+                        alt={tech.name}
+                        className="h-20 object-contain"
+                      />
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden sm:flex" />
+          <CarouselNext className="hidden sm:flex" />
+        </Carousel>
       </div>
     </section>
   );
