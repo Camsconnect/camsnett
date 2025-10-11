@@ -27,6 +27,7 @@ const services = [
     description:
       "Modern, responsive websites that capture your brand and convert visitors into customers. Fully optimized for performance and SEO.",
     image: webDesignImage,
+    link: "/services/web-design",
   },
   {
     title: "Branding & Graphic Design",
