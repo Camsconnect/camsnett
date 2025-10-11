@@ -32,7 +32,7 @@ const TechnologyStackSection = () => {
               <img
                 src={tech.logo}
                 alt={tech.name}
-                className="max-h-16 w-auto object-contain"
+                className="max-h-24 w-auto object-contain"
               />
             </li>
           ))}
@@ -46,7 +46,7 @@ const TechnologyStackSection = () => {
               <img
                 src={tech.logo}
                 alt={tech.name}
-                className="max-h-16 w-auto object-contain"
+                className="max-h-24 w-auto object-contain"
               />
             </li>
           ))}
