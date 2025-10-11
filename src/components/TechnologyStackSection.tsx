@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
-
 import openAiLogo from "@/assets/openai-logo.png";
 import canvaLogo from "@/assets/canva-logo.png";
 import illustratorLogo from "@/assets/illustrator-logo.png";
@@ -25,21 +23,34 @@ const TechnologyStackSection = () => {
   return (
     <section className="w-full text-foreground text-center">
       <h2 className="text-4xl font-light mb-12">Our Tech & Tools</h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-        {technologies.map((tech) => (
-          <Card
-            key={tech.name}
-            className="flex items-center justify-center p-6 bg-card border shadow-sm aspect-video"
-          >
-            <CardContent className="p-0">
+      <div
+        className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
+      >
+        <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 animate-infinite-scroll">
+          {technologies.map((tech) => (
+            <li key={tech.name}>
               <img
                 src={tech.logo}
                 alt={tech.name}
                 className="max-h-16 w-auto object-contain"
               />
-            </CardContent>
-          </Card>
-        ))}
+            </li>
+          ))}
+        </ul>
+        <ul
+          className="flex items-center justify-center md:justify-start [&_li]:mx-8 animate-infinite-scroll"
+          aria-hidden="true"
+        >
+          {technologies.map((tech) => (
+            <li key={tech.name}>
+              <img
+                src={tech.logo}
+                alt={tech.name}
+                className="max-h-16 w-auto object-contain"
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
