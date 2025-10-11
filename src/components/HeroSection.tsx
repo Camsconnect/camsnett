@@ -2,75 +2,99 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-image.png";
-import { Facebook, Instagram, Linkedin } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Badge } from "@/components/ui/badge";
+
+const slides = [
+  {
+    badge: "Camsnett",
+    title: "Turn Attention into Sales",
+    description:
+      "We build your visual identity, shape your personality, and grow your brand presence online.",
+    primaryCta: "Grow My Sales",
+    secondaryCta: "View Packages",
+  },
+  {
+    badge: "Innovation",
+    title: "Drive Growth with Technology",
+    description:
+      "Leverage cutting-edge solutions to scale your business and stay ahead of the competition.",
+    primaryCta: "Explore Solutions",
+    secondaryCta: "Learn More",
+  },
+  {
+    badge: "Creativity",
+    title: "Design That Inspires Action",
+    description:
+      "From stunning visuals to compelling brand stories, we create designs that captivate and convert.",
+    primaryCta: "See Our Work",
+    secondaryCta: "Get in Touch",
+  },
+];
 
 const HeroSection = () => {
   return (
-    <section className="w-full flex items-center py-12">
-      <div className="container px-4 md:px-6 grid gap-10 lg:grid-cols-5 lg:gap-16 items-center max-w-screen-2xl">
-        <div className="lg:col-span-2 flex flex-col justify-center space-y-6 text-left order-2 lg:order-1">
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-            Your Online business success starts here
-          </h1>
-          <p className="max-w-[600px] text-muted-foreground md:text-xl font-light">
-            From modern website design to business apps, SEO, social media growth
-            and management, marketing strategies, and graphic design, we help
-            businesses stand out. We create professional branding that gives your
-            business a unique image, builds trust, and generates quality leads.
-          </p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Button
-              size="lg"
-              className="bg-foreground text-background hover:bg-foreground/90 px-6 text-lg rounded-full"
-            >
-              Get Started
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="px-6 text-lg rounded-full"
-            >
-              Learn More
-            </Button>
-            <div className="flex items-center gap-3">
-              <span className="text-muted-foreground font-light text-sm">
-                Follow us
-              </span>
-              <div className="flex items-center gap-2">
-                <a
-                  href="#"
-                  aria-label="Facebook"
-                  className="h-8 w-8 rounded-full border border-muted-foreground flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
-                >
-                  <Facebook className="h-4 w-4" />
-                </a>
-                <a
-                  href="#"
-                  aria-label="Instagram"
-                  className="h-8 w-8 rounded-full border border-muted-foreground flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
-                >
-                  <Instagram className="h-4 w-4" />
-                </a>
-                <a
-                  href="#"
-                  aria-label="LinkedIn"
-                  className="h-8 w-8 rounded-full border border-muted-foreground flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
-                >
-                  <Linkedin className="h-4 w-4" />
-                </a>
+    <section className="w-full">
+      <Carousel
+        className="w-full"
+        opts={{
+          loop: true,
+        }}
+      >
+        <CarouselContent>
+          {slides.map((slide, index) => (
+            <CarouselItem key={index}>
+              <div
+                className="relative w-full h-[70vh] min-h-[500px] flex items-center bg-cover bg-center rounded-xl overflow-hidden"
+                style={{ backgroundImage: `url(/hero-background.jpeg)` }}
+              >
+                <div className="absolute inset-0 bg-black/30" />
+                <div className="relative container mx-auto px-4 md:px-6 max-w-screen-2xl">
+                  <div className="max-w-2xl text-left text-white">
+                    <Badge
+                      variant="secondary"
+                      className="bg-white/20 text-white border-none mb-4 font-light"
+                    >
+                      {slide.badge}
+                    </Badge>
+                    <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+                      {slide.title}
+                    </h1>
+                    <p className="mt-4 max-w-[600px] text-white/90 md:text-xl font-light">
+                      {slide.description}
+                    </p>
+                    <div className="mt-8 flex flex-wrap items-center gap-4">
+                      <Button
+                        size="lg"
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 text-lg rounded-md"
+                      >
+                        {slide.primaryCta}
+                      </Button>
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="px-6 text-lg rounded-md bg-white/10 border-white text-white hover:bg-white/20 hover:text-white"
+                      >
+                        {slide.secondaryCta}
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2">
+          <CarouselPrevious className="static translate-y-0 text-white bg-white/20 hover:bg-white/30 border-white/50" />
+          <CarouselNext className="static translate-y-0 text-white bg-white/20 hover:bg-white/30 border-white/50" />
         </div>
-        <div className="lg:col-span-3 flex items-center justify-center order-1 lg:order-2">
-          <img
-            alt="Hero"
-            className="rounded-xl object-cover w-full"
-            src={heroImage}
-          />
-        </div>
-      </div>
+      </Carousel>
     </section>
   );
 };
