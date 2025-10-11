@@ -11,6 +11,7 @@ import Blog from "./pages/Blog";
 import About from "./pages/About";
 import SocialMediaManagement from "./pages/SocialMediaManagement";
 import WebDesign from "./pages/WebDesign";
+import BusinessAppDevelopment from "./pages/BusinessAppDevelopment";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,10 @@ const App = () => (
           <Route
             path="/services/web-design"
             element={<WebDesign />}
+          />
+          <Route
+            path="/services/business-app-development"
+            element={<BusinessAppDevelopment />}
           />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

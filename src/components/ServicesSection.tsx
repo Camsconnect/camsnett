@@ -44,6 +44,7 @@ const services = [
     description:
       "Custom applications to streamline your operations, enhance customer engagement, and drive business growth.",
     image: businessAppImage,
+    link: "/services/business-app-development",
   },
   {
     title: "Videography",
