@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
+import ProcessSection from "@/components/ProcessSection";
 
 const SocialMediaManagement = () => {
   return (
@@ -73,12 +74,7 @@ const SocialMediaManagement = () => {
             </Card>
           </section>
 
-          <section className="text-center">
-            <p className="text-lg text-muted-foreground">
-              Scroll down to explore all our packages and find the one that
-              best matches your business goals.
-            </p>
-          </section>
+          <ProcessSection />
         </div>
       </main>
       <MadeWithDyad />
