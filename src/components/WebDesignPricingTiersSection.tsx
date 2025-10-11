@@ -14,6 +14,9 @@ const tiers = [
     features: [
       "Up to 3 Pages",
       "Responsive Design",
+      "Domain Registration",
+      "Basic Security",
+      "Up to 10 Custom Emails",
       "Contact Form",
       "Basic SEO Setup",
       "3 Days Delivery",
@@ -26,8 +29,9 @@ const tiers = [
     frequency: "one-time",
     description: "Ideal for growing businesses needing more features and content.",
     features: [
+      "Everything in Starter, plus:",
       "Up to 6 Pages",
-      "Everything in Starter",
+      "Unlimited Custom Emails",
       "Content Management System (CMS)",
       "Blog Integration",
       "1 Week Delivery",
@@ -41,7 +45,7 @@ const tiers = [
     frequency: "starting from",
     description: "A complete online store to sell your products and services.",
     features: [
-      "Everything in Business",
+      "Everything in Business, plus:",
       "Full E-commerce Functionality",
       "Payment Gateway Integration",
       "Product & Inventory Management",
