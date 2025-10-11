@@ -53,6 +53,7 @@ const services = [
     description:
       "Professional video production to showcase your brand, products, or services. From concept to final cut, we create compelling visual stories.",
     image: videographyImage,
+    link: "/services/videography",
   },
   {
     title: "3D Modeling & Animation",

@@ -12,6 +12,7 @@ import About from "./pages/About";
 import SocialMediaManagement from "./pages/SocialMediaManagement";
 import WebDesign from "./pages/WebDesign";
 import BusinessAppDevelopment from "./pages/BusinessAppDevelopment";
+import Videography from "./pages/Videography";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,10 @@ const App = () => (
           <Route
             path="/services/business-app-development"
             element={<BusinessAppDevelopment />}
+          />
+          <Route
+            path="/services/videography"
+            element={<Videography />}
           />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
