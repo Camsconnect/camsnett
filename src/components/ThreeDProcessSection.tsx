@@ -3,7 +3,7 @@
 import React from "react";
 import {
   Lightbulb,
-  Cube,
+  Box,
   Paintbrush,
   Film,
   Sun,
@@ -18,7 +18,7 @@ const processSteps = [
       "We start by understanding your vision, developing the concept, and creating storyboards or sketches to outline the project.",
   },
   {
-    icon: <Cube className="h-5 w-5 text-brand-neon" />,
+    icon: <Box className="h-5 w-5 text-brand-neon" />,
     title: "2. 3D Modeling",
     description:
       "Our artists create the 3D assets, whether it's a product, character, or environment, focusing on detail and accuracy.",
