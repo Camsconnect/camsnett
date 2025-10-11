@@ -12,9 +12,13 @@ const Index = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <MenuBar />
-      <main className="flex-grow pt-28">
-        <SearchBar />
-        <HeroSection />
+      <main className="flex-grow">
+        <div className="relative">
+          <HeroSection />
+          <div className="absolute top-0 left-0 right-0 pt-28 w-full z-10">
+            <SearchBar />
+          </div>
+        </div>
         <div className="container mx-auto px-4 py-16 max-w-screen-2xl space-y-16">
           <AboutUsSection />
           <ServicesSection />

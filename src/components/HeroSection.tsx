@@ -51,11 +51,11 @@ const HeroSection = () => {
           {slides.map((slide, index) => (
             <CarouselItem key={index}>
               <div
-                className="relative w-full h-[70vh] min-h-[500px] flex items-center bg-cover bg-center rounded-xl overflow-hidden"
+                className="relative w-full h-[70vh] min-h-[500px] flex bg-cover bg-center"
                 style={{ backgroundImage: `url(/hero-background.jpeg)` }}
               >
                 <div className="absolute inset-0 bg-black/30" />
-                <div className="relative container mx-auto px-4 md:px-6 max-w-screen-2xl">
+                <div className="relative container mx-auto px-4 md:px-6 max-w-screen-2xl pt-48">
                   <div className="max-w-2xl text-left text-white">
                     <Badge
                       variant="secondary"
