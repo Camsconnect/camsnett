@@ -7,6 +7,8 @@ import videographyServiceImage from "@/assets/videography-service.jpeg";
 import VideographyProcessSection from "@/components/VideographyProcessSection";
 import VideographyRequirementsSection from "@/components/VideographyRequirementsSection";
 import VideographyPricingTiersSection from "@/components/VideographyPricingTiersSection";
+import WeddingEventsPricingSection from "@/components/WeddingEventsPricingSection";
+import { Separator } from "@/components/ui/separator";
 
 const Videography = () => {
   return (
@@ -36,6 +38,10 @@ const Videography = () => {
           </section>
 
           <VideographyPricingTiersSection />
+
+          <Separator />
+
+          <WeddingEventsPricingSection />
 
           <VideographyProcessSection />
 
