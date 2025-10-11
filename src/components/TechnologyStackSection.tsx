@@ -10,6 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import openAiLogo from "@/assets/openai-logo.png";
 import canvaLogo from "@/assets/canva-logo.png";
 import illustratorLogo from "@/assets/illustrator-logo.png";
@@ -31,6 +32,9 @@ const technologies = [
 const TechnologyStackSection = () => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [tweenValues, setTweenValues] = React.useState<number[]>([]);
+  const plugin = React.useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  );
 
   const onScroll = React.useCallback(() => {
     if (!api) return;
@@ -69,6 +73,9 @@ const TechnologyStackSection = () => {
       <div className="w-full max-w-3xl mx-auto">
         <Carousel
           setApi={setApi}
+          plugins={[plugin.current]}
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.reset}
           opts={{
             align: "center",
             loop: true,
