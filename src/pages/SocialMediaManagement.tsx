@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
 import ProcessSection from "@/components/ProcessSection";
+import RequirementsSection from "@/components/RequirementsSection";
 
 const SocialMediaManagement = () => {
   return (
@@ -75,6 +76,8 @@ const SocialMediaManagement = () => {
           </section>
 
           <ProcessSection />
+
+          <RequirementsSection />
         </div>
       </main>
       <MadeWithDyad />
