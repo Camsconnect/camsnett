@@ -9,12 +9,12 @@ const CamsConnectSection = () => {
   return (
     <section className="w-full rounded-xl bg-card text-foreground border shadow-sm overflow-hidden">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-3 gap-12 items-center">
-          <div className="flex justify-center md:col-span-2">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="flex justify-center">
             <img
               src={camsConnectCard}
               alt="Cams-Connect NFC Card and packaging"
-              className="w-full h-auto object-contain"
+              className="w-full max-w-lg h-auto object-contain"
             />
           </div>
           <div className="text-center md:text-left">
