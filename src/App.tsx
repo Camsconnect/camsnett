@@ -13,6 +13,7 @@ import SocialMediaManagement from "./pages/SocialMediaManagement";
 import WebDesign from "./pages/WebDesign";
 import BusinessAppDevelopment from "./pages/BusinessAppDevelopment";
 import Videography from "./pages/Videography";
+import ThreeDModeling from "./pages/ThreeDModeling";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,10 @@ const App = () => (
           <Route
             path="/services/videography"
             element={<Videography />}
+          />
+          <Route
+            path="/services/3d-modeling"
+            element={<ThreeDModeling />}
           />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

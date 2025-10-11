@@ -62,6 +62,7 @@ const services = [
     description:
       "Bring your ideas to life with stunning 3D models and animations. Perfect for product visualization, architectural walkthroughs, and more.",
     image: threeDModelingImage,
+    link: "/services/3d-modeling",
   },
 ];
 
