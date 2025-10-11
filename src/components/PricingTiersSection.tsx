@@ -53,7 +53,7 @@ const tiers = [
 
 const PricingTiersSection = () => {
   return (
-    <section>
+    <section id="pricing">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {tiers.map((tier) => (
           <Card
