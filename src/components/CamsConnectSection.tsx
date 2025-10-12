@@ -18,7 +18,7 @@ const CamsConnectSection = () => {
             />
           </div>
           <div className="text-center md:text-left">
-            <h2 className="text-[20px] font-bold mb-4">Cams-Connect</h2>
+            <h2 className="text-[29px] font-thin mb-4">Cams-Connect</h2>
             <p className="text-[18px] text-muted-foreground mb-6">
               Networking reimagined. A frontier in effortless, intelligent
               connections.
