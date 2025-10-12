@@ -38,7 +38,7 @@ const SubBrandsSection = () => {
             <img
               src={brand.logo}
               alt={`${brand.name} logo`}
-              className="w-full h-48 object-cover rounded-md mb-6"
+              className="w-full h-48 object-contain rounded-md mb-6"
             />
             <h3 className="text-2xl font-semibold mb-2">{brand.name}</h3>
             <p className="text-lg opacity-90">{brand.description}</p>
