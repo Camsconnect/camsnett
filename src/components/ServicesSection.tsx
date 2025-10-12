@@ -2,110 +2,110 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import socialMediaImage from "@/assets/social-media-service.jpeg";
+import webDesignImage from "@/assets/web-design-service.jpeg";
+import brandingGraphicsImage from "@/assets/branding-graphics-service.png";
+import businessAppImage from "@/assets/business-app-service.jpeg";
+import videographyImage from "@/assets/videography-service.jpeg";
+import threeDModelingImage from "@/assets/3d-modeling-service.jpeg";
 import { Button } from "@/components/ui/button";
-import {
-  ArrowRight,
-  Code,
-  Megaphone,
-  Palette,
-  Smartphone,
-  Video,
-  Cube,
-} from "lucide-react";
-import SearchBar from "./SearchBar";
 
 const services = [
   {
-    icon: <Megaphone className="h-8 w-8 text-green-500" />,
     title: "Social Media Management",
+    price: "From $100 per month",
+    duration: "Weekly reports",
     description:
-      "Engaging your audience and growing your online presence across all major platforms.",
+      "We help businesses grow and stand out online through strategic content, consistent branding, and performance-driven marketing.",
+    image: socialMediaImage,
     link: "/services/social-media-management",
   },
   {
-    icon: <Code className="h-8 w-8 text-purple-500" />,
-    title: "Web Design",
+    title: "Web Design (up to 6 pages)",
+    price: "From $80",
+    duration: "3 days delivery",
     description:
-      "Building responsive, high-performance websites that deliver exceptional user experiences.",
+      "Modern, responsive websites that capture your brand and convert visitors into customers. Fully optimized for performance and SEO.",
+    image: webDesignImage,
     link: "/services/web-design",
   },
   {
-    icon: <Palette className="h-8 w-8 text-blue-500" />,
     title: "Branding & Graphic Design",
+    price: "From $150",
+    duration: "Printing and delivery",
     description:
-      "Crafting unique visual identities that tell your story and resonate with your audience.",
+      "Crafting unique brand identities and stunning visuals that tell your story, from logos to complete brand guidelines.",
+    image: brandingGraphicsImage,
     link: "/services/branding-and-graphic-design",
   },
   {
-    icon: <Smartphone className="h-8 w-8 text-red-500" />,
     title: "Business App Development",
+    price: "From $300",
+    duration: "3 weeks",
     description:
-      "Creating custom mobile apps to streamline operations and connect with your customers.",
+      "Custom applications to streamline your operations, enhance customer engagement, and drive business growth.",
+    image: businessAppImage,
     link: "/services/business-app-development",
   },
   {
-    icon: <Video className="h-8 w-8 text-orange-500" />,
     title: "Videography",
+    price: "From $300",
+    duration: "1 week",
     description:
-      "Producing compelling video content that captures attention and tells your brand's story.",
+      "Professional video production to showcase your brand, products, or services. From concept to final cut, we create compelling visual stories.",
+    image: videographyImage,
     link: "/services/videography",
   },
   {
-    icon: <Cube className="h-8 w-8 text-yellow-500" />,
     title: "3D Modeling & Animation",
+    price: "From $1500",
+    duration: "2-4 weeks",
     description:
-      "Bringing your ideas to life with stunning 3D models and captivating animations.",
+      "Bring your ideas to life with stunning 3D models and animations. Perfect for product visualization, architectural walkthroughs, and more.",
+    image: threeDModelingImage,
     link: "/services/3d-modeling",
   },
 ];
 
 const ServicesSection = () => {
   return (
-    <section className="py-12 md:py-24 bg-muted/40">
-      <div className="container mx-auto px-4 md:px-6 max-w-screen-2xl">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-            Our Services
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-muted-foreground md:text-xl">
-            We offer a comprehensive suite of services to elevate your brand and
-            business.
-          </p>
-        </div>
+    <section className="w-full text-foreground">
+      <h2 className="text-4xl font-light text-center mb-12">Our Services</h2>
 
-        <div className="mb-12">
-          <SearchBar />
-        </div>
-
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <Link to={service.link} key={index} className="group">
-              <Card className="bg-card border h-full transition-all duration-300 group-hover:border-primary group-hover:shadow-lg">
-                <CardHeader>
-                  <div className="flex items-center gap-4">
-                    <div className="bg-muted p-3 rounded-full">
-                      {service.icon}
-                    </div>
-                    <CardTitle>{service.title}</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    {service.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
-        <div className="mt-12 text-center">
-          <Button size="lg" asChild>
-            <Link to="/pricing">
-              View All Services <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {services.map((service, i) => (
+          <div key={i} className="group text-left flex flex-col">
+            <div className="overflow-hidden rounded-xl mb-4">
+              <img
+                src={service.image}
+                alt={service.title}
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+              />
+            </div>
+            <div className="flex flex-col flex-grow">
+              <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+              <div className="flex items-center text-sm text-muted-foreground mb-3">
+                <span>{service.price}</span>
+                <span className="mx-2">|</span>
+                <span>{service.duration}</span>
+              </div>
+              <p className="text-base text-muted-foreground font-light leading-relaxed flex-grow mb-4">
+                {service.description}
+              </p>
+              <Button
+                asChild={!!service.link}
+                variant="outline"
+                className="mt-auto w-fit rounded-full px-6"
+              >
+                {service.link ? (
+                  <Link to={service.link}>Learn More</Link>
+                ) : (
+                  <span>Learn More</span>
+                )}
+              </Button>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
