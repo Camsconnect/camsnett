@@ -3,6 +3,7 @@
 import React from "react";
 import MenuBar from "@/components/MenuBar";
 import Footer from "@/components/Footer";
+import ChatPopup from "@/components/ChatPopup";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ children, noPaddingTop = false }) => {
         {children}
       </main>
       <Footer />
+      <ChatPopup />
     </div>
   );
 };
