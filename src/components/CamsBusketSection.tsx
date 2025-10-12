@@ -13,8 +13,8 @@ const CamsBusketSection = () => {
           <div className="text-center md:text-left">
             <h2 className="text-[29px] font-thin mb-4">Cams-Busket</h2>
             <p className="text-[18px] text-muted-foreground mb-6">
-              A new platform for business owners, listing services and delivery
-              bikers, much like Uber Eats.
+              A new platform connecting business owners with a network of
+              listing services and delivery bikers.
             </p>
             <div className="mb-8 flex justify-center md:justify-start">
               <Badge variant="secondary" className="text-sm font-semibold">
