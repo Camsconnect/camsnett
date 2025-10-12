@@ -18,7 +18,7 @@ const ChatPopup = () => {
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted">
             <Brain className="h-6 w-6 text-foreground" />
           </div>
-          <span className="absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full bg-green-500 ring-2 ring-card" />
+          <span className="absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full bg-green-500 ring-2 ring-card animate-breathing-dot" />
         </div>
         <div className="pr-2">
           <p className="font-semibold text-foreground">Chat with Camsnett</p>
