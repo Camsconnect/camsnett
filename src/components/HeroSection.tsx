@@ -19,6 +19,7 @@ const slides = [
       "We build your visual identity, shape your personality, and grow your brand presence online.",
     primaryCta: "Grow My Sales",
     secondaryCta: "View Packages",
+    image: "/hero-background.jpeg",
   },
   {
     badge: "Innovation",
@@ -27,6 +28,7 @@ const slides = [
       "Leverage cutting-edge solutions to scale your business and stay ahead of the competition.",
     primaryCta: "Explore Solutions",
     secondaryCta: "Learn More",
+    image: "/hero-background-tech.jpeg",
   },
   {
     badge: "Creativity",
@@ -35,6 +37,7 @@ const slides = [
       "From stunning visuals to compelling brand stories, we create designs that captivate and convert.",
     primaryCta: "See Our Work",
     secondaryCta: "Get in Touch",
+    image: "/hero-background.jpeg",
   },
 ];
 
@@ -52,7 +55,7 @@ const HeroSection = () => {
             <CarouselItem key={index}>
               <div
                 className="relative w-full h-[70vh] min-h-[500px] flex bg-cover bg-center"
-                style={{ backgroundImage: `url(/hero-background.jpeg)` }}
+                style={{ backgroundImage: `url(${slide.image})` }}
               >
                 <div className="absolute inset-0 bg-black/30" />
                 <div className="relative container mx-auto px-4 md:px-6 max-w-screen-2xl pt-48">
