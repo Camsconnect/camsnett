@@ -2,12 +2,63 @@
 
 import React from "react";
 import Layout from "@/components/Layout";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
+import PricingTiersSection from "@/components/PricingTiersSection";
+import WebDesignPricingTiersSection from "@/components/WebDesignPricingTiersSection";
+import BrandingPricingTiersSection from "@/components/BrandingPricingTiersSection";
+import BusinessAppPricingTiersSection from "@/components/BusinessAppPricingTiersSection";
+import VideographyPricingTiersSection from "@/components/VideographyPricingTiersSection";
+import ThreeDPricingTiersSection from "@/components/ThreeDPricingTiersSection";
 
 const Pricing = () => {
   return (
     <Layout>
-      <div className="flex-grow flex items-center justify-center p-4">
-        <h1 className="text-4xl font-bold text-foreground">Pricing Page</h1>
+      <div className="container mx-auto px-4 py-16 max-w-screen-lg space-y-16">
+        <section className="text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+            Our Packages
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Find the perfect plan to fit your needs. We offer a range of
+            packages designed for businesses of all sizes.
+          </p>
+        </section>
+
+        <Tabs defaultValue="social-media" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 h-auto">
+            <TabsTrigger value="social-media">Social Media</TabsTrigger>
+            <TabsTrigger value="web-design">Web Design</TabsTrigger>
+            <TabsTrigger value="branding">Branding</TabsTrigger>
+            <TabsTrigger value="app-dev">App Development</TabsTrigger>
+            <TabsTrigger value="videography">Videography</TabsTrigger>
+            <TabsTrigger value="3d-modeling">3D Modeling</TabsTrigger>
+          </TabsList>
+          <div className="pt-8">
+            <TabsContent value="social-media">
+              <PricingTiersSection />
+            </TabsContent>
+            <TabsContent value="web-design">
+              <WebDesignPricingTiersSection />
+            </TabsContent>
+            <TabsContent value="branding">
+              <BrandingPricingTiersSection />
+            </TabsContent>
+            <TabsContent value="app-dev">
+              <BusinessAppPricingTiersSection />
+            </TabsContent>
+            <TabsContent value="videography">
+              <VideographyPricingTiersSection />
+            </TabsContent>
+            <TabsContent value="3d-modeling">
+              <ThreeDPricingTiersSection />
+            </TabsContent>
+          </div>
+        </Tabs>
       </div>
     </Layout>
   );
