@@ -9,6 +9,7 @@ import ServicesSection from "@/components/ServicesSection";
 import SearchBar from "@/components/SearchBar";
 import TechnologyStackSection from "@/components/TechnologyStackSection";
 import CamsConnectSection from "@/components/CamsConnectSection";
+import CamsBusketSection from "@/components/CamsBusketSection";
 
 const Index = () => {
   return (
@@ -26,6 +27,7 @@ const Index = () => {
           <ServicesSection />
           <TechnologyStackSection />
           <CamsConnectSection />
+          <CamsBusketSection />
           <SubBrandsSection />
         </div>
       </main>
