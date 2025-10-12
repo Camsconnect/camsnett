@@ -124,7 +124,7 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "breathing-glow": "breathing-glow 4s ease-in-out infinite",
-        "infinite-scroll": "infinite-scroll 25s linear infinite",
+        "infinite-scroll": "infinite-scroll 40s linear infinite",
       },
       backdropBlur: {
         '3xl': '30px', // Custom strong blur

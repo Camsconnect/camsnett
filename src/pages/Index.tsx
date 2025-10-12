@@ -10,6 +10,7 @@ import TechnologyStackSection from "@/components/TechnologyStackSection";
 import CamsConnectSection from "@/components/CamsConnectSection";
 import CamsBusketSection from "@/components/CamsBusketSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import ServiceScroller from "@/components/ServiceScroller";
 
 const Index = () => {
   return (
@@ -20,6 +21,7 @@ const Index = () => {
           <SearchBar />
         </div>
       </div>
+      <ServiceScroller />
       <div className="container mx-auto px-4 py-16 max-w-screen-2xl space-y-16">
         <AboutUsSection />
         <ServicesSection />
