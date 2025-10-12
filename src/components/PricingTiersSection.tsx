@@ -8,7 +8,7 @@ import { Check } from "lucide-react";
 const tiers = [
   {
     name: "Basic",
-    price: "$60",
+    price: "$100",
     frequency: "/month",
     description: "Perfect for small businesses that need a consistent online presence.",
     features: [
@@ -21,7 +21,7 @@ const tiers = [
   },
   {
     name: "Standard",
-    price: "$150",
+    price: "$180",
     frequency: "/month",
     description: "Ideal for growing businesses ready to scale their engagement and reach.",
     features: [

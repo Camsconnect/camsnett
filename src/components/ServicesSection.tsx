@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 const services = [
   {
     title: "Social Media Management",
-    price: "From $60 per month",
+    price: "From $100 per month",
     duration: "Weekly reports",
     description:
       "We help businesses grow and stand out online through strategic content, consistent branding, and performance-driven marketing.",
