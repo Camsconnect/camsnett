@@ -37,6 +37,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/services/social-media-management" className="text-sm text-muted-foreground hover:text-foreground">Social Media</Link></li>
               <li><Link to="/services/web-design" className="text-sm text-muted-foreground hover:text-foreground">Web Design</Link></li>
+              <li><Link to="/services/branding-and-graphic-design" className="text-sm text-muted-foreground hover:text-foreground">Branding</Link></li>
               <li><Link to="/services/videography" className="text-sm text-muted-foreground hover:text-foreground">Videography</Link></li>
               <li><Link to="/services/3d-modeling" className="text-sm text-muted-foreground hover:text-foreground">3D Modeling</Link></li>
             </ul>

@@ -14,6 +14,7 @@ import WebDesign from "./pages/WebDesign";
 import BusinessAppDevelopment from "./pages/BusinessAppDevelopment";
 import Videography from "./pages/Videography";
 import ThreeDModeling from "./pages/ThreeDModeling";
+import BrandingAndGraphicDesign from "./pages/BrandingAndGraphicDesign";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,10 @@ const App = () => (
           <Route
             path="/services/3d-modeling"
             element={<ThreeDModeling />}
+          />
+          <Route
+            path="/services/branding-and-graphic-design"
+            element={<BrandingAndGraphicDesign />}
           />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

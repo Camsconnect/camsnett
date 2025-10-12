@@ -31,11 +31,12 @@ const services = [
   },
   {
     title: "Branding & Graphic Design",
-    price: "From $950",
+    price: "From $150",
     duration: "Printing and delivery",
     description:
       "Crafting unique brand identities and stunning visuals that tell your story, from logos to complete brand guidelines.",
     image: brandingGraphicsImage,
+    link: "/services/branding-and-graphic-design",
   },
   {
     title: "Business App Development",
