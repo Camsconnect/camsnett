@@ -3,7 +3,6 @@
 import React from "react";
 import MenuBar from "@/components/MenuBar";
 import Footer from "@/components/Footer";
-import { MadeWithDyad } from "@/components/made-with-dyad";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -18,7 +17,6 @@ const Layout: React.FC<LayoutProps> = ({ children, noPaddingTop = false }) => {
         {children}
       </main>
       <Footer />
-      <MadeWithDyad />
     </div>
   );
 };
