@@ -3,7 +3,6 @@
 import Layout from "@/components/Layout";
 import HeroSection from "@/components/HeroSection";
 import SubBrandsSection from "@/components/SubBrandsSection";
-import AboutUsSection from "@/components/AboutUsSection";
 import ServicesSection from "@/components/ServicesSection";
 import SearchBar from "@/components/SearchBar";
 import TechnologyStackSection from "@/components/TechnologyStackSection";
@@ -24,7 +23,6 @@ const Index = () => {
       </div>
       <ServiceScroller />
       <div className="container mx-auto px-4 py-16 max-w-screen-2xl space-y-16">
-        <AboutUsSection />
         <ServicesSection />
         <WhyWorkWithUsSection />
         <TechnologyStackSection />
