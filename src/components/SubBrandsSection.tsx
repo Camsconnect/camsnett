@@ -7,17 +7,17 @@ import camsnettListingsLogo from "@/assets/camsnett-listings-logo.png";
 
 const subBrands = [
   {
-    name: "CAMS-CONNECT",
+    name: "Cams-Connect",
     logo: camsConnectLogo,
     description: "Seamless communication solutions for your business.",
   },
   {
-    name: "CAMSNETT CO CREATIVE MINDS",
+    name: "Camsnett Co Creative Minds",
     logo: camsnettCoLogo,
     description: "Innovative design and marketing strategies.",
   },
   {
-    name: "camsnett listings",
+    name: "Camsnett Listings",
     logo: camsnettListingsLogo,
     description: "Get listed, get leads, get sales with our powerful listings.",
   },
