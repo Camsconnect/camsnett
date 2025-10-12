@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Button } from "@/components/ui/button";
 import camsConnectLogo from "@/assets/cams-connect-logo.png";
 import camsnettCoLogo from "@/assets/camsnett-co-logo.png";
 import camsnettListingsLogo from "@/assets/camsnett-listings-logo.png";
@@ -41,7 +42,12 @@ const SubBrandsSection = () => {
               className="w-full h-48 object-contain rounded-md mb-6"
             />
             <h3 className="text-2xl font-semibold mb-2">{brand.name}</h3>
-            <p className="text-lg opacity-90">{brand.description}</p>
+            <p className="text-lg opacity-90 mb-4 flex-grow">
+              {brand.description}
+            </p>
+            <Button variant="outline" className="mt-auto">
+              Find out more
+            </Button>
           </div>
         ))}
       </div>
