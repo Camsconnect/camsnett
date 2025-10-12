@@ -123,6 +123,16 @@ export default {
           "0%, 100%": { transform: "scale(1)", opacity: "1" },
           "50%": { transform: "scale(1.25)", opacity: "0.75" },
         },
+        "popup-in": {
+          "0%": { opacity: "0", transform: "scale(0.3) translateY(1rem)" },
+          "50%": { transform: "scale(1.05) translateY(0)" },
+          "70%": { transform: "scale(0.95) translateY(0)" },
+          "100%": { opacity: "1", transform: "scale(1) translateY(0)" },
+        },
+        "popup-out": {
+          "from": { opacity: "1", transform: "scale(1) translateY(0)" },
+          "to": { opacity: "0", transform: "scale(0.3) translateY(1rem)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -130,6 +140,8 @@ export default {
         "breathing-glow": "breathing-glow 4s ease-in-out infinite",
         "infinite-scroll": "infinite-scroll 40s linear infinite",
         "breathing-dot": "breathing-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "popup-in": "popup-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+        "popup-out": "popup-out 0.3s ease-out forwards",
       },
       backdropBlur: {
         '3xl': '30px', // Custom strong blur

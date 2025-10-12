@@ -1,17 +1,40 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Brain } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const ChatPopup = () => {
+  const [isVisible, setIsVisible] = useState(false);
   const whatsappLink = "https://wa.me/27630498076";
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+
+    const cycle = (shouldBeVisible: boolean) => {
+      const delay = shouldBeVisible ? 10000 : 5000; // 10s visible, 5s hidden
+      setIsVisible(shouldBeVisible);
+      timer = setTimeout(() => cycle(!shouldBeVisible), delay);
+    };
+
+    // Start the first cycle (to become visible) after 5 seconds
+    const initialTimer = setTimeout(() => cycle(true), 5000);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(initialTimer);
+    };
+  }, []);
 
   return (
     <a
       href={whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 group"
+      className={cn(
+        "fixed bottom-6 right-6 z-50 group opacity-0",
+        isVisible ? "animate-popup-in" : "animate-popup-out"
+      )}
     >
       <div className="flex items-center gap-3 rounded-full bg-card p-3 shadow-lg border group-hover:bg-accent transition-colors duration-300">
         <div className="relative">
