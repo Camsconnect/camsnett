@@ -6,18 +6,14 @@ import { Search } from "lucide-react";
 
 const SearchBar = () => {
   return (
-    <section className="w-full flex justify-center">
-      <div className="container px-4 md:px-6 max-w-[16rem] md:max-w-lg">
-        <div className="relative w-full">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-white/70" />
-          <Input
-            type="search"
-            placeholder="What are you looking for?"
-            className="w-full rounded-full pl-12 pr-4 py-3 h-14 text-base bg-black/30 backdrop-blur-md border border-white/20 text-white placeholder:text-white/70 focus:ring-white/50 shadow-lg"
-          />
-        </div>
-      </div>
-    </section>
+    <div className="relative w-full max-w-2xl mx-auto">
+      <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+      <Input
+        type="search"
+        placeholder="Search for services like 'Branding' or 'SEO'..."
+        className="w-full rounded-full pl-12 pr-4 py-3 h-14 text-base bg-background border text-foreground placeholder:text-muted-foreground focus:ring-ring shadow-sm"
+      />
+    </div>
   );
 };
 
