@@ -19,9 +19,9 @@ declare module 'jspdf' {
 }
 
 const services = [
-  { name: "Social Media Management - Basic", price: 100 },
-  { name: "Social Media Management - Standard", price: 180 },
-  { name: "Social Media Management - Premium", price: 300 },
+  { name: "Social Media Management - Basic", price: 100, brief: "Includes Facebook management, regular posting, and professionally designed graphics." },
+  { name: "Social Media Management - Standard", price: 180, brief: "Includes Basic plan features plus Instagram & TikTok management, audience engagement, and a full branding kit design." },
+  { name: "Social Media Management - Premium", price: 300, brief: "Includes Standard plan features plus management of up to 4 platforms and weekly strategy calls." },
   { name: "Web Design - Starter Site", price: 80 },
   { name: "Web Design - Business Site", price: 250 },
   { name: "Web Design - E-commerce Store", price: 500 },
@@ -49,6 +49,7 @@ const InvoicesTab = () => {
   const [clientCompany, setClientCompany] = useState("");
   const [clientAddress, setClientAddress] = useState("");
   const [clientEmail, setClientEmail] = useState("");
+  const [discount, setDiscount] = useState(0);
   const [issueDate, setIssueDate] = useState(new Date().toISOString().split('T')[0]);
   const [dueDate, setDueDate] = useState(() => {
       const date = new Date();
@@ -89,7 +90,7 @@ const InvoicesTab = () => {
 
   const subtotal = lineItems.reduce((acc, item) => acc + item.quantity * item.price, 0);
   const tax = subtotal * 0.15; // Assuming 15% tax
-  const total = subtotal + tax;
+  const total = subtotal + tax - discount;
 
   const handleDownloadPdf = () => {
     const doc = new jsPDF();
@@ -142,17 +143,51 @@ const InvoicesTab = () => {
             headStyles: { fillColor: [34, 87, 81] },
         });
 
-        const finalY = (doc as any).lastAutoTable.finalY;
+        let finalY = (doc as any).lastAutoTable.finalY;
+
+        const socialMediaBriefs = lineItems
+            .map(item => {
+                const service = services.find(s => s.name === item.description);
+                return service && service.brief ? `* ${service.name}: ${service.brief}` : null;
+            })
+            .filter(brief => brief !== null)
+            .join('\n');
+
+        if (socialMediaBriefs) {
+            finalY += 10;
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'bold');
+            doc.text("Package Details:", 14, finalY);
+            finalY += 5;
+            doc.setFont(undefined, 'normal');
+            doc.setFontSize(9);
+            const splitBriefs = doc.splitTextToSize(socialMediaBriefs, 180);
+            doc.text(splitBriefs, 14, finalY);
+            finalY += splitBriefs.length * 4;
+        }
+
+        let totalsY = (doc as any).lastAutoTable.finalY + 10;
         doc.setFontSize(10);
-        doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 196, finalY + 10, { align: 'right' });
-        doc.text(`Tax (15%): $${tax.toFixed(2)}`, 196, finalY + 15, { align: 'right' });
+        doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 196, totalsY, { align: 'right' });
+        totalsY += 5;
+        doc.text(`Tax (15%): $${tax.toFixed(2)}`, 196, totalsY, { align: 'right' });
+        totalsY += 5;
+        if (discount > 0) {
+            doc.text(`Discount: -$${discount.toFixed(2)}`, 196, totalsY, { align: 'right' });
+            totalsY += 7;
+        } else {
+            totalsY += 2;
+        }
+        
         doc.setFontSize(12);
         doc.setFont(undefined, 'bold');
-        doc.text(`Total: $${total.toFixed(2)}`, 196, finalY + 22, { align: 'right' });
+        doc.text(`Total: $${total.toFixed(2)}`, 196, totalsY, { align: 'right' });
 
         doc.setFontSize(8);
         doc.setTextColor(150);
-        doc.text("Thank you for your business!", 105, 285, { align: 'center' });
+        doc.text("Explore our other services: Web Design, Branding, Videography, and 3D Modeling.", 105, 280, { align: 'center' });
+        doc.text("www.camsnett.com", 105, 285, { align: 'center' });
+        doc.text("Thank you for your business!", 105, 290, { align: 'center' });
 
         doc.save(`Invoice-${invoiceNumber}.pdf`);
     };
@@ -274,6 +309,18 @@ const InvoicesTab = () => {
             <div className="flex justify-between">
               <span className="text-muted-foreground">Tax (15%)</span>
               <span>${tax.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Discount</span>
+                <div className="flex items-center gap-1">
+                    <span>$</span>
+                    <Input
+                        type="number"
+                        value={discount}
+                        onChange={(e) => setDiscount(parseFloat(e.target.value) || 0)}
+                        className="w-24 h-8 text-right"
+                    />
+                </div>
             </div>
             <div className="flex justify-between font-bold text-lg">
               <span>Total</span>
