@@ -1,26 +1,32 @@
 "use client";
 
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import type { Customer } from "./CustomersTab";
+import { services } from "@/lib/services";
 
-const data = [
-  { name: "Jan", total: Math.floor(Math.random() * 5000) + 1000 },
-  { name: "Feb", total: Math.floor(Math.random() * 5000) + 1000 },
-  { name: "Mar", total: Math.floor(Math.random() * 5000) + 1000 },
-  { name: "Apr", total: Math.floor(Math.random() * 5000) + 1000 },
-  { name: "May", total: Math.floor(Math.random() * 5000) + 1000 },
-  { name: "Jun", total: Math.floor(Math.random() * 5000) + 1000 },
-  { name: "Jul", total: Math.floor(Math.random() * 5000) + 1000 },
-  { name: "Aug", total: Math.floor(Math.random() * 5000) + 1000 },
-  { name: "Sep", total: Math.floor(Math.random() * 5000) + 1000 },
-  { name: "Oct", total: Math.floor(Math.random() * 5000) + 1000 },
-  { name: "Nov", total: Math.floor(Math.random() * 5000) + 1000 },
-  { name: "Dec", total: Math.floor(Math.random() * 5000) + 1000 },
-];
+interface OverviewChartProps {
+  customers: Customer[];
+}
 
-export default function OverviewChart() {
+const servicePriceMap = new Map(services.map(s => [s.name, s.price]));
+
+export default function OverviewChart({ customers }: OverviewChartProps) {
+  const monthlyRevenue = Array.from({ length: 12 }, (_, i) => ({
+    name: new Date(0, i).toLocaleString('default', { month: 'short' }),
+    total: 0,
+  }));
+
+  customers
+    .filter(c => c.status === 'Paid' && c.created_at)
+    .forEach(c => {
+      const month = new Date(c.created_at).getMonth();
+      const price = servicePriceMap.get(c.service) || 0;
+      monthlyRevenue[month].total += price;
+    });
+
   return (
     <ResponsiveContainer width="100%" height={350}>
-      <BarChart data={data}>
+      <BarChart data={monthlyRevenue}>
         <XAxis
           dataKey="name"
           stroke="#888888"

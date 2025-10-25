@@ -2,8 +2,24 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DollarSign, Users, CreditCard, Activity } from "lucide-react";
+import type { Customer } from "./CustomersTab";
+import { services } from "@/lib/services";
 
-const OverviewCards = () => {
+interface OverviewCardsProps {
+  customers: Customer[];
+}
+
+const servicePriceMap = new Map(services.map(s => [s.name, s.price]));
+
+const OverviewCards = ({ customers }: OverviewCardsProps) => {
+  const totalRevenue = customers
+    .filter(c => c.status === 'Paid')
+    .reduce((acc, c) => acc + (servicePriceMap.get(c.service) || 0), 0);
+
+  const totalCustomers = customers.length;
+  const completedSales = customers.filter(c => c.status === 'Paid').length;
+  const pendingCustomers = customers.filter(c => c.status === 'Pending').length;
+
   return (
     <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
       <Card>
@@ -12,45 +28,45 @@ const OverviewCards = () => {
           <DollarSign className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">$45,231.89</div>
+          <div className="text-2xl font-bold">${totalRevenue.toLocaleString('en-US')}</div>
           <p className="text-xs text-muted-foreground">
-            +20.1% from last month
+            From completed sales
           </p>
         </CardContent>
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Subscriptions</CardTitle>
+          <CardTitle className="text-sm font-medium">Total Customers</CardTitle>
           <Users className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">+2350</div>
+          <div className="text-2xl font-bold">+{totalCustomers}</div>
           <p className="text-xs text-muted-foreground">
-            +180.1% from last month
+            All-time customer count
           </p>
         </CardContent>
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Sales</CardTitle>
+          <CardTitle className="text-sm font-medium">Completed Sales</CardTitle>
           <CreditCard className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">+12,234</div>
+          <div className="text-2xl font-bold">+{completedSales}</div>
           <p className="text-xs text-muted-foreground">
-            +19% from last month
+            Customers with "Paid" status
           </p>
         </CardContent>
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Active Now</CardTitle>
+          <CardTitle className="text-sm font-medium">Pending Customers</CardTitle>
           <Activity className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">+573</div>
+          <div className="text-2xl font-bold">+{pendingCustomers}</div>
           <p className="text-xs text-muted-foreground">
-            +201 since last hour
+            Awaiting payment
           </p>
         </CardContent>
       </Card>

@@ -12,10 +12,30 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { useSession } from "@/contexts/SessionContext";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const [customerForInvoice, setCustomerForInvoice] = useState<Customer | null>(null);
+  const { user } = useSession();
+
+  const { data: customers, isLoading: isLoadingCustomers } = useQuery({
+    queryKey: ["customers", user?.id],
+    queryFn: async () => {
+      if (!user) return [];
+      const { data, error } = await supabase
+        .from("customers")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false });
+      if (error) throw new Error(error.message);
+      return data as Customer[];
+    },
+    enabled: !!user,
+  });
 
   const handleGenerateInvoice = (customer: Customer) => {
     setCustomerForInvoice(customer);
@@ -52,17 +72,44 @@ const Dashboard = () => {
               </div>
             </div>
             <TabsContent value="overview" className="space-y-4">
-              <OverviewCards />
+              {isLoadingCustomers ? (
+                <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+                  <Skeleton className="h-[125px]" />
+                  <Skeleton className="h-[125px]" />
+                  <Skeleton className="h-[125px]" />
+                  <Skeleton className="h-[125px]" />
+                </div>
+              ) : (
+                <OverviewCards customers={customers || []} />
+              )}
               <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
                 <Card className="xl:col-span-2">
                   <CardHeader>
                     <CardTitle>Overview</CardTitle>
                   </CardHeader>
                   <CardContent className="pl-2">
-                    <OverviewChart />
+                    {isLoadingCustomers ? (
+                      <Skeleton className="h-[350px] w-full" />
+                    ) : (
+                      <OverviewChart customers={customers || []} />
+                    )}
                   </CardContent>
                 </Card>
-                <RecentSales />
+                {isLoadingCustomers ? (
+                  <Card>
+                    <CardHeader>
+                      <Skeleton className="h-6 w-1/2" />
+                      <Skeleton className="h-4 w-3/4" />
+                    </CardHeader>
+                    <CardContent className="grid gap-8">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Skeleton key={i} className="h-10 w-full" />
+                      ))}
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <RecentSales customers={customers || []} />
+                )}
               </div>
             </TabsContent>
             <TabsContent value="invoices" className="space-y-4">

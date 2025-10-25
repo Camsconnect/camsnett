@@ -13,21 +13,7 @@ import camsnettLogo from "@/assets/camsnett-co-logo.png";
 import jsPDF from "jspdf";
 import autoTable from 'jspdf-autotable';
 import type { Customer } from "./CustomersTab";
-
-const services = [
-  { name: "Social Media Management - Basic", price: 100, brief: "Includes Facebook management, regular posting, and professionally designed graphics." },
-  { name: "Social Media Management - Standard", price: 180, brief: "Includes Basic plan features plus Instagram & TikTok management, audience engagement, and a full branding kit design." },
-  { name: "Social Media Management - Premium", price: 300, brief: "Includes Standard plan features plus management of up to 4 platforms and weekly strategy calls." },
-  { name: "Web Design - Starter Site", price: 80 },
-  { name: "Web Design - Business Site", price: 250 },
-  { name: "Web Design - E-commerce Store", price: 500 },
-  { name: "Branding - Logo & Brand Identity", price: 150 },
-  { name: "Branding - Corporate Kit", price: 250 },
-  { name: "Videography - Social Media Reels", price: 150 },
-  { name: "Videography - Corporate & Brand Video", price: 400 },
-  { name: "3D Modeling - Static 3D Model", price: 500 },
-  { name: "3D Modeling - Animated Scene", price: 1500 },
-];
+import { services } from "@/lib/services";
 
 interface LineItem {
   id: number;
