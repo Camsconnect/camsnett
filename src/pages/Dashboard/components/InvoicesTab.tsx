@@ -10,13 +10,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { PlusCircle, Trash2, Download } from "lucide-react";
 import camsnettLogo from "@/assets/camsnett-co-logo.png";
 import jsPDF from "jspdf";
-import 'jspdf-autotable';
-
-declare module 'jspdf' {
-    interface jsPDF {
-      autoTable: (options: any) => jsPDF;
-    }
-}
+import autoTable from 'jspdf-autotable';
 
 const services = [
   { name: "Social Media Management - Basic", price: 100, brief: "Includes Facebook management, regular posting, and professionally designed graphics." },
@@ -135,7 +129,7 @@ const InvoicesTab = () => {
             ]);
         });
 
-        doc.autoTable({
+        autoTable(doc, {
             head: [tableColumn],
             body: tableRows,
             startY: 95,
