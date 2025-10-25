@@ -160,7 +160,7 @@ const InvoicesTab = () => {
             finalY += splitBriefs.length * 4;
         }
 
-        let totalsY = (doc as any).lastAutoTable.finalY + 10;
+        let totalsY = finalY + 10;
         doc.setFontSize(10);
         doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 196, totalsY, { align: 'right' });
         totalsY += 5;
