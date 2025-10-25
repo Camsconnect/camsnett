@@ -7,7 +7,7 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip";
 import { Link } from "react-router-dom";
-import { Home, Settings, Package, Users, LineChart, Brain } from "lucide-react";
+import { Home, Settings, Package, Users, LineChart, Brain, FileText } from "lucide-react";
 
 const Sidebar = () => {
   return (
@@ -44,6 +44,18 @@ const Sidebar = () => {
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right">Orders</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                to="#"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+              >
+                <FileText className="h-5 w-5" />
+                <span className="sr-only">Invoices</span>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="right">Invoices</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>

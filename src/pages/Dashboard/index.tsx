@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar";
 import OverviewCards from "./components/OverviewCards";
 import OverviewChart from "./components/OverviewChart";
 import RecentSales from "./components/RecentSales";
+import InvoicesTab from "./components/InvoicesTab";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,7 @@ const Dashboard = () => {
             <div className="flex items-center justify-between">
               <TabsList>
                 <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="invoices">Invoices</TabsTrigger>
                 <TabsTrigger value="analytics" disabled>
                   Analytics
                 </TabsTrigger>
@@ -51,6 +53,9 @@ const Dashboard = () => {
                 </Card>
                 <RecentSales />
               </div>
+            </TabsContent>
+            <TabsContent value="invoices" className="space-y-4">
+              <InvoicesTab />
             </TabsContent>
           </Tabs>
         </main>

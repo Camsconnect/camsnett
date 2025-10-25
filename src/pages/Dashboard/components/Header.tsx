@@ -7,6 +7,7 @@ import {
   Users,
   LineChart,
   PanelLeft,
+  FileText,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -53,6 +54,13 @@ const Header = () => {
             >
               <Package className="h-5 w-5" />
               Orders
+            </Link>
+            <Link
+              to="#"
+              className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+            >
+              <FileText className="h-5 w-5" />
+              Invoices
             </Link>
             <Link
               to="#"
