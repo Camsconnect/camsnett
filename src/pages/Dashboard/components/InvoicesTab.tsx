@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Textarea } from "@/components/ui/textarea";
 import { PlusCircle, Trash2, Download } from "lucide-react";
 import camsnettLogo from "@/assets/camsnett-co-logo.png";
 import jsPDF from "jspdf";
@@ -62,11 +63,10 @@ const InvoicesTab = () => {
     setLineItems(lineItems.filter((item) => item.id !== id));
   };
 
-  const handleLineItemChange = (id: number, field: keyof Omit<LineItem, 'id' | 'description'>, value: string) => {
-    const numericValue = parseFloat(value) || 0;
+  const handleLineItemChange = (id: number, field: keyof Omit<LineItem, 'id'>, value: string) => {
     setLineItems(
       lineItems.map((item) =>
-        item.id === id ? { ...item, [field]: numericValue } : item
+        item.id === id ? { ...item, [field]: value } : item
       )
     );
   };
@@ -82,7 +82,7 @@ const InvoicesTab = () => {
       }
   }
 
-  const subtotal = lineItems.reduce((acc, item) => acc + item.quantity * item.price, 0);
+  const subtotal = lineItems.reduce((acc, item) => acc + Number(item.quantity) * Number(item.price), 0);
   const tax = subtotal * 0.15; // Assuming 15% tax
   const total = subtotal + tax - discount;
 
@@ -91,7 +91,10 @@ const InvoicesTab = () => {
     const img = new Image();
     img.src = camsnettLogo;
     img.onload = () => {
-        doc.addImage(img, 'PNG', 14, 15, 40, 15);
+        const logoWidth = 40;
+        const logoAspectRatio = img.width / img.height;
+        const logoHeight = logoWidth / logoAspectRatio;
+        doc.addImage(img, 'PNG', 14, 15, logoWidth, logoHeight);
 
         doc.setFontSize(22);
         doc.setFont(undefined, 'bold');
@@ -124,8 +127,8 @@ const InvoicesTab = () => {
             tableRows.push([
                 item.description,
                 item.quantity,
-                `$${item.price.toFixed(2)}`,
-                `$${(item.quantity * item.price).toFixed(2)}`
+                `$${Number(item.price).toFixed(2)}`,
+                `$${(Number(item.quantity) * Number(item.price)).toFixed(2)}`
             ]);
         });
 
@@ -247,9 +250,9 @@ const InvoicesTab = () => {
               {lineItems.map((item) => (
                 <TableRow key={item.id}>
                   <TableCell>
-                    <Select onValueChange={(value) => handleServiceSelect(item.id, value)} defaultValue={item.description}>
-                        <SelectTrigger>
-                            <SelectValue placeholder="Select a service" />
+                    <Select onValueChange={(value) => handleServiceSelect(item.id, value)}>
+                        <SelectTrigger className="mb-2">
+                            <SelectValue placeholder="Select a service template" />
                         </SelectTrigger>
                         <SelectContent>
                             {services.map(service => (
@@ -257,6 +260,11 @@ const InvoicesTab = () => {
                             ))}
                         </SelectContent>
                     </Select>
+                    <Textarea
+                      placeholder="Enter or edit service description..."
+                      value={item.description}
+                      onChange={(e) => handleLineItemChange(item.id, "description", e.target.value)}
+                    />
                   </TableCell>
                   <TableCell>
                     <Input
@@ -277,7 +285,7 @@ const InvoicesTab = () => {
                     />
                   </TableCell>
                   <TableCell className="text-right">
-                    ${(item.quantity * item.price).toFixed(2)}
+                    ${(Number(item.quantity) * Number(item.price)).toFixed(2)}
                   </TableCell>
                   <TableCell>
                     <Button variant="ghost" size="icon" onClick={() => handleRemoveLineItem(item.id)}>
