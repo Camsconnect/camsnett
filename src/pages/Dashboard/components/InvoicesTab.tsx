@@ -108,10 +108,10 @@ const InvoicesTab = () => {
 
         doc.setFontSize(10);
         doc.setFont(undefined, 'bold');
-        doc.text("Camsnett", 14, 40);
+        doc.text("Camsnett", 14, 45);
         doc.setFont(undefined, 'normal');
-        doc.text("83 Durban Road", 14, 45);
-        doc.text("Mowbray, Capetown", 14, 50);
+        doc.text("83 Durban Road", 14, 50);
+        doc.text("Mowbray, Capetown", 14, 55);
 
         doc.setFont(undefined, 'bold');
         doc.text("Bill To:", 14, 65);
