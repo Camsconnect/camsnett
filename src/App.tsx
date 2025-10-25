@@ -15,6 +15,7 @@ import BusinessAppDevelopment from "./pages/BusinessAppDevelopment";
 import Videography from "./pages/Videography";
 import ThreeDModeling from "./pages/ThreeDModeling";
 import BrandingAndGraphicDesign from "./pages/BrandingAndGraphicDesign";
+import Dashboard from "./pages/Dashboard";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/about" element={<About />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route
             path="/services/social-media-management"
             element={<SocialMediaManagement />}
