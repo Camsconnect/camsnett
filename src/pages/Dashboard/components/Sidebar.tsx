@@ -8,8 +8,22 @@ import {
 } from "@/components/ui/tooltip";
 import { Link } from "react-router-dom";
 import { Home, Settings, Package, Users, LineChart, Brain, FileText } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const Sidebar = () => {
+interface SidebarProps {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}
+
+const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
+  const navItems = [
+    { name: "Dashboard", icon: Home, tab: "overview" },
+    { name: "Orders", icon: Package, tab: "orders", disabled: true },
+    { name: "Invoices", icon: FileText, tab: "invoices" },
+    { name: "Customers", icon: Users, tab: "customers" },
+    { name: "Analytics", icon: LineChart, tab: "analytics", disabled: true },
+  ];
+
   return (
     <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
       <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
@@ -21,66 +35,27 @@ const Sidebar = () => {
           <span className="sr-only">Camsnett</span>
         </Link>
         <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                to="/dashboard"
-                className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <Home className="h-5 w-5" />
-                <span className="sr-only">Dashboard</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Dashboard</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                to="#"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <Package className="h-5 w-5" />
-                <span className="sr-only">Orders</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Orders</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                to="#"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <FileText className="h-5 w-5" />
-                <span className="sr-only">Invoices</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Invoices</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                to="#"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <Users className="h-5 w-5" />
-                <span className="sr-only">Customers</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Customers</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                to="#"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <LineChart className="h-5 w-5" />
-                <span className="sr-only">Analytics</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Analytics</TooltipContent>
-          </Tooltip>
+          {navItems.map((item) => (
+            <Tooltip key={item.name}>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => !item.disabled && setActiveTab(item.tab)}
+                  disabled={item.disabled}
+                  className={cn(
+                    "flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8",
+                    activeTab === item.tab
+                      ? "bg-accent text-accent-foreground"
+                      : "text-muted-foreground",
+                    item.disabled && "cursor-not-allowed opacity-50"
+                  )}
+                >
+                  <item.icon className="h-5 w-5" />
+                  <span className="sr-only">{item.name}</span>
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="right">{item.name}</TooltipContent>
+            </Tooltip>
+          ))}
         </TooltipProvider>
       </nav>
       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">

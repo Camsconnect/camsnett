@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import OverviewCards from "./components/OverviewCards";
@@ -13,13 +14,15 @@ import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 
 const Dashboard = () => {
+  const [activeTab, setActiveTab] = useState("overview");
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
-      <Sidebar />
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="flex flex-col sm:pl-14">
-        <Header />
+        <Header activeTab={activeTab} setActiveTab={setActiveTab} />
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-          <Tabs defaultValue="overview" className="space-y-4">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
             <div className="flex items-center justify-between">
               <TabsList>
                 <TabsTrigger value="overview">Overview</TabsTrigger>

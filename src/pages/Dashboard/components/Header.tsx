@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Search,
   Home,
@@ -8,6 +9,7 @@ import {
   LineChart,
   PanelLeft,
   FileText,
+  Settings,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,11 +23,32 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
-const Header = () => {
+interface HeaderProps {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}
+
+const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    setIsSheetOpen(false);
+  };
+
+  const navItems = [
+    { name: "Dashboard", icon: Home, tab: "overview" },
+    { name: "Orders", icon: Package, tab: "orders", disabled: true },
+    { name: "Invoices", icon: FileText, tab: "invoices" },
+    { name: "Customers", icon: Users, tab: "customers" },
+    { name: "Analytics", icon: LineChart, tab: "analytics", disabled: true },
+  ];
+
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-      <Sheet>
+      <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
         <SheetTrigger asChild>
           <Button size="icon" variant="outline" className="sm:hidden">
             <PanelLeft className="h-5 w-5" />
@@ -35,45 +58,32 @@ const Header = () => {
         <SheetContent side="left" className="sm:max-w-xs">
           <nav className="grid gap-6 text-lg font-medium">
             <Link
-              to="#"
+              to="/"
               className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
             >
               <Package className="h-5 w-5 transition-all group-hover:scale-110" />
               <span className="sr-only">Camsnett</span>
             </Link>
-            <Link
-              to="/dashboard"
-              className="flex items-center gap-4 px-2.5 text-foreground"
-            >
-              <Home className="h-5 w-5" />
-              Dashboard
-            </Link>
-            <Link
-              to="#"
-              className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-            >
-              <Package className="h-5 w-5" />
-              Orders
-            </Link>
-            <Link
-              to="#"
-              className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-            >
-              <FileText className="h-5 w-5" />
-              Invoices
-            </Link>
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => !item.disabled && handleTabChange(item.tab)}
+                disabled={item.disabled}
+                className={cn(
+                  "flex items-center gap-4 px-2.5 hover:text-foreground",
+                  activeTab === item.tab ? "text-foreground" : "text-muted-foreground",
+                  item.disabled && "cursor-not-allowed opacity-50"
+                )}
+              >
+                <item.icon className="h-5 w-5" />
+                {item.name}
+              </button>
+            ))}
             <Link
               to="#"
               className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
             >
-              <Users className="h-5 w-5" />
-              Customers
-            </Link>
-            <Link
-              to="#"
-              className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-            >
-              <LineChart className="h-5 w-5" />
+              <Settings className="h-5 w-5" />
               Settings
             </Link>
           </nav>
