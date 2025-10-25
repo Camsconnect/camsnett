@@ -154,8 +154,7 @@ const InvoicesTab = () => {
   }
 
   const subtotal = lineItems.reduce((acc, item) => acc + Number(item.quantity) * Number(item.price), 0);
-  const tax = subtotal * 0.15; // Assuming 15% tax
-  const total = subtotal + tax - discount;
+  const total = subtotal - discount;
 
   const handleDownloadPdf = () => {
     const doc = new jsPDF();
@@ -237,8 +236,6 @@ const InvoicesTab = () => {
         let totalsY = finalY + 10;
         doc.setFontSize(10);
         doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 196, totalsY, { align: 'right' });
-        totalsY += 5;
-        doc.text(`Tax (15%): $${tax.toFixed(2)}`, 196, totalsY, { align: 'right' });
         totalsY += 5;
         if (discount > 0) {
             doc.text(`Discount: -$${discount.toFixed(2)}`, 196, totalsY, { align: 'right' });
@@ -386,10 +383,6 @@ const InvoicesTab = () => {
                 <span className="text-muted-foreground">Subtotal</span>
                 <span>${subtotal.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Tax (15%)</span>
-                <span>${tax.toFixed(2)}</span>
-              </div>
               <div className="flex justify-between items-center">
                   <span className="text-muted-foreground">Discount</span>
                   <div className="flex items-center gap-1">
@@ -439,8 +432,7 @@ const InvoicesTab = () => {
               <TableBody>
                 {drafts.map(draft => {
                   const draftSubtotal = draft.lineItems.reduce((acc, item) => acc + Number(item.quantity) * Number(item.price), 0);
-                  const draftTax = draftSubtotal * 0.15;
-                  const draftTotal = draftSubtotal + draftTax - draft.discount;
+                  const draftTotal = draftSubtotal - draft.discount;
                   return (
                     <TableRow key={draft.id}>
                       <TableCell>{draft.invoiceNumber}</TableCell>
