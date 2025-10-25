@@ -9,6 +9,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PlusCircle, Trash2, Download } from "lucide-react";
 import camsnettLogo from "@/assets/camsnett-co-logo.png";
+import jsPDF from "jspdf";
+import 'jspdf-autotable';
+
+declare module 'jspdf' {
+    interface jsPDF {
+      autoTable: (options: any) => jsPDF;
+    }
+}
 
 const services = [
   { name: "Social Media Management - Basic", price: 100 },
@@ -36,6 +44,17 @@ const InvoicesTab = () => {
   const [lineItems, setLineItems] = useState<LineItem[]>([
     { id: 1, description: "", quantity: 1, price: 0 },
   ]);
+  const [invoiceNumber, setInvoiceNumber] = useState("INV-001");
+  const [clientName, setClientName] = useState("");
+  const [clientCompany, setClientCompany] = useState("");
+  const [clientAddress, setClientAddress] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
+  const [issueDate, setIssueDate] = useState(new Date().toISOString().split('T')[0]);
+  const [dueDate, setDueDate] = useState(() => {
+      const date = new Date();
+      date.setDate(date.getDate() + 30);
+      return date.toISOString().split('T')[0];
+  });
 
   const handleAddLineItem = () => {
     setLineItems([
@@ -72,6 +91,73 @@ const InvoicesTab = () => {
   const tax = subtotal * 0.15; // Assuming 15% tax
   const total = subtotal + tax;
 
+  const handleDownloadPdf = () => {
+    const doc = new jsPDF();
+    const img = new Image();
+    img.src = camsnettLogo;
+    img.onload = () => {
+        doc.addImage(img, 'PNG', 14, 15, 40, 15);
+
+        doc.setFontSize(22);
+        doc.setFont(undefined, 'bold');
+        doc.text("INVOICE", 196, 22, { align: 'right' });
+
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'normal');
+        doc.text(`Invoice #: ${invoiceNumber}`, 196, 30, { align: 'right' });
+        doc.text(`Issue Date: ${issueDate}`, 196, 35, { align: 'right' });
+        doc.text(`Due Date: ${dueDate}`, 196, 40, { align: 'right' });
+
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'bold');
+        doc.text("Camsnett", 14, 40);
+        doc.setFont(undefined, 'normal');
+        doc.text("123 Creative Lane", 14, 45);
+        doc.text("Harare, Zimbabwe", 14, 50);
+
+        doc.setFont(undefined, 'bold');
+        doc.text("Bill To:", 14, 65);
+        doc.setFont(undefined, 'normal');
+        doc.text(clientName, 14, 70);
+        doc.text(clientCompany, 14, 75);
+        doc.text(clientAddress, 14, 80);
+        doc.text(clientEmail, 14, 85);
+
+        const tableColumn = ["Description", "Quantity", "Unit Price", "Total"];
+        const tableRows: (string | number)[][] = [];
+        lineItems.forEach(item => {
+            tableRows.push([
+                item.description,
+                item.quantity,
+                `$${item.price.toFixed(2)}`,
+                `$${(item.quantity * item.price).toFixed(2)}`
+            ]);
+        });
+
+        doc.autoTable({
+            head: [tableColumn],
+            body: tableRows,
+            startY: 95,
+            theme: 'grid',
+            headStyles: { fillColor: [34, 87, 81] },
+        });
+
+        const finalY = (doc as any).lastAutoTable.finalY;
+        doc.setFontSize(10);
+        doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 196, finalY + 10, { align: 'right' });
+        doc.text(`Tax (15%): $${tax.toFixed(2)}`, 196, finalY + 15, { align: 'right' });
+        doc.setFontSize(12);
+        doc.setFont(undefined, 'bold');
+        doc.text(`Total: $${total.toFixed(2)}`, 196, finalY + 22, { align: 'right' });
+
+        doc.setFontSize(8);
+        doc.setTextColor(150);
+        doc.text("Thank you for your business!", 105, 285, { align: 'center' });
+
+        doc.save(`Invoice-${invoiceNumber}.pdf`);
+    };
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -79,7 +165,6 @@ const InvoicesTab = () => {
         <CardDescription>Fill out the details below to create a new invoice.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-8">
-        {/* Header Section */}
         <div className="flex justify-between items-start">
           <div>
             <img src={camsnettLogo} alt="Camsnett Logo" className="h-16 w-auto object-contain" />
@@ -93,33 +178,31 @@ const InvoicesTab = () => {
             <h2 className="text-2xl font-bold">INVOICE</h2>
             <div className="grid w-full max-w-sm items-center gap-1.5 mt-2">
               <Label htmlFor="invoice-number">Invoice #</Label>
-              <Input id="invoice-number" defaultValue="INV-001" />
+              <Input id="invoice-number" value={invoiceNumber} onChange={(e) => setInvoiceNumber(e.target.value)} />
             </div>
           </div>
         </div>
 
-        {/* Client and Dates Section */}
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-4">
             <h3 className="font-semibold">Bill To:</h3>
-            <Input placeholder="Client Name" />
-            <Input placeholder="Client Company" />
-            <Input placeholder="Client Address" />
-            <Input type="email" placeholder="Client Email" />
+            <Input placeholder="Client Name" value={clientName} onChange={(e) => setClientName(e.target.value)} />
+            <Input placeholder="Client Company" value={clientCompany} onChange={(e) => setClientCompany(e.target.value)} />
+            <Input placeholder="Client Address" value={clientAddress} onChange={(e) => setClientAddress(e.target.value)} />
+            <Input type="email" placeholder="Client Email" value={clientEmail} onChange={(e) => setClientEmail(e.target.value)} />
           </div>
           <div className="space-y-4">
              <div className="grid gap-2">
                 <Label>Issue Date</Label>
-                <Input type="date" />
+                <Input type="date" value={issueDate} onChange={(e) => setIssueDate(e.target.value)} />
              </div>
              <div className="grid gap-2">
                 <Label>Due Date</Label>
-                <Input type="date" />
+                <Input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
              </div>
           </div>
         </div>
 
-        {/* Line Items Table */}
         <div>
           <Table>
             <TableHeader>
@@ -182,7 +265,6 @@ const InvoicesTab = () => {
           </Button>
         </div>
 
-        {/* Totals Section */}
         <div className="flex justify-end">
           <div className="w-full max-w-xs space-y-2">
             <div className="flex justify-between">
@@ -202,7 +284,7 @@ const InvoicesTab = () => {
       </CardContent>
       <CardFooter className="flex justify-end gap-2">
         <Button variant="outline">Save Draft</Button>
-        <Button>
+        <Button onClick={handleDownloadPdf}>
             <Download className="mr-2 h-4 w-4" />
             Download PDF
         </Button>
