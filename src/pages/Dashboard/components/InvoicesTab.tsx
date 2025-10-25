@@ -113,8 +113,8 @@ const InvoicesTab = () => {
         doc.setFont(undefined, 'bold');
         doc.text("Camsnett", 14, 40);
         doc.setFont(undefined, 'normal');
-        doc.text("123 Creative Lane", 14, 45);
-        doc.text("Harare, Zimbabwe", 14, 50);
+        doc.text("83 Durban Road", 14, 45);
+        doc.text("Mowbray, Capetown", 14, 50);
 
         doc.setFont(undefined, 'bold');
         doc.text("Bill To:", 14, 65);
@@ -205,8 +205,8 @@ const InvoicesTab = () => {
             <img src={camsnettLogo} alt="Camsnett Logo" className="h-16 w-auto object-contain" />
             <div className="mt-2 text-sm text-muted-foreground">
               <p>Camsnett</p>
-              <p>123 Creative Lane</p>
-              <p>Harare, Zimbabwe</p>
+              <p>83 Durban Road</p>
+              <p>Mowbray, Capetown</p>
             </div>
           </div>
           <div className="text-right">
