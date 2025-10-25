@@ -7,7 +7,7 @@ import OverviewCards from "./components/OverviewCards";
 import OverviewChart from "./components/OverviewChart";
 import RecentSales from "./components/RecentSales";
 import InvoicesTab from "./components/InvoicesTab";
-import CustomersTab from "./components/CustomersTab";
+import CustomersTab, { Customer } from "./components/CustomersTab";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,12 @@ import { Download } from "lucide-react";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
+  const [customerForInvoice, setCustomerForInvoice] = useState<Customer | null>(null);
+
+  const handleGenerateInvoice = (customer: Customer) => {
+    setCustomerForInvoice(customer);
+    setActiveTab("invoices");
+  };
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -60,10 +66,10 @@ const Dashboard = () => {
               </div>
             </TabsContent>
             <TabsContent value="invoices" className="space-y-4">
-              <InvoicesTab />
+              <InvoicesTab customerToPreFill={customerForInvoice} clearCustomerToPreFill={() => setCustomerForInvoice(null)} />
             </TabsContent>
             <TabsContent value="customers" className="space-y-4">
-              <CustomersTab />
+              <CustomersTab onGenerateInvoice={handleGenerateInvoice} />
             </TabsContent>
           </Tabs>
         </main>

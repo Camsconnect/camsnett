@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,6 +12,7 @@ import { PlusCircle, Trash2, Download, FilePlus } from "lucide-react";
 import camsnettLogo from "@/assets/camsnett-co-logo.png";
 import jsPDF from "jspdf";
 import autoTable from 'jspdf-autotable';
+import type { Customer } from "./CustomersTab";
 
 const services = [
   { name: "Social Media Management - Basic", price: 100, brief: "Includes Facebook management, regular posting, and professionally designed graphics." },
@@ -48,7 +49,12 @@ interface Invoice {
   discount: number;
 }
 
-const InvoicesTab = () => {
+interface InvoicesTabProps {
+  customerToPreFill: Customer | null;
+  clearCustomerToPreFill: () => void;
+}
+
+const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCustomerToPreFill }) => {
   const [lineItems, setLineItems] = useState<LineItem[]>([
     { id: 1, description: "", quantity: 1, price: 0 },
   ]);
@@ -84,6 +90,34 @@ const InvoicesTab = () => {
     setLineItems([{ id: Date.now(), description: "", quantity: 1, price: 0 }]);
     setCurrentDraftId(null);
   };
+
+  useEffect(() => {
+    if (customerToPreFill) {
+      resetForm();
+      setClientName(customerToPreFill.name);
+      setClientEmail(customerToPreFill.email);
+      setClientCompany(customerToPreFill.company);
+
+      const service = services.find(s => s.name === customerToPreFill.service);
+      if (service) {
+        setLineItems([{
+          id: Date.now(),
+          description: service.name,
+          quantity: 1,
+          price: service.price,
+        }]);
+      } else {
+        setLineItems([{
+          id: Date.now(),
+          description: customerToPreFill.service,
+          quantity: 1,
+          price: 0,
+        }]);
+      }
+      
+      clearCustomerToPreFill();
+    }
+  }, [customerToPreFill, clearCustomerToPreFill]);
 
   const handleSaveDraft = () => {
     const draftData: Invoice = {
@@ -325,7 +359,7 @@ const InvoicesTab = () => {
                 {lineItems.map((item) => (
                   <TableRow key={item.id}>
                     <TableCell>
-                      <Select onValueChange={(value) => handleServiceSelect(item.id, value)}>
+                      <Select onValueChange={(value) => handleServiceSelect(item.id, value)} value={item.description}>
                           <SelectTrigger className="mb-2">
                               <SelectValue placeholder="Select a service template" />
                           </SelectTrigger>

@@ -37,7 +37,11 @@ export interface Customer {
   status: "Paid" | "Pending" | "Overdue";
 }
 
-const CustomersTab = () => {
+interface CustomersTabProps {
+  onGenerateInvoice: (customer: Customer) => void;
+}
+
+const CustomersTab: React.FC<CustomersTabProps> = ({ onGenerateInvoice }) => {
   const [customers, setCustomers] = useState<Customer[]>([
     {
       id: "1",
@@ -147,7 +151,7 @@ const CustomersTab = () => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => onGenerateInvoice(customer)}>
                         <FileText className="mr-2 h-4 w-4" />
                         Generate Invoice
                       </DropdownMenuItem>
