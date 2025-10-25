@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import { PlusCircle } from "lucide-react";
 import type { Customer } from "./CustomersTab";
+import { showError } from "@/utils/toast";
 
 const services = [
   "Social Media Management - Basic",
@@ -39,7 +40,7 @@ const services = [
 ];
 
 interface AddCustomerDialogProps {
-  onSave: (customer: Omit<Customer, "id">) => void;
+  onSave: (customer: Omit<Customer, "id" | "created_at">) => void;
 }
 
 const AddCustomerDialog: React.FC<AddCustomerDialogProps> = ({ onSave }) => {
@@ -51,7 +52,7 @@ const AddCustomerDialog: React.FC<AddCustomerDialogProps> = ({ onSave }) => {
   const [status, setStatus] = useState<Customer["status"]>("Pending");
 
   const handleSave = () => {
-    if (name && email && company && service && status) {
+    if (name && service && status) {
       onSave({ name, email, company, service, status });
       setIsOpen(false);
       // Reset form
@@ -60,6 +61,8 @@ const AddCustomerDialog: React.FC<AddCustomerDialogProps> = ({ onSave }) => {
       setCompany("");
       setService("");
       setStatus("Pending");
+    } else {
+      showError("Please fill in all required fields: Name, Service, and Status.");
     }
   };
 
@@ -90,6 +93,7 @@ const AddCustomerDialog: React.FC<AddCustomerDialogProps> = ({ onSave }) => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="col-span-3"
+              required
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
