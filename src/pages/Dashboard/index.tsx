@@ -6,6 +6,7 @@ import OverviewCards from "./components/OverviewCards";
 import OverviewChart from "./components/OverviewChart";
 import RecentSales from "./components/RecentSales";
 import InvoicesTab from "./components/InvoicesTab";
+import CustomersTab from "./components/CustomersTab";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,7 @@ const Dashboard = () => {
               <TabsList>
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="invoices">Invoices</TabsTrigger>
+                <TabsTrigger value="customers">Customers</TabsTrigger>
                 <TabsTrigger value="analytics" disabled>
                   Analytics
                 </TabsTrigger>
@@ -56,6 +58,9 @@ const Dashboard = () => {
             </TabsContent>
             <TabsContent value="invoices" className="space-y-4">
               <InvoicesTab />
+            </TabsContent>
+            <TabsContent value="customers" className="space-y-4">
+              <CustomersTab />
             </TabsContent>
           </Tabs>
         </main>
