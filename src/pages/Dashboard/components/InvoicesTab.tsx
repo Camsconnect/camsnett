@@ -14,6 +14,11 @@ import jsPDF from "jspdf";
 import autoTable from 'jspdf-autotable';
 import type { Customer } from "./CustomersTab";
 import { services } from "@/lib/services";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { useSession } from "@/contexts/SessionContext";
+import { Skeleton } from "@/components/ui/skeleton";
+import { showError, showSuccess } from "@/utils/toast";
 
 interface LineItem {
   id: number;
@@ -41,6 +46,9 @@ interface InvoicesTabProps {
 }
 
 const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCustomerToPreFill }) => {
+  const { user } = useSession();
+  const queryClient = useQueryClient();
+
   const [lineItems, setLineItems] = useState<LineItem[]>([
     { id: 1, description: "", quantity: 1, price: 0 },
   ]);
@@ -56,11 +64,64 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
       date.setDate(date.getDate() + 30);
       return date.toISOString().split('T')[0];
   });
-  const [drafts, setDrafts] = useState<Invoice[]>([]);
   const [currentDraftId, setCurrentDraftId] = useState<string | null>(null);
 
+  const { data: drafts, isLoading: isLoadingDrafts } = useQuery({
+    queryKey: ['invoice_drafts', user?.id],
+    queryFn: async () => {
+        if (!user) return [];
+        const { data, error } = await supabase
+            .from('invoices')
+            .select('id, invoice_data')
+            .eq('user_id', user.id)
+            .eq('status', 'draft')
+            .order('created_at', { ascending: false });
+        if (error) throw new Error(error.message);
+        return data.map(d => ({ id: d.id, ...d.invoice_data })) as Invoice[];
+    },
+    enabled: !!user,
+  });
+
+  const saveDraftMutation = useMutation({
+    mutationFn: async (draftData: Omit<Invoice, 'id'> & { id?: string }) => {
+        if (!user) throw new Error("User not authenticated");
+        const { id, ...invoice_data } = draftData;
+        if (id) {
+            const { data, error } = await supabase.from('invoices').update({ invoice_data, updated_at: new Date().toISOString() }).eq('id', id).select();
+            if (error) throw new Error(error.message);
+            return data;
+        } else {
+            const { data, error } = await supabase.from('invoices').insert({ user_id: user.id, invoice_data, status: 'draft' }).select();
+            if (error) throw new Error(error.message);
+            return data;
+        }
+    },
+    onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['invoice_drafts', user?.id] });
+        showSuccess("Draft saved successfully!");
+        resetForm();
+    },
+    onError: (error) => {
+        showError(`Error saving draft: ${error.message}`);
+    }
+  });
+
+  const deleteDraftMutation = useMutation({
+    mutationFn: async (draftId: string) => {
+        const { error } = await supabase.from('invoices').delete().eq('id', draftId);
+        if (error) throw new Error(error.message);
+    },
+    onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['invoice_drafts', user?.id] });
+        showSuccess("Draft deleted successfully!");
+    },
+    onError: (error) => {
+        showError(`Error deleting draft: ${error.message}`);
+    }
+  });
+
   const resetForm = () => {
-    const newInvoiceNum = `INV-${String(drafts.length + 1).padStart(3, '0')}`;
+    const newInvoiceNum = `INV-${String((drafts?.length || 0) + 1).padStart(3, '0')}`;
     setInvoiceNumber(newInvoiceNum);
     setClientName("");
     setClientCompany("");
@@ -83,45 +144,27 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
       setClientName(customerToPreFill.name);
       setClientEmail(customerToPreFill.email);
       setClientCompany(customerToPreFill.company);
-
       const service = services.find(s => s.name === customerToPreFill.service);
       if (service) {
-        setLineItems([{
-          id: Date.now(),
-          description: service.name,
-          quantity: 1,
-          price: service.price,
-        }]);
+        setLineItems([{ id: Date.now(), description: service.name, quantity: 1, price: service.price }]);
       } else {
-        setLineItems([{
-          id: Date.now(),
-          description: customerToPreFill.service,
-          quantity: 1,
-          price: 0,
-        }]);
+        setLineItems([{ id: Date.now(), description: customerToPreFill.service, quantity: 1, price: 0 }]);
       }
-      
       clearCustomerToPreFill();
     }
-  }, [customerToPreFill, clearCustomerToPreFill]);
+  }, [customerToPreFill, clearCustomerToPreFill, drafts]);
 
   const handleSaveDraft = () => {
-    const draftData: Invoice = {
-      id: currentDraftId || Date.now().toString(),
+    const draftData = {
+      id: currentDraftId || undefined,
       invoiceNumber, clientName, clientCompany, clientAddress, clientEmail,
       issueDate, dueDate, lineItems, discount,
     };
-
-    if (currentDraftId) {
-      setDrafts(drafts.map(d => d.id === currentDraftId ? draftData : d));
-    } else {
-      setDrafts([...drafts, draftData]);
-    }
-    resetForm();
+    saveDraftMutation.mutate(draftData);
   };
 
   const handleLoadDraft = (id: string) => {
-    const draftToLoad = drafts.find(d => d.id === id);
+    const draftToLoad = drafts?.find(d => d.id === id);
     if (draftToLoad) {
       setInvoiceNumber(draftToLoad.invoiceNumber);
       setClientName(draftToLoad.clientName);
@@ -137,17 +180,14 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
   };
 
   const handleDeleteDraft = (id: string) => {
-    setDrafts(drafts.filter(d => d.id !== id));
+    deleteDraftMutation.mutate(id);
     if (currentDraftId === id) {
       resetForm();
     }
   };
 
   const handleAddLineItem = () => {
-    setLineItems([
-      ...lineItems,
-      { id: Date.now(), description: "", quantity: 1, price: 0 },
-    ]);
+    setLineItems([...lineItems, { id: Date.now(), description: "", quantity: 1, price: 0 }]);
   };
 
   const handleRemoveLineItem = (id: number) => {
@@ -155,21 +195,13 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
   };
 
   const handleLineItemChange = (id: number, field: keyof Omit<LineItem, 'id'>, value: string) => {
-    setLineItems(
-      lineItems.map((item) =>
-        item.id === id ? { ...item, [field]: value } : item
-      )
-    );
+    setLineItems(lineItems.map((item) => item.id === id ? { ...item, [field]: value } : item));
   };
   
   const handleServiceSelect = (id: number, serviceName: string) => {
       const selectedService = services.find(s => s.name === serviceName);
       if (selectedService) {
-          setLineItems(
-              lineItems.map((item) =>
-                item.id === id ? { ...item, description: selectedService.name, price: selectedService.price } : item
-              )
-          );
+          setLineItems(lineItems.map((item) => item.id === id ? { ...item, description: selectedService.name, price: selectedService.price } : item));
       }
   }
 
@@ -185,24 +217,20 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
         const logoAspectRatio = img.width / img.height;
         const logoHeight = logoWidth / logoAspectRatio;
         doc.addImage(img, 'PNG', 14, 15, logoWidth, logoHeight);
-
         doc.setFontSize(22);
         doc.setFont(undefined, 'bold');
         doc.text("INVOICE", 196, 22, { align: 'right' });
-
         doc.setFontSize(10);
         doc.setFont(undefined, 'normal');
         doc.text(`Invoice #: ${invoiceNumber}`, 196, 30, { align: 'right' });
         doc.text(`Issue Date: ${issueDate}`, 196, 35, { align: 'right' });
         doc.text(`Due Date: ${dueDate}`, 196, 40, { align: 'right' });
-
         doc.setFontSize(10);
         doc.setFont(undefined, 'bold');
         doc.text("Camsnett", 14, 45);
         doc.setFont(undefined, 'normal');
         doc.text("83 Durban Road", 14, 50);
         doc.text("Mowbray, Capetown", 14, 55);
-
         doc.setFont(undefined, 'bold');
         doc.text("Bill To:", 14, 65);
         doc.setFont(undefined, 'normal');
@@ -210,36 +238,14 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
         doc.text(clientCompany, 14, 75);
         doc.text(clientAddress, 14, 80);
         doc.text(clientEmail, 14, 85);
-
         const tableColumn = ["Description", "Quantity", "Unit Price", "Total"];
         const tableRows: (string | number)[][] = [];
         lineItems.forEach(item => {
-            tableRows.push([
-                item.description,
-                item.quantity,
-                `$${Number(item.price).toFixed(2)}`,
-                `$${(Number(item.quantity) * Number(item.price)).toFixed(2)}`
-            ]);
+            tableRows.push([item.description, item.quantity, `$${Number(item.price).toFixed(2)}`, `$${(Number(item.quantity) * Number(item.price)).toFixed(2)}`]);
         });
-
-        autoTable(doc, {
-            head: [tableColumn],
-            body: tableRows,
-            startY: 95,
-            theme: 'grid',
-            headStyles: { fillColor: [34, 87, 81] },
-        });
-
+        autoTable(doc, { head: [tableColumn], body: tableRows, startY: 95, theme: 'grid', headStyles: { fillColor: [34, 87, 81] } });
         let finalY = (doc as any).lastAutoTable.finalY;
-
-        const socialMediaBriefs = lineItems
-            .map(item => {
-                const service = services.find(s => s.name === item.description);
-                return service && service.brief ? `* ${service.name}: ${service.brief}` : null;
-            })
-            .filter(brief => brief !== null)
-            .join('\n');
-
+        const socialMediaBriefs = lineItems.map(item => { const service = services.find(s => s.name === item.description); return service && service.brief ? `* ${service.name}: ${service.brief}` : null; }).filter(brief => brief !== null).join('\n');
         if (socialMediaBriefs) {
             finalY += 10;
             doc.setFontSize(10);
@@ -252,7 +258,6 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
             doc.text(splitBriefs, 14, finalY);
             finalY += splitBriefs.length * 4;
         }
-
         let totalsY = finalY + 10;
         doc.setFontSize(10);
         doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 196, totalsY, { align: 'right' });
@@ -263,17 +268,14 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
         } else {
             totalsY += 2;
         }
-        
         doc.setFontSize(12);
         doc.setFont(undefined, 'bold');
         doc.text(`Total: $${total.toFixed(2)}`, 196, totalsY, { align: 'right' });
-
         doc.setFontSize(8);
         doc.setTextColor(150);
         doc.text("Explore our other services: Web Design, Branding, Videography, and 3D Modeling.", 105, 280, { align: 'center' });
         doc.text("www.camsnett.com", 105, 285, { align: 'center' });
         doc.text("Thank you for your business!", 105, 290, { align: 'center' });
-
         doc.save(`Invoice-${invoiceNumber}.pdf`);
     };
   };
@@ -309,7 +311,6 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
               </div>
             </div>
           </div>
-
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-4">
               <h3 className="font-semibold">Bill To:</h3>
@@ -329,7 +330,6 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
               </div>
             </div>
           </div>
-
           <div>
             <Table>
               <TableHeader>
@@ -350,107 +350,58 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
                               <SelectValue placeholder="Select a service template" />
                           </SelectTrigger>
                           <SelectContent>
-                              {services.map(service => (
-                                  <SelectItem key={service.name} value={service.name}>{service.name}</SelectItem>
-                              ))}
+                              {services.map(service => (<SelectItem key={service.name} value={service.name}>{service.name}</SelectItem>))}
                           </SelectContent>
                       </Select>
-                      <Textarea
-                        placeholder="Enter or edit service description..."
-                        value={item.description}
-                        onChange={(e) => handleLineItemChange(item.id, "description", e.target.value)}
-                      />
+                      <Textarea placeholder="Enter or edit service description..." value={item.description} onChange={(e) => handleLineItemChange(item.id, "description", e.target.value)} />
                     </TableCell>
-                    <TableCell>
-                      <Input
-                        type="number"
-                        value={item.quantity}
-                        onChange={(e) => handleLineItemChange(item.id, "quantity", e.target.value)}
-                        className="w-16"
-                        min="1"
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Input
-                        type="number"
-                        value={item.price}
-                        onChange={(e) => handleLineItemChange(item.id, "price", e.target.value)}
-                        className="w-24"
-                        step="0.01"
-                      />
-                    </TableCell>
-                    <TableCell className="text-right">
-                      ${(Number(item.quantity) * Number(item.price)).toFixed(2)}
-                    </TableCell>
-                    <TableCell>
-                      <Button variant="ghost" size="icon" onClick={() => handleRemoveLineItem(item.id)}>
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </TableCell>
+                    <TableCell><Input type="number" value={item.quantity} onChange={(e) => handleLineItemChange(item.id, "quantity", e.target.value)} className="w-16" min="1" /></TableCell>
+                    <TableCell><Input type="number" value={item.price} onChange={(e) => handleLineItemChange(item.id, "price", e.target.value)} className="w-24" step="0.01" /></TableCell>
+                    <TableCell className="text-right">${(Number(item.quantity) * Number(item.price)).toFixed(2)}</TableCell>
+                    <TableCell><Button variant="ghost" size="icon" onClick={() => handleRemoveLineItem(item.id)}><Trash2 className="h-4 w-4" /></Button></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-            <Button variant="outline" size="sm" className="mt-4" onClick={handleAddLineItem}>
-              <PlusCircle className="mr-2 h-4 w-4" />
-              Add Item
-            </Button>
+            <Button variant="outline" size="sm" className="mt-4" onClick={handleAddLineItem}><PlusCircle className="mr-2 h-4 w-4" />Add Item</Button>
           </div>
-
           <div className="flex justify-end">
             <div className="w-full max-w-xs space-y-2">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Subtotal</span>
-                <span>${subtotal.toFixed(2)}</span>
-              </div>
+              <div className="flex justify-between"><span className="text-muted-foreground">Subtotal</span><span>${subtotal.toFixed(2)}</span></div>
               <div className="flex justify-between items-center">
                   <span className="text-muted-foreground">Discount</span>
-                  <div className="flex items-center gap-1">
-                      <span>$</span>
-                      <Input
-                          type="number"
-                          value={discount}
-                          onChange={(e) => setDiscount(parseFloat(e.target.value) || 0)}
-                          className="w-24 h-8 text-right"
-                      />
-                  </div>
+                  <div className="flex items-center gap-1"><span>$</span><Input type="number" value={discount} onChange={(e) => setDiscount(parseFloat(e.target.value) || 0)} className="w-24 h-8 text-right" /></div>
               </div>
-              <div className="flex justify-between font-bold text-lg">
-                <span>Total</span>
-                <span>${total.toFixed(2)}</span>
-              </div>
+              <div className="flex justify-between font-bold text-lg"><span>Total</span><span>${total.toFixed(2)}</span></div>
             </div>
           </div>
         </CardContent>
         <CardFooter className="flex justify-end gap-2">
-          <Button variant="outline" onClick={handleSaveDraft}>
-            {currentDraftId ? "Update Draft" : "Save Draft"}
+          <Button variant="outline" onClick={handleSaveDraft} disabled={saveDraftMutation.isPending}>
+            {saveDraftMutation.isPending ? "Saving..." : (currentDraftId ? "Update Draft" : "Save Draft")}
           </Button>
-          <Button onClick={handleDownloadPdf}>
-              <Download className="mr-2 h-4 w-4" />
-              Download PDF
-          </Button>
+          <Button onClick={handleDownloadPdf}><Download className="mr-2 h-4 w-4" />Download PDF</Button>
         </CardFooter>
       </Card>
 
-      {drafts.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Saved Drafts</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Invoice #</TableHead>
-                  <TableHead>Client Name</TableHead>
-                  <TableHead>Due Date</TableHead>
-                  <TableHead className="text-right">Total</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {drafts.map(draft => {
+      <Card>
+        <CardHeader><CardTitle>Saved Drafts</CardTitle></CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Invoice #</TableHead>
+                <TableHead>Client Name</TableHead>
+                <TableHead>Due Date</TableHead>
+                <TableHead className="text-right">Total</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {isLoadingDrafts ? (
+                Array.from({ length: 3 }).map((_, i) => (<TableRow key={i}><TableCell colSpan={5}><Skeleton className="h-8 w-full" /></TableCell></TableRow>))
+              ) : drafts && drafts.length > 0 ? (
+                drafts.map(draft => {
                   const draftSubtotal = draft.lineItems.reduce((acc, item) => acc + Number(item.quantity) * Number(item.price), 0);
                   const draftTotal = draftSubtotal - draft.discount;
                   return (
@@ -461,16 +412,18 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
                       <TableCell className="text-right">${draftTotal.toFixed(2)}</TableCell>
                       <TableCell className="text-right">
                         <Button variant="outline" size="sm" onClick={() => handleLoadDraft(draft.id)} className="mr-2">Load</Button>
-                        <Button variant="destructive" size="sm" onClick={() => handleDeleteDraft(draft.id)}>Delete</Button>
+                        <Button variant="destructive" size="sm" onClick={() => handleDeleteDraft(draft.id)} disabled={deleteDraftMutation.isPending}>Delete</Button>
                       </TableCell>
                     </TableRow>
                   )
-                })}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      )}
+                })
+              ) : (
+                <TableRow><TableCell colSpan={5} className="text-center">No saved drafts.</TableCell></TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 };
