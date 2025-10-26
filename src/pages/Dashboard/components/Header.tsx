@@ -22,8 +22,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
 
 interface HeaderProps {
   activeTab: string;
@@ -32,6 +33,12 @@ interface HeaderProps {
 
 const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate("/login");
+  };
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
@@ -126,7 +133,7 @@ const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
             <DropdownMenuItem onClick={() => setActiveTab('settings')}>Settings</DropdownMenuItem>
             <DropdownMenuItem>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
       </div>
