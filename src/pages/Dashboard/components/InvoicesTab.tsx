@@ -223,11 +223,7 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
   const subtotal = lineItems.reduce((acc, item) => acc + Number(item.quantity) * Number(item.price), 0);
   const total = subtotal - discount;
 
-  const generatePdfDoc = () => {
-    const doc = new jsPDF();
-    const img = new Image();
-    img.src = camsnettLogo;
-    
+  const populatePdf = (doc: jsPDF, img: HTMLImageElement) => {
     const logoWidth = 40;
     const logoAspectRatio = img.width / img.height;
     const logoHeight = logoWidth / logoAspectRatio;
@@ -297,21 +293,35 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
     doc.setTextColor(150);
     doc.text("Explore our other services: Web Design, Branding, Videography, and 3D Modeling.", 105, 280, { align: 'center' });
     doc.text("www.camsnett.com", 105, 285, { align: 'center' });
-    
-    return doc;
   };
 
   const handleDownloadPdf = () => {
-    const doc = generatePdfDoc();
-    doc.save(`Invoice-${invoiceNumber}.pdf`);
+    const img = new Image();
+    img.src = camsnettLogo;
+    img.onload = () => {
+      const doc = new jsPDF();
+      populatePdf(doc, img);
+      doc.save(`Invoice-${invoiceNumber}.pdf`);
+    };
+    img.onerror = () => {
+      showError("Error: Could not load logo image for PDF.");
+    };
   };
 
   const handleViewPdf = () => {
-    const doc = generatePdfDoc();
-    const pdfBlob = doc.output('blob');
-    const url = URL.createObjectURL(pdfBlob);
-    setPreviewUrl(url);
-    setIsPreviewOpen(true);
+    const img = new Image();
+    img.src = camsnettLogo;
+    img.onload = () => {
+      const doc = new jsPDF();
+      populatePdf(doc, img);
+      const pdfBlob = doc.output('blob');
+      const url = URL.createObjectURL(pdfBlob);
+      setPreviewUrl(url);
+      setIsPreviewOpen(true);
+    };
+    img.onerror = () => {
+      showError("Error: Could not load logo image for PDF.");
+    };
   };
 
   const handlePreviewClose = (isOpen: boolean) => {
