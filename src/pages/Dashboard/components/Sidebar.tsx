@@ -7,7 +7,7 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip";
 import { Link } from "react-router-dom";
-import { Home, Settings, Package, Users, LineChart, Brain, FileText, ClipboardCheck } from "lucide-react";
+import { Home, Settings, Users, LineChart, Brain, FileText, ClipboardCheck, BarChart3 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SidebarProps {
@@ -21,6 +21,7 @@ const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
     { name: "Tasks", icon: ClipboardCheck, tab: "tasks" },
     { name: "Invoices", icon: FileText, tab: "invoices" },
     { name: "Customers", icon: Users, tab: "customers" },
+    { name: "Reports", icon: BarChart3, tab: "reports" },
     { name: "Analytics", icon: LineChart, tab: "analytics", disabled: true },
   ];
 

@@ -11,6 +11,7 @@ import {
   FileText,
   Settings,
   ClipboardCheck,
+  BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -51,6 +52,7 @@ const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
     { name: "Tasks", icon: ClipboardCheck, tab: "tasks" },
     { name: "Invoices", icon: FileText, tab: "invoices" },
     { name: "Customers", icon: Users, tab: "customers" },
+    { name: "Reports", icon: BarChart3, tab: "reports" },
     { name: "Analytics", icon: LineChart, tab: "analytics", disabled: true },
   ];
 
