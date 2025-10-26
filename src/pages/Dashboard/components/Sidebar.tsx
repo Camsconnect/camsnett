@@ -62,13 +62,18 @@ const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link
-                to="#"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+              <button
+                onClick={() => setActiveTab("settings")}
+                className={cn(
+                  "flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8",
+                  activeTab === "settings"
+                    ? "bg-accent text-accent-foreground"
+                    : "text-muted-foreground"
+                )}
               >
                 <Settings className="h-5 w-5" />
                 <span className="sr-only">Settings</span>
-              </Link>
+              </button>
             </TooltipTrigger>
             <TooltipContent side="right">Settings</TooltipContent>
           </Tooltip>

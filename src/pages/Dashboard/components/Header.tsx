@@ -79,13 +79,16 @@ const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
                 {item.name}
               </button>
             ))}
-            <Link
-              to="#"
-              className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+            <button
+              onClick={() => handleTabChange("settings")}
+              className={cn(
+                "flex items-center gap-4 px-2.5 hover:text-foreground",
+                activeTab === "settings" ? "text-foreground" : "text-muted-foreground"
+              )}
             >
               <Settings className="h-5 w-5" />
               Settings
-            </Link>
+            </button>
           </nav>
         </SheetContent>
       </Sheet>
@@ -120,7 +123,7 @@ const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
             <DropdownMenuContent align="end">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setActiveTab('settings')}>Settings</DropdownMenuItem>
             <DropdownMenuItem>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Logout</DropdownMenuItem>

@@ -8,6 +8,7 @@ import OverviewChart from "./components/OverviewChart";
 import RecentSales from "./components/RecentSales";
 import InvoicesTab from "./components/InvoicesTab";
 import CustomersTab, { Customer } from "./components/CustomersTab";
+import SettingsTab from "./components/SettingsTab";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -54,15 +55,7 @@ const Dashboard = () => {
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="invoices">Invoices</TabsTrigger>
                 <TabsTrigger value="customers">Customers</TabsTrigger>
-                <TabsTrigger value="analytics" disabled>
-                  Analytics
-                </TabsTrigger>
-                <TabsTrigger value="reports" disabled>
-                  Reports
-                </TabsTrigger>
-                <TabsTrigger value="notifications" disabled>
-                  Notifications
-                </TabsTrigger>
+                <TabsTrigger value="settings">Settings</TabsTrigger>
               </TabsList>
               <div className="hidden md:flex items-center gap-2">
                 <Button>
@@ -117,6 +110,9 @@ const Dashboard = () => {
             </TabsContent>
             <TabsContent value="customers" className="space-y-4">
               <CustomersTab onGenerateInvoice={handleGenerateInvoice} />
+            </TabsContent>
+            <TabsContent value="settings" className="space-y-4">
+              <SettingsTab />
             </TabsContent>
           </Tabs>
         </main>
