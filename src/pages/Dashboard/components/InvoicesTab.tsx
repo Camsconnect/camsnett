@@ -231,18 +231,25 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
     const logoAspectRatio = img.width / img.height;
     const logoHeight = logoWidth / logoAspectRatio;
     doc.addImage(img, 'PNG', 14, 15, logoWidth, logoHeight);
-    doc.setFontSize(26);
+    
+    doc.setFontSize(18);
     doc.setFont(undefined, 'bold');
     doc.setTextColor(brandColor);
-    doc.text("INVOICE", 50, 28);
+    doc.text("INVOICE", 196, 18, { align: 'right' });
 
     doc.setFontSize(10);
     doc.setFont(undefined, 'normal');
     doc.setTextColor(40);
-    let dateY = 18;
+    let dateY = 28;
     doc.text(`Invoice #: ${invoiceNumber}`, 196, dateY, { align: 'right' }); dateY += 6;
     doc.text(`Issue Date: ${issueDate}`, 196, dateY, { align: 'right' }); dateY += 6;
-    doc.text(`Due Date: ${dueDate}`, 196, dateY, { align: 'right' });
+    doc.text(`Due Date: ${dueDate}`, 196, dateY, { align: 'right' }); dateY += 6;
+    if (serviceStartDate) {
+        doc.text(`Service Start: ${serviceStartDate}`, 196, dateY, { align: 'right' }); dateY += 6;
+    }
+    if (renewalDate) {
+        doc.text(`Renewal Date: ${renewalDate}`, 196, dateY, { align: 'right' });
+    }
 
     // From / Bill To
     let fromToY = 60;
@@ -262,7 +269,7 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
     doc.text("Capetown, South Africa", 14, fromToY);
     doc.text(clientAddress, 110, fromToY);
     fromToY += 5;
-    doc.text("contact@camsnett.com", 14, fromToY);
+    doc.text("info@camsnett.com", 14, fromToY);
     doc.text(clientEmail, 110, fromToY);
 
     // Line Items Table
