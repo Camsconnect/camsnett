@@ -224,104 +224,154 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
   const total = subtotal - discount;
 
   const populatePdf = (doc: jsPDF, img: HTMLImageElement) => {
-    const logoWidth = 40;
+    const brandColor = '#225751';
+
+    // Header
+    const logoWidth = 30;
     const logoAspectRatio = img.width / img.height;
     const logoHeight = logoWidth / logoAspectRatio;
     doc.addImage(img, 'PNG', 14, 15, logoWidth, logoHeight);
-    doc.setFontSize(22);
+    doc.setFontSize(26);
     doc.setFont(undefined, 'bold');
-    doc.text("INVOICE", 196, 22, { align: 'right' });
+    doc.setTextColor(brandColor);
+    doc.text("INVOICE", 50, 28);
+
     doc.setFontSize(10);
     doc.setFont(undefined, 'normal');
-    let dateY = 30;
-    doc.text(`Invoice #: ${invoiceNumber}`, 196, dateY, { align: 'right' }); dateY += 5;
-    doc.text(`Issue Date: ${issueDate}`, 196, dateY, { align: 'right' }); dateY += 5;
-    doc.text(`Due Date: ${dueDate}`, 196, dateY, { align: 'right' }); dateY += 5;
-    if (serviceStartDate) { doc.text(`Service Start: ${serviceStartDate}`, 196, dateY, { align: 'right' }); dateY += 5; }
-    if (renewalDate) { doc.text(`Renewal Date: ${renewalDate}`, 196, dateY, { align: 'right' }); }
-    
+    doc.setTextColor(40);
+    let dateY = 18;
+    doc.text(`Invoice #: ${invoiceNumber}`, 196, dateY, { align: 'right' }); dateY += 6;
+    doc.text(`Issue Date: ${issueDate}`, 196, dateY, { align: 'right' }); dateY += 6;
+    doc.text(`Due Date: ${dueDate}`, 196, dateY, { align: 'right' });
+
+    // From / Bill To
+    let fromToY = 60;
+    doc.setFontSize(11);
+    doc.setFont(undefined, 'bold');
+    doc.text("From", 14, fromToY);
+    doc.text("Bill to", 110, fromToY);
     doc.setFontSize(10);
-    doc.setFont(undefined, 'bold');
-    doc.text("Camsnett", 14, 45);
     doc.setFont(undefined, 'normal');
-    doc.text("83 Durban Road", 14, 50);
-    doc.text("Mowbray, Capetown", 14, 55);
-    doc.setFont(undefined, 'bold');
-    doc.text("Bill To:", 14, 65);
-    doc.setFont(undefined, 'normal');
-    doc.text(clientName, 14, 70);
-    doc.text(clientCompany, 14, 75);
-    doc.text(clientAddress, 14, 80);
-    doc.text(clientEmail, 14, 85);
-    const tableColumn = ["Description", "Quantity", "Unit Price", "Total"];
+    fromToY += 6;
+    doc.text("Camsnett", 14, fromToY);
+    doc.text(clientName, 110, fromToY);
+    fromToY += 5;
+    doc.text("83 Durban Road, Mowbray", 14, fromToY);
+    doc.text(clientCompany, 110, fromToY);
+    fromToY += 5;
+    doc.text("Capetown, South Africa", 14, fromToY);
+    doc.text(clientAddress, 110, fromToY);
+    fromToY += 5;
+    doc.text("contact@camsnett.com", 14, fromToY);
+    doc.text(clientEmail, 110, fromToY);
+
+    // Line Items Table
+    const tableColumn = ["DESCRIPTION", "QTY", "RATE", "AMOUNT"];
     const tableRows: (string | number)[][] = [];
     lineItems.forEach(item => {
-        tableRows.push([item.description, item.quantity, `$${Number(item.price).toFixed(2)}`, `$${(Number(item.quantity) * Number(item.price)).toFixed(2)}`]);
+        const itemTotal = (Number(item.quantity) * Number(item.price)).toFixed(2);
+        tableRows.push([item.description, item.quantity, `$${Number(item.price).toFixed(2)}`, `$${itemTotal}`]);
     });
-    autoTable(doc, { head: [tableColumn], body: tableRows, startY: 95, theme: 'grid', headStyles: { fillColor: [34, 87, 81] } });
+    autoTable(doc, {
+        head: [tableColumn],
+        body: tableRows,
+        startY: fromToY + 15,
+        theme: 'striped',
+        headStyles: { fillColor: brandColor, textColor: 255, fontStyle: 'bold' },
+        styles: { cellPadding: 3, fontSize: 10 },
+        columnStyles: {
+            0: { cellWidth: 90 },
+            1: { cellWidth: 20, halign: 'center' },
+            2: { cellWidth: 30, halign: 'right' },
+            3: { cellWidth: 40, halign: 'right' },
+        }
+    });
+
     let finalY = (doc as any).lastAutoTable.finalY;
-    
-    let totalsY = finalY + 10;
+    let bottomY = finalY + 15;
+
+    // Footer Section
+    doc.setFontSize(11);
+    doc.setFont(undefined, 'bold');
+    doc.text("Payment Instructions", 14, bottomY);
     doc.setFontSize(10);
-    doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 196, totalsY, { align: 'right' });
-    totalsY += 5;
+    doc.setFont(undefined, 'normal');
+    bottomY += 6;
+    doc.text("We accept payments via PayPal, Visa, and Mastercard.", 14, bottomY);
+    bottomY += 10;
+    doc.setFontSize(11);
+    doc.setFont(undefined, 'bold');
+    doc.text("Notes", 14, bottomY);
+    doc.setFontSize(10);
+    doc.setFont(undefined, 'normal');
+    bottomY += 6;
+    const splitNotes = doc.splitTextToSize(notes, 80);
+    doc.text(splitNotes, 14, bottomY);
+
+    // Totals
+    let totalsY = finalY + 15;
+    const totalsX = 196;
+    doc.setFontSize(10);
+    doc.setFont(undefined, 'normal');
+    doc.text(`Subtotal:`, totalsX - 30, totalsY, { align: 'left' });
+    doc.text(`$${subtotal.toFixed(2)}`, totalsX, totalsY, { align: 'right' });
+    totalsY += 7;
     if (discount > 0) {
-        doc.text(`Discount: -$${discount.toFixed(2)}`, 196, totalsY, { align: 'right' });
+        doc.text(`Discount:`, totalsX - 30, totalsY, { align: 'left' });
+        doc.text(`-$${discount.toFixed(2)}`, totalsX, totalsY, { align: 'right' });
         totalsY += 7;
-    } else {
-        totalsY += 2;
     }
+    const balanceDueY = totalsY + 2;
+    doc.setFillColor(brandColor);
+    doc.rect(110, balanceDueY - 5, 88, 10, 'F');
     doc.setFontSize(12);
     doc.setFont(undefined, 'bold');
-    doc.text(`Total: $${total.toFixed(2)}`, 196, totalsY, { align: 'right' });
+    doc.setTextColor(255);
+    doc.text(`Balance Due:`, 115, balanceDueY);
+    doc.text(`$${total.toFixed(2)}`, totalsX, balanceDueY, { align: 'right' });
+    doc.setTextColor(40);
 
-    let notesY = finalY + 10;
-    doc.setFontSize(10);
-    doc.setFont(undefined, 'bold');
-    doc.text("Notes:", 14, notesY);
-    doc.setFont(undefined, 'normal');
-    const splitNotes = doc.splitTextToSize(notes, 100);
-    doc.text(splitNotes, 14, notesY + 5);
-    
-    let paymentY = notesY + splitNotes.length * 5 + 10;
-    doc.setFont(undefined, 'bold');
-    doc.text("Payment Methods:", 14, paymentY);
-    doc.setFont(undefined, 'normal');
-    doc.text("We accept payments via PayPal, Visa, and Mastercard.", 14, paymentY + 5);
-
+    // Page Footer
     doc.setFontSize(8);
     doc.setTextColor(150);
-    doc.text("Explore our other services: Web Design, Branding, Videography, and 3D Modeling.", 105, 280, { align: 'center' });
-    doc.text("www.camsnett.com", 105, 285, { align: 'center' });
+    doc.text("Thank you for your business! | www.camsnett.com", 105, 285, { align: 'center' });
   };
 
-  const handleDownloadPdf = () => {
-    const img = new Image();
-    img.src = camsnettLogo;
-    img.onload = () => {
-      const doc = new jsPDF();
-      populatePdf(doc, img);
+  const generatePdfDoc = () => {
+    return new Promise<jsPDF>((resolve, reject) => {
+      const img = new Image();
+      img.src = camsnettLogo;
+      img.onload = () => {
+        const doc = new jsPDF();
+        populatePdf(doc, img);
+        resolve(doc);
+      };
+      img.onerror = (err) => {
+        showError("Error: Could not load logo image for PDF.");
+        reject(err);
+      };
+    });
+  };
+
+  const handleDownloadPdf = async () => {
+    try {
+      const doc = await generatePdfDoc();
       doc.save(`Invoice-${invoiceNumber}.pdf`);
-    };
-    img.onerror = () => {
-      showError("Error: Could not load logo image for PDF.");
-    };
+    } catch (error) {
+      console.error("Failed to generate PDF for download:", error);
+    }
   };
 
-  const handleViewPdf = () => {
-    const img = new Image();
-    img.src = camsnettLogo;
-    img.onload = () => {
-      const doc = new jsPDF();
-      populatePdf(doc, img);
+  const handleViewPdf = async () => {
+    try {
+      const doc = await generatePdfDoc();
       const pdfBlob = doc.output('blob');
       const url = URL.createObjectURL(pdfBlob);
       setPreviewUrl(url);
       setIsPreviewOpen(true);
-    };
-    img.onerror = () => {
-      showError("Error: Could not load logo image for PDF.");
-    };
+    } catch (error) {
+      console.error("Failed to generate PDF for preview:", error);
+    }
   };
 
   const handlePreviewClose = (isOpen: boolean) => {
