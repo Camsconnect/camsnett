@@ -344,15 +344,28 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
         doc.text(`-$${discount.toFixed(2)}`, totalsX, totalsY, { align: 'right' });
         totalsY += 7;
     }
-    const balanceDueY = totalsY + 2;
-    doc.setFillColor(brandColor);
-    doc.rect(110, balanceDueY - 5, 88, 10, 'F');
-    doc.setFontSize(12);
-    doc.setFont(undefined, 'bold');
-    doc.setTextColor(255);
-    doc.text(`Balance Due:`, 115, balanceDueY);
-    doc.text(`$${total.toFixed(2)}`, totalsX, balanceDueY, { align: 'right' });
-    doc.setTextColor(40);
+    
+    const finalTotalY = totalsY + 2;
+
+    if (status === 'Paid') {
+        const paidColor = '#228B22'; // ForestGreen
+        doc.setFillColor(paidColor);
+        doc.rect(110, finalTotalY - 5, 88, 10, 'F');
+        doc.setFontSize(12);
+        doc.setFont(undefined, 'bold');
+        doc.setTextColor(255);
+        doc.text(`Amount Paid:`, 115, finalTotalY);
+        doc.text(`$${total.toFixed(2)}`, totalsX, finalTotalY, { align: 'right' });
+    } else {
+        doc.setFillColor(brandColor);
+        doc.rect(110, finalTotalY - 5, 88, 10, 'F');
+        doc.setFontSize(12);
+        doc.setFont(undefined, 'bold');
+        doc.setTextColor(255);
+        doc.text(`Balance Due:`, 115, finalTotalY);
+        doc.text(`$${total.toFixed(2)}`, totalsX, finalTotalY, { align: 'right' });
+    }
+    doc.setTextColor(40); // Reset text color
 
     // Page Footer
     doc.setFontSize(8);
