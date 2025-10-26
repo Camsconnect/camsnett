@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
-import { PlusCircle, Trash2, Download, FilePlus } from "lucide-react";
+import { PlusCircle, Trash2, Download, FilePlus, Eye } from "lucide-react";
 import camsnettLogo from "@/assets/camsnett-co-logo.png";
 import jsPDF from "jspdf";
 import autoTable from 'jspdf-autotable';
@@ -19,6 +19,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useSession } from "@/contexts/SessionContext";
 import { Skeleton } from "@/components/ui/skeleton";
 import { showError, showSuccess } from "@/utils/toast";
+import InvoicePreviewDialog from "./InvoicePreviewDialog";
 
 interface LineItem {
   id: number;
@@ -71,6 +72,8 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
   const [renewalDate, setRenewalDate] = useState("");
   const [notes, setNotes] = useState("Thank you for your business!");
   const [currentDraftId, setCurrentDraftId] = useState<string | null>(null);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const { data: drafts, isLoading: isLoadingDrafts } = useQuery({
     queryKey: ['invoice_drafts', user?.id],
@@ -220,86 +223,110 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
   const subtotal = lineItems.reduce((acc, item) => acc + Number(item.quantity) * Number(item.price), 0);
   const total = subtotal - discount;
 
-  const handleDownloadPdf = () => {
+  const generatePdfDoc = () => {
     const doc = new jsPDF();
     const img = new Image();
     img.src = camsnettLogo;
-    img.onload = () => {
-        const logoWidth = 40;
-        const logoAspectRatio = img.width / img.height;
-        const logoHeight = logoWidth / logoAspectRatio;
-        doc.addImage(img, 'PNG', 14, 15, logoWidth, logoHeight);
-        doc.setFontSize(22);
-        doc.setFont(undefined, 'bold');
-        doc.text("INVOICE", 196, 22, { align: 'right' });
-        doc.setFontSize(10);
-        doc.setFont(undefined, 'normal');
-        let dateY = 30;
-        doc.text(`Invoice #: ${invoiceNumber}`, 196, dateY, { align: 'right' }); dateY += 5;
-        doc.text(`Issue Date: ${issueDate}`, 196, dateY, { align: 'right' }); dateY += 5;
-        doc.text(`Due Date: ${dueDate}`, 196, dateY, { align: 'right' }); dateY += 5;
-        if (serviceStartDate) { doc.text(`Service Start: ${serviceStartDate}`, 196, dateY, { align: 'right' }); dateY += 5; }
-        if (renewalDate) { doc.text(`Renewal Date: ${renewalDate}`, 196, dateY, { align: 'right' }); }
-        
-        doc.setFontSize(10);
-        doc.setFont(undefined, 'bold');
-        doc.text("Camsnett", 14, 45);
-        doc.setFont(undefined, 'normal');
-        doc.text("83 Durban Road", 14, 50);
-        doc.text("Mowbray, Capetown", 14, 55);
-        doc.setFont(undefined, 'bold');
-        doc.text("Bill To:", 14, 65);
-        doc.setFont(undefined, 'normal');
-        doc.text(clientName, 14, 70);
-        doc.text(clientCompany, 14, 75);
-        doc.text(clientAddress, 14, 80);
-        doc.text(clientEmail, 14, 85);
-        const tableColumn = ["Description", "Quantity", "Unit Price", "Total"];
-        const tableRows: (string | number)[][] = [];
-        lineItems.forEach(item => {
-            tableRows.push([item.description, item.quantity, `$${Number(item.price).toFixed(2)}`, `$${(Number(item.quantity) * Number(item.price)).toFixed(2)}`]);
-        });
-        autoTable(doc, { head: [tableColumn], body: tableRows, startY: 95, theme: 'grid', headStyles: { fillColor: [34, 87, 81] } });
-        let finalY = (doc as any).lastAutoTable.finalY;
-        
-        let totalsY = finalY + 10;
-        doc.setFontSize(10);
-        doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 196, totalsY, { align: 'right' });
-        totalsY += 5;
-        if (discount > 0) {
-            doc.text(`Discount: -$${discount.toFixed(2)}`, 196, totalsY, { align: 'right' });
-            totalsY += 7;
-        } else {
-            totalsY += 2;
-        }
-        doc.setFontSize(12);
-        doc.setFont(undefined, 'bold');
-        doc.text(`Total: $${total.toFixed(2)}`, 196, totalsY, { align: 'right' });
+    
+    const logoWidth = 40;
+    const logoAspectRatio = img.width / img.height;
+    const logoHeight = logoWidth / logoAspectRatio;
+    doc.addImage(img, 'PNG', 14, 15, logoWidth, logoHeight);
+    doc.setFontSize(22);
+    doc.setFont(undefined, 'bold');
+    doc.text("INVOICE", 196, 22, { align: 'right' });
+    doc.setFontSize(10);
+    doc.setFont(undefined, 'normal');
+    let dateY = 30;
+    doc.text(`Invoice #: ${invoiceNumber}`, 196, dateY, { align: 'right' }); dateY += 5;
+    doc.text(`Issue Date: ${issueDate}`, 196, dateY, { align: 'right' }); dateY += 5;
+    doc.text(`Due Date: ${dueDate}`, 196, dateY, { align: 'right' }); dateY += 5;
+    if (serviceStartDate) { doc.text(`Service Start: ${serviceStartDate}`, 196, dateY, { align: 'right' }); dateY += 5; }
+    if (renewalDate) { doc.text(`Renewal Date: ${renewalDate}`, 196, dateY, { align: 'right' }); }
+    
+    doc.setFontSize(10);
+    doc.setFont(undefined, 'bold');
+    doc.text("Camsnett", 14, 45);
+    doc.setFont(undefined, 'normal');
+    doc.text("83 Durban Road", 14, 50);
+    doc.text("Mowbray, Capetown", 14, 55);
+    doc.setFont(undefined, 'bold');
+    doc.text("Bill To:", 14, 65);
+    doc.setFont(undefined, 'normal');
+    doc.text(clientName, 14, 70);
+    doc.text(clientCompany, 14, 75);
+    doc.text(clientAddress, 14, 80);
+    doc.text(clientEmail, 14, 85);
+    const tableColumn = ["Description", "Quantity", "Unit Price", "Total"];
+    const tableRows: (string | number)[][] = [];
+    lineItems.forEach(item => {
+        tableRows.push([item.description, item.quantity, `$${Number(item.price).toFixed(2)}`, `$${(Number(item.quantity) * Number(item.price)).toFixed(2)}`]);
+    });
+    autoTable(doc, { head: [tableColumn], body: tableRows, startY: 95, theme: 'grid', headStyles: { fillColor: [34, 87, 81] } });
+    let finalY = (doc as any).lastAutoTable.finalY;
+    
+    let totalsY = finalY + 10;
+    doc.setFontSize(10);
+    doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 196, totalsY, { align: 'right' });
+    totalsY += 5;
+    if (discount > 0) {
+        doc.text(`Discount: -$${discount.toFixed(2)}`, 196, totalsY, { align: 'right' });
+        totalsY += 7;
+    } else {
+        totalsY += 2;
+    }
+    doc.setFontSize(12);
+    doc.setFont(undefined, 'bold');
+    doc.text(`Total: $${total.toFixed(2)}`, 196, totalsY, { align: 'right' });
 
-        let notesY = finalY + 10;
-        doc.setFontSize(10);
-        doc.setFont(undefined, 'bold');
-        doc.text("Notes:", 14, notesY);
-        doc.setFont(undefined, 'normal');
-        const splitNotes = doc.splitTextToSize(notes, 100);
-        doc.text(splitNotes, 14, notesY + 5);
-        
-        let paymentY = notesY + splitNotes.length * 5 + 10;
-        doc.setFont(undefined, 'bold');
-        doc.text("Payment Methods:", 14, paymentY);
-        doc.setFont(undefined, 'normal');
-        doc.text("We accept payments via PayPal, Visa, and Mastercard.", 14, paymentY + 5);
+    let notesY = finalY + 10;
+    doc.setFontSize(10);
+    doc.setFont(undefined, 'bold');
+    doc.text("Notes:", 14, notesY);
+    doc.setFont(undefined, 'normal');
+    const splitNotes = doc.splitTextToSize(notes, 100);
+    doc.text(splitNotes, 14, notesY + 5);
+    
+    let paymentY = notesY + splitNotes.length * 5 + 10;
+    doc.setFont(undefined, 'bold');
+    doc.text("Payment Methods:", 14, paymentY);
+    doc.setFont(undefined, 'normal');
+    doc.text("We accept payments via PayPal, Visa, and Mastercard.", 14, paymentY + 5);
 
-        doc.setFontSize(8);
-        doc.setTextColor(150);
-        doc.text("Explore our other services: Web Design, Branding, Videography, and 3D Modeling.", 105, 280, { align: 'center' });
-        doc.text("www.camsnett.com", 105, 285, { align: 'center' });
-        doc.save(`Invoice-${invoiceNumber}.pdf`);
-    };
+    doc.setFontSize(8);
+    doc.setTextColor(150);
+    doc.text("Explore our other services: Web Design, Branding, Videography, and 3D Modeling.", 105, 280, { align: 'center' });
+    doc.text("www.camsnett.com", 105, 285, { align: 'center' });
+    
+    return doc;
+  };
+
+  const handleDownloadPdf = () => {
+    const doc = generatePdfDoc();
+    doc.save(`Invoice-${invoiceNumber}.pdf`);
+  };
+
+  const handleViewPdf = () => {
+    const doc = generatePdfDoc();
+    const pdfBlob = doc.output('blob');
+    const url = URL.createObjectURL(pdfBlob);
+    setPreviewUrl(url);
+    setIsPreviewOpen(true);
+  };
+
+  const handlePreviewClose = (isOpen: boolean) => {
+    if (!isOpen) {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+        setPreviewUrl(null);
+      }
+    }
+    setIsPreviewOpen(isOpen);
   };
 
   return (
     <div className="space-y-4">
+      <InvoicePreviewDialog isOpen={isPreviewOpen} onOpenChange={handlePreviewClose} pdfUrl={previewUrl} />
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
@@ -414,6 +441,7 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
           <Button variant="outline" onClick={handleSaveDraft} disabled={saveDraftMutation.isPending}>
             {saveDraftMutation.isPending ? "Saving..." : (currentDraftId ? "Update Draft" : "Save Draft")}
           </Button>
+          <Button variant="outline" onClick={handleViewPdf}><Eye className="mr-2 h-4 w-4" />View Invoice</Button>
           <Button onClick={handleDownloadPdf}><Download className="mr-2 h-4 w-4" />Download PDF</Button>
         </CardFooter>
       </Card>
