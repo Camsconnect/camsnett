@@ -26,8 +26,9 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, PlusCircle, Trash2, Edit, CheckCircle } from "lucide-react";
+import { MoreHorizontal, PlusCircle, Trash2, Edit, CheckCircle, Zap } from "lucide-react";
 import AddTaskDialog from "./AddTaskDialog";
+import GenerateTasksDialog from "./GenerateTasksDialog";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useSession } from "@/contexts/SessionContext";
@@ -50,7 +51,8 @@ export interface Task {
 const TasksTab = () => {
   const { user } = useSession();
   const queryClient = useQueryClient();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [isGenerateDialogOpen, setIsGenerateDialogOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<Task | null>(null);
 
   const { data: tasks, isLoading: isLoadingTasks } = useQuery({
@@ -72,9 +74,9 @@ const TasksTab = () => {
     queryKey: ["customers", user?.id],
     queryFn: async () => {
       if (!user) return [];
-      const { data, error } = await supabase.from("customers").select("id, name").eq("user_id", user.id);
+      const { data, error } = await supabase.from("customers").select("*").eq("user_id", user.id);
       if (error) throw new Error(error.message);
-      return data as Pick<Customer, "id" | "name">[];
+      return data as Customer[];
     },
     enabled: !!user,
   });
@@ -136,6 +138,26 @@ const TasksTab = () => {
     },
   });
 
+  const generateTasksMutation = useMutation({
+    mutationFn: async (newTasks: Omit<Task, "id" | "created_at" | "completed_at" | "user_id">[]) => {
+      if (!user) throw new Error("User not authenticated");
+      const tasksToInsert = newTasks.map(task => ({ ...task, user_id: user.id }));
+      const { data, error } = await supabase
+        .from("tasks")
+        .insert(tasksToInsert)
+        .select();
+      if (error) throw new Error(error.message);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["tasks", user?.id] });
+      showSuccess("Monthly tasks generated successfully!");
+    },
+    onError: (error) => {
+      showError(`Error generating tasks: ${error.message}`);
+    },
+  });
+
   const handleSaveTask = (task: Omit<Task, "id" | "created_at" | "completed_at" | "user_id">) => {
     if (taskToEdit) {
       updateTaskMutation.mutate({ id: taskToEdit.id, ...task });
@@ -154,12 +176,12 @@ const TasksTab = () => {
 
   const handleEditTask = (task: Task) => {
     setTaskToEdit(task);
-    setIsDialogOpen(true);
+    setIsAddDialogOpen(true);
   };
 
   const handleAddNewTask = () => {
     setTaskToEdit(null);
-    setIsDialogOpen(true);
+    setIsAddDialogOpen(true);
   };
 
   const getStatusVariant = (status: Task["status"]) => {
@@ -176,11 +198,17 @@ const TasksTab = () => {
   return (
     <>
       <AddTaskDialog
-        isOpen={isDialogOpen}
-        onOpenChange={setIsDialogOpen}
+        isOpen={isAddDialogOpen}
+        onOpenChange={setIsAddDialogOpen}
         onSave={handleSaveTask}
         customers={customers || []}
         taskToEdit={taskToEdit}
+      />
+      <GenerateTasksDialog
+        isOpen={isGenerateDialogOpen}
+        onOpenChange={setIsGenerateDialogOpen}
+        onGenerate={(tasks) => generateTasksMutation.mutate(tasks)}
+        customers={customers || []}
       />
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
@@ -190,12 +218,20 @@ const TasksTab = () => {
               Manage your to-do list for all your clients.
             </CardDescription>
           </div>
-          <Button size="sm" className="gap-1" onClick={handleAddNewTask}>
-            <PlusCircle className="h-3.5 w-3.5" />
-            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-              Add Task
-            </span>
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" size="sm" className="gap-1" onClick={() => setIsGenerateDialogOpen(true)}>
+              <Zap className="h-3.5 w-3.5" />
+              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                Generate Tasks
+              </span>
+            </Button>
+            <Button size="sm" className="gap-1" onClick={handleAddNewTask}>
+              <PlusCircle className="h-3.5 w-3.5" />
+              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                Add Task
+              </span>
+            </Button>
+          </div>
         </CardHeader>
         <CardContent>
           <Table>
