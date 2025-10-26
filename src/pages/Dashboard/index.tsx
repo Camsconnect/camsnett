@@ -9,6 +9,7 @@ import RecentSales from "./components/RecentSales";
 import InvoicesTab from "./components/InvoicesTab";
 import CustomersTab, { Customer } from "./components/CustomersTab";
 import SettingsTab from "./components/SettingsTab";
+import TasksTab from "./components/TasksTab";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -53,6 +54,7 @@ const Dashboard = () => {
             <div className="flex items-center justify-between">
               <TabsList>
                 <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="tasks">Tasks</TabsTrigger>
                 <TabsTrigger value="invoices">Invoices</TabsTrigger>
                 <TabsTrigger value="customers">Customers</TabsTrigger>
                 <TabsTrigger value="settings">Settings</TabsTrigger>
@@ -104,6 +106,9 @@ const Dashboard = () => {
                   <RecentSales customers={customers || []} />
                 )}
               </div>
+            </TabsContent>
+            <TabsContent value="tasks" className="space-y-4">
+              <TasksTab />
             </TabsContent>
             <TabsContent value="invoices" className="space-y-4">
               <InvoicesTab customerToPreFill={customerForInvoice} clearCustomerToPreFill={() => setCustomerForInvoice(null)} />

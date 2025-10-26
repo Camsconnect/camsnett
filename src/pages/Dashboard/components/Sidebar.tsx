@@ -7,7 +7,7 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip";
 import { Link } from "react-router-dom";
-import { Home, Settings, Package, Users, LineChart, Brain, FileText } from "lucide-react";
+import { Home, Settings, Package, Users, LineChart, Brain, FileText, ClipboardCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SidebarProps {
@@ -18,7 +18,7 @@ interface SidebarProps {
 const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
   const navItems = [
     { name: "Dashboard", icon: Home, tab: "overview" },
-    { name: "Orders", icon: Package, tab: "orders", disabled: true },
+    { name: "Tasks", icon: ClipboardCheck, tab: "tasks" },
     { name: "Invoices", icon: FileText, tab: "invoices" },
     { name: "Customers", icon: Users, tab: "customers" },
     { name: "Analytics", icon: LineChart, tab: "analytics", disabled: true },

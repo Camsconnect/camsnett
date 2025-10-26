@@ -10,6 +10,7 @@ import {
   PanelLeft,
   FileText,
   Settings,
+  ClipboardCheck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -47,7 +48,7 @@ const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
 
   const navItems = [
     { name: "Dashboard", icon: Home, tab: "overview" },
-    { name: "Orders", icon: Package, tab: "orders", disabled: true },
+    { name: "Tasks", icon: ClipboardCheck, tab: "tasks" },
     { name: "Invoices", icon: FileText, tab: "invoices" },
     { name: "Customers", icon: Users, tab: "customers" },
     { name: "Analytics", icon: LineChart, tab: "analytics", disabled: true },
