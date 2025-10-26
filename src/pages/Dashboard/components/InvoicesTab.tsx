@@ -42,6 +42,7 @@ interface Invoice {
   lineItems: LineItem[];
   discount: number;
   notes: string;
+  status: "Paid" | "Pending" | "Overdue";
 }
 
 interface InvoicesTabProps {
@@ -71,6 +72,7 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
   const [serviceStartDate, setServiceStartDate] = useState("");
   const [renewalDate, setRenewalDate] = useState("");
   const [notes, setNotes] = useState("Thank you for your business!");
+  const [status, setStatus] = useState<"Paid" | "Pending" | "Overdue">("Pending");
   const [currentDraftId, setCurrentDraftId] = useState<string | null>(null);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -147,6 +149,7 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
     setRenewalDate("");
     setNotes("Thank you for your business!");
     setLineItems([{ id: Date.now(), description: "", quantity: 1, price: 0 }]);
+    setStatus("Pending");
     setCurrentDraftId(null);
   };
 
@@ -156,6 +159,7 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
       setClientName(customerToPreFill.name);
       setClientEmail(customerToPreFill.email);
       setClientCompany(customerToPreFill.company);
+      setStatus(customerToPreFill.status || "Pending");
       const service = services.find(s => s.name === customerToPreFill.service);
       if (service) {
         setLineItems([{ id: Date.now(), description: service.name, quantity: 1, price: service.price }]);
@@ -170,7 +174,7 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
     const draftData = {
       id: currentDraftId || undefined,
       invoiceNumber, clientName, clientCompany, clientAddress, clientEmail,
-      issueDate, dueDate, serviceStartDate, renewalDate, lineItems, discount, notes,
+      issueDate, dueDate, serviceStartDate, renewalDate, lineItems, discount, notes, status,
     };
     saveDraftMutation.mutate(draftData);
   };
@@ -190,6 +194,7 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
       setLineItems(draftToLoad.lineItems);
       setDiscount(draftToLoad.discount);
       setNotes(draftToLoad.notes || "Thank you for your business!");
+      setStatus(draftToLoad.status || "Pending");
       setCurrentDraftId(draftToLoad.id);
     }
   };
@@ -231,24 +236,35 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
     const logoAspectRatio = img.width / img.height;
     const logoHeight = logoWidth / logoAspectRatio;
     doc.addImage(img, 'PNG', 14, 15, logoWidth, logoHeight);
-    
-    doc.setFontSize(18);
-    doc.setFont(undefined, 'bold');
-    doc.setTextColor(brandColor);
-    doc.text("INVOICE", 196, 18, { align: 'right' });
 
     doc.setFontSize(10);
     doc.setFont(undefined, 'normal');
     doc.setTextColor(40);
-    let dateY = 28;
-    doc.text(`Invoice #: ${invoiceNumber}`, 196, dateY, { align: 'right' }); dateY += 6;
-    doc.text(`Issue Date: ${issueDate}`, 196, dateY, { align: 'right' }); dateY += 6;
-    doc.text(`Due Date: ${dueDate}`, 196, dateY, { align: 'right' }); dateY += 6;
+    let headerY = 18;
+    doc.text(`Invoice #: ${invoiceNumber}`, 196, headerY, { align: 'right' }); headerY += 6;
+
+    if (status === 'Paid') {
+        doc.setFont(undefined, 'bold');
+        doc.setTextColor('#228B22'); // ForestGreen
+        doc.text('PAID', 196, headerY, { align: 'right' });
+    } else {
+        doc.setFont(undefined, 'bold');
+        doc.setTextColor('#DC143C'); // Crimson
+        doc.text(`AMOUNT DUE`, 196, headerY, { align: 'right' });
+        headerY += 5;
+        doc.setFontSize(12);
+        doc.text(`$${total.toFixed(2)}`, 196, headerY, { align: 'right' });
+    }
+    headerY += 6;
+    doc.setTextColor(40);
+    doc.setFont(undefined, 'normal');
+    doc.setFontSize(10);
+
     if (serviceStartDate) {
-        doc.text(`Service Start: ${serviceStartDate}`, 196, dateY, { align: 'right' }); dateY += 6;
+        doc.text(`Service Start: ${serviceStartDate}`, 196, headerY, { align: 'right' }); headerY += 6;
     }
     if (renewalDate) {
-        doc.text(`Renewal Date: ${renewalDate}`, 196, dateY, { align: 'right' });
+        doc.text(`Renewal Date: ${renewalDate}`, 196, headerY, { align: 'right' });
     }
 
     // From / Bill To
@@ -416,7 +432,6 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
               </div>
             </div>
             <div className="text-right">
-              <h2 className="text-2xl font-bold">INVOICE</h2>
               <div className="grid w-full max-w-sm items-center gap-1.5 mt-2">
                 <Label htmlFor="invoice-number">Invoice #</Label>
                 <Input id="invoice-number" value={invoiceNumber} onChange={(e) => setInvoiceNumber(e.target.value)} />
@@ -432,7 +447,7 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
               <Input type="email" placeholder="Client Email" value={clientEmail} onChange={(e) => setClientEmail(e.target.value)} />
             </div>
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <div className="grid gap-2">
                     <Label>Issue Date</Label>
                     <Input type="date" value={issueDate} onChange={(e) => setIssueDate(e.target.value)} />
@@ -440,6 +455,19 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
                 <div className="grid gap-2">
                     <Label>Due Date</Label>
                     <Input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
+                </div>
+                <div className="grid gap-2">
+                  <Label>Status</Label>
+                  <Select onValueChange={(value: "Paid" | "Pending" | "Overdue") => setStatus(value)} value={status}>
+                      <SelectTrigger>
+                          <SelectValue placeholder="Select status" />
+                      </SelectTrigger>
+                      <SelectContent>
+                          <SelectItem value="Paid">Paid</SelectItem>
+                          <SelectItem value="Pending">Pending</SelectItem>
+                          <SelectItem value="Overdue">Overdue</SelectItem>
+                      </SelectContent>
+                  </Select>
                 </div>
                 <div className="grid gap-2">
                     <Label>Service Start Date</Label>
