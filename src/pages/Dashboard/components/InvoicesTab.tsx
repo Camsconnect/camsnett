@@ -36,8 +36,11 @@ interface Invoice {
   clientEmail: string;
   issueDate: string;
   dueDate: string;
+  serviceStartDate: string;
+  renewalDate: string;
   lineItems: LineItem[];
   discount: number;
+  notes: string;
 }
 
 interface InvoicesTabProps {
@@ -64,6 +67,9 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
       date.setDate(date.getDate() + 30);
       return date.toISOString().split('T')[0];
   });
+  const [serviceStartDate, setServiceStartDate] = useState("");
+  const [renewalDate, setRenewalDate] = useState("");
+  const [notes, setNotes] = useState("Thank you for your business!");
   const [currentDraftId, setCurrentDraftId] = useState<string | null>(null);
 
   const { data: drafts, isLoading: isLoadingDrafts } = useQuery({
@@ -134,6 +140,9 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
       date.setDate(date.getDate() + 30);
       return date.toISOString().split('T')[0];
     });
+    setServiceStartDate("");
+    setRenewalDate("");
+    setNotes("Thank you for your business!");
     setLineItems([{ id: Date.now(), description: "", quantity: 1, price: 0 }]);
     setCurrentDraftId(null);
   };
@@ -158,7 +167,7 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
     const draftData = {
       id: currentDraftId || undefined,
       invoiceNumber, clientName, clientCompany, clientAddress, clientEmail,
-      issueDate, dueDate, lineItems, discount,
+      issueDate, dueDate, serviceStartDate, renewalDate, lineItems, discount, notes,
     };
     saveDraftMutation.mutate(draftData);
   };
@@ -173,8 +182,11 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
       setClientEmail(draftToLoad.clientEmail);
       setIssueDate(draftToLoad.issueDate);
       setDueDate(draftToLoad.dueDate);
+      setServiceStartDate(draftToLoad.serviceStartDate || "");
+      setRenewalDate(draftToLoad.renewalDate || "");
       setLineItems(draftToLoad.lineItems);
       setDiscount(draftToLoad.discount);
+      setNotes(draftToLoad.notes || "Thank you for your business!");
       setCurrentDraftId(draftToLoad.id);
     }
   };
@@ -222,9 +234,13 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
         doc.text("INVOICE", 196, 22, { align: 'right' });
         doc.setFontSize(10);
         doc.setFont(undefined, 'normal');
-        doc.text(`Invoice #: ${invoiceNumber}`, 196, 30, { align: 'right' });
-        doc.text(`Issue Date: ${issueDate}`, 196, 35, { align: 'right' });
-        doc.text(`Due Date: ${dueDate}`, 196, 40, { align: 'right' });
+        let dateY = 30;
+        doc.text(`Invoice #: ${invoiceNumber}`, 196, dateY, { align: 'right' }); dateY += 5;
+        doc.text(`Issue Date: ${issueDate}`, 196, dateY, { align: 'right' }); dateY += 5;
+        doc.text(`Due Date: ${dueDate}`, 196, dateY, { align: 'right' }); dateY += 5;
+        if (serviceStartDate) { doc.text(`Service Start: ${serviceStartDate}`, 196, dateY, { align: 'right' }); dateY += 5; }
+        if (renewalDate) { doc.text(`Renewal Date: ${renewalDate}`, 196, dateY, { align: 'right' }); }
+        
         doc.setFontSize(10);
         doc.setFont(undefined, 'bold');
         doc.text("Camsnett", 14, 45);
@@ -245,19 +261,7 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
         });
         autoTable(doc, { head: [tableColumn], body: tableRows, startY: 95, theme: 'grid', headStyles: { fillColor: [34, 87, 81] } });
         let finalY = (doc as any).lastAutoTable.finalY;
-        const socialMediaBriefs = lineItems.map(item => { const service = services.find(s => s.name === item.description); return service && service.brief ? `* ${service.name}: ${service.brief}` : null; }).filter(brief => brief !== null).join('\n');
-        if (socialMediaBriefs) {
-            finalY += 10;
-            doc.setFontSize(10);
-            doc.setFont(undefined, 'bold');
-            doc.text("Package Details:", 14, finalY);
-            finalY += 5;
-            doc.setFont(undefined, 'normal');
-            doc.setFontSize(9);
-            const splitBriefs = doc.splitTextToSize(socialMediaBriefs, 180);
-            doc.text(splitBriefs, 14, finalY);
-            finalY += splitBriefs.length * 4;
-        }
+        
         let totalsY = finalY + 10;
         doc.setFontSize(10);
         doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 196, totalsY, { align: 'right' });
@@ -271,11 +275,25 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
         doc.setFontSize(12);
         doc.setFont(undefined, 'bold');
         doc.text(`Total: $${total.toFixed(2)}`, 196, totalsY, { align: 'right' });
+
+        let notesY = finalY + 10;
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'bold');
+        doc.text("Notes:", 14, notesY);
+        doc.setFont(undefined, 'normal');
+        const splitNotes = doc.splitTextToSize(notes, 100);
+        doc.text(splitNotes, 14, notesY + 5);
+        
+        let paymentY = notesY + splitNotes.length * 5 + 10;
+        doc.setFont(undefined, 'bold');
+        doc.text("Payment Methods:", 14, paymentY);
+        doc.setFont(undefined, 'normal');
+        doc.text("We accept payments via PayPal, Visa, and Mastercard.", 14, paymentY + 5);
+
         doc.setFontSize(8);
         doc.setTextColor(150);
         doc.text("Explore our other services: Web Design, Branding, Videography, and 3D Modeling.", 105, 280, { align: 'center' });
         doc.text("www.camsnett.com", 105, 285, { align: 'center' });
-        doc.text("Thank you for your business!", 105, 290, { align: 'center' });
         doc.save(`Invoice-${invoiceNumber}.pdf`);
     };
   };
@@ -320,13 +338,23 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
               <Input type="email" placeholder="Client Email" value={clientEmail} onChange={(e) => setClientEmail(e.target.value)} />
             </div>
             <div className="space-y-4">
-              <div className="grid gap-2">
-                  <Label>Issue Date</Label>
-                  <Input type="date" value={issueDate} onChange={(e) => setIssueDate(e.target.value)} />
-              </div>
-              <div className="grid gap-2">
-                  <Label>Due Date</Label>
-                  <Input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="grid gap-2">
+                    <Label>Issue Date</Label>
+                    <Input type="date" value={issueDate} onChange={(e) => setIssueDate(e.target.value)} />
+                </div>
+                <div className="grid gap-2">
+                    <Label>Due Date</Label>
+                    <Input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
+                </div>
+                <div className="grid gap-2">
+                    <Label>Service Start Date</Label>
+                    <Input type="date" value={serviceStartDate} onChange={(e) => setServiceStartDate(e.target.value)} />
+                </div>
+                <div className="grid gap-2">
+                    <Label>Renewal Date</Label>
+                    <Input type="date" value={renewalDate} onChange={(e) => setRenewalDate(e.target.value)} />
+                </div>
               </div>
             </div>
           </div>
@@ -365,14 +393,20 @@ const InvoicesTab: React.FC<InvoicesTabProps> = ({ customerToPreFill, clearCusto
             </Table>
             <Button variant="outline" size="sm" className="mt-4" onClick={handleAddLineItem}><PlusCircle className="mr-2 h-4 w-4" />Add Item</Button>
           </div>
-          <div className="flex justify-end">
-            <div className="w-full max-w-xs space-y-2">
-              <div className="flex justify-between"><span className="text-muted-foreground">Subtotal</span><span>${subtotal.toFixed(2)}</span></div>
-              <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Discount</span>
-                  <div className="flex items-center gap-1"><span>$</span><Input type="number" value={discount} onChange={(e) => setDiscount(parseFloat(e.target.value) || 0)} className="w-24 h-8 text-right" /></div>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <Label htmlFor="notes">Notes</Label>
+              <Textarea id="notes" placeholder="Add any notes, terms, or a thank you message..." value={notes} onChange={(e) => setNotes(e.target.value)} className="mt-2" />
+            </div>
+            <div className="flex justify-end items-end">
+              <div className="w-full max-w-xs space-y-2">
+                <div className="flex justify-between"><span className="text-muted-foreground">Subtotal</span><span>${subtotal.toFixed(2)}</span></div>
+                <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground">Discount</span>
+                    <div className="flex items-center gap-1"><span>$</span><Input type="number" value={discount} onChange={(e) => setDiscount(parseFloat(e.target.value) || 0)} className="w-24 h-8 text-right" /></div>
+                </div>
+                <div className="flex justify-between font-bold text-lg"><span>Total</span><span>${total.toFixed(2)}</span></div>
               </div>
-              <div className="flex justify-between font-bold text-lg"><span>Total</span><span>${total.toFixed(2)}</span></div>
             </div>
           </div>
         </CardContent>
