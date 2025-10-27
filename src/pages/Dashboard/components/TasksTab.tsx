@@ -16,6 +16,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -84,6 +90,18 @@ const TasksTab = () => {
   const customerMap = useMemo(() => {
     return new Map(customers?.map(c => [c.id, c.name]));
   }, [customers]);
+
+  const groupedTasks = useMemo(() => {
+    if (!tasks) return new Map<string, Task[]>();
+    return tasks.reduce((acc, task) => {
+      const customerId = task.customer_id;
+      if (!acc.has(customerId)) {
+        acc.set(customerId, []);
+      }
+      acc.get(customerId)!.push(task);
+      return acc;
+    }, new Map<string, Task[]>());
+  }, [tasks]);
 
   const taskMutation = useMutation({
     mutationFn: async (newTask: Omit<Task, "id" | "created_at" | "completed_at" | "user_id">) => {
@@ -221,7 +239,7 @@ const TasksTab = () => {
           <div className="flex gap-2">
             <Button variant="outline" size="sm" className="gap-1" onClick={() => setIsGenerateDialogOpen(true)}>
               <Zap className="h-3.5 w-3.5" />
-              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+              <span className="sr-only sm:not-sr-only sm:whitespace-rap">
                 Generate Tasks
               </span>
             </Button>
@@ -234,78 +252,91 @@ const TasksTab = () => {
           </div>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Task</TableHead>
-                <TableHead className="hidden md:table-cell">Customer</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Due Date</TableHead>
-                <TableHead>
-                  <span className="sr-only">Actions</span>
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {isLoading ? (
-                Array.from({ length: 5 }).map((_, i) => (
-                  <TableRow key={i}>
-                    <TableCell colSpan={5}>
-                      <Skeleton className="h-8 w-full" />
-                    </TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                tasks?.map((task) => (
-                  <TableRow key={task.id}>
-                    <TableCell className="font-medium">{task.title}</TableCell>
-                    <TableCell className="hidden md:table-cell">
-                      {customerMap.get(task.customer_id) || "Unknown"}
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={getStatusVariant(task.status)}>
-                        {task.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      {new Date(task.due_date).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button aria-haspopup="true" size="icon" variant="ghost">
-                            <MoreHorizontal className="h-4 w-4" />
-                            <span className="sr-only">Toggle menu</span>
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          {task.status !== "Done" && (
-                            <DropdownMenuItem onClick={() => handleMarkAsDone(task)}>
-                              <CheckCircle className="mr-2 h-4 w-4" />
-                              Mark as Done
-                            </DropdownMenuItem>
-                          )}
-                          <DropdownMenuItem onClick={() => handleEditTask(task)}>
-                            <Edit className="mr-2 h-4 w-4" />
-                            Edit
-                          </DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem
-                            onClick={() => deleteTaskMutation.mutate(task.id)}
-                            className="text-red-600"
-                          >
-                            <Trash2 className="mr-2 h-4 w-4" />
-                            Delete
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
+          {isLoading ? (
+            <div className="space-y-2">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <Skeleton key={i} className="h-12 w-full" />
+              ))}
+            </div>
+          ) : groupedTasks.size > 0 ? (
+            <Accordion type="single" collapsible className="w-full">
+              {Array.from(groupedTasks.entries()).map(([customerId, tasksForCustomer]) => (
+                <AccordionItem value={customerId} key={customerId}>
+                  <AccordionTrigger className="text-lg font-medium">
+                    <div className="flex items-center gap-2">
+                      {customerMap.get(customerId) || "Unknown Customer"}
+                      <Badge variant="secondary">{tasksForCustomer.length} tasks</Badge>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Task</TableHead>
+                          <TableHead>Status</TableHead>
+                          <TableHead>Due Date</TableHead>
+                          <TableHead>
+                            <span className="sr-only">Actions</span>
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {tasksForCustomer.map((task) => (
+                          <TableRow key={task.id}>
+                            <TableCell className="font-medium">{task.title}</TableCell>
+                            <TableCell>
+                              <Badge variant={getStatusVariant(task.status)}>
+                                {task.status}
+                              </Badge>
+                            </TableCell>
+                            <TableCell>
+                              {new Date(task.due_date).toLocaleDateString()}
+                            </TableCell>
+                            <TableCell>
+                              <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                  <Button aria-haspopup="true" size="icon" variant="ghost">
+                                    <MoreHorizontal className="h-4 w-4" />
+                                    <span className="sr-only">Toggle menu</span>
+                                  </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end">
+                                  <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                                  {task.status !== "Done" && (
+                                    <DropdownMenuItem onClick={() => handleMarkAsDone(task)}>
+                                      <CheckCircle className="mr-2 h-4 w-4" />
+                                      Mark as Done
+                                    </DropdownMenuItem>
+                                  )}
+                                  <DropdownMenuItem onClick={() => handleEditTask(task)}>
+                                    <Edit className="mr-2 h-4 w-4" />
+                                    Edit
+                                  </DropdownMenuItem>
+                                  <DropdownMenuSeparator />
+                                  <DropdownMenuItem
+                                    onClick={() => deleteTaskMutation.mutate(task.id)}
+                                    className="text-red-600"
+                                  >
+                                    <Trash2 className="mr-2 h-4 w-4" />
+                                    Delete
+                                  </DropdownMenuItem>
+                                </DropdownMenuContent>
+                              </DropdownMenu>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          ) : (
+            <div className="text-center py-10">
+              <p className="text-muted-foreground">No tasks found.</p>
+              <p className="text-sm text-muted-foreground">Add a new task or generate them for a client to get started.</p>
+            </div>
+          )}
         </CardContent>
       </Card>
     </>
