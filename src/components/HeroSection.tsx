@@ -37,7 +37,7 @@ const slides = [
       "From stunning visuals to compelling brand stories, we create designs that captivate and convert.",
     primaryCta: "See Our Work",
     secondaryCta: "Get in Touch",
-    image: "/hero-background.jpeg",
+    image: "/hero-background-design.jpeg",
   },
 ];
 
