@@ -11,6 +11,7 @@ import CamsBusketSection from "@/components/CamsBusketSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ServiceScroller from "@/components/ServiceScroller";
 import WhyWorkWithUsSection from "@/components/WhyWorkWithUsSection";
+import GraphicDesignServicesSection from "@/components/GraphicDesignServicesSection";
 
 const Index = () => {
   return (
@@ -30,6 +31,7 @@ const Index = () => {
         <SubBrandsSection />
         <CamsBusketSection />
         <TestimonialsSection />
+        <GraphicDesignServicesSection />
       </div>
     </Layout>
   );

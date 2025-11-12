@@ -3,6 +3,12 @@
 import React from "react";
 import whyWorkWithUsImage from "@/assets/why-work-with-us-image.png";
 import { Lightbulb, Handshake, Search, Rocket, Brain } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const points = [
   {
@@ -52,17 +58,21 @@ const WhyWorkWithUsSection = () => {
           <p className="text-lg text-muted-foreground mb-8 font-semibold">
             Here’s why businesses love working with us:
           </p>
-          <div className="space-y-6">
+          <Accordion type="single" collapsible className="w-full" defaultValue="item-0">
             {points.map((point, index) => (
-              <div key={index} className="flex items-start gap-4">
-                <div className="flex-shrink-0 mt-1">{point.icon}</div>
-                <div>
-                  <h3 className="font-semibold text-lg">{point.title}</h3>
-                  <p className="text-muted-foreground">{point.description}</p>
-                </div>
-              </div>
+              <AccordionItem key={index} value={`item-${index}`}>
+                <AccordionTrigger className="text-left hover:no-underline">
+                  <div className="flex items-center gap-4">
+                    <div className="flex-shrink-0">{point.icon}</div>
+                    <h3 className="font-semibold text-lg">{point.title}</h3>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pl-12 text-base">
+                  {point.description}
+                </AccordionContent>
+              </AccordionItem>
             ))}
-          </div>
+          </Accordion>
         </div>
         <div className="flex justify-center">
           <img
