@@ -9,40 +9,51 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+import testimonialAvatar1 from "@/assets/avatars/testimonial-1.png";
+import testimonialAvatar2 from "@/assets/avatars/testimonial-2.png";
+import testimonialAvatar3 from "@/assets/avatars/testimonial-3.png";
 
 const testimonials = [
   {
     client: "SueGuard Risk & Management",
     quote:
       "“We thank you so much — you’ll be gifted with so much from us in the future.”",
-    work: "We helped SueGuard enhance their brand image and online consistency, building trust and visibility across digital platforms.",
+    work: "Enhanced brand image and online consistency.",
+    avatar: testimonialAvatar1,
   },
   {
     client: "EC Cricket Academy",
     quote:
       "“Camsnett has been an incredible partner in helping us grow our academy’s online presence and celebrate every milestone with our players and community.”",
-    work: "Our collaboration brought their academy’s spirit to life through engaging visuals, videos, and social storytelling.",
+    work: "Brought academy's spirit to life online.",
+    avatar: testimonialAvatar2,
   },
   {
     client: "MyDrive Car Rentals",
     quote: "“We love your videos — they have that international feel to them.”",
-    work: "Camsnett’s creative direction gave MyDrive a polished, global look that matched their premium brand experience.",
+    work: "Gave MyDrive a polished, global look.",
+    avatar: testimonialAvatar3,
   },
   {
     client: "SVS Cosmetics",
     quote:
       "“We loved your logo and cover page design! It’s too bad our store sign was already up — we could have used your service.”",
-    work: "Their feedback speaks to our strength in branding that blends beauty and professionalism.",
+    work: "Branding that blends beauty and professionalism.",
+    avatar: testimonialAvatar1,
   },
   {
     client: "Purple Celebrations",
     quote: "“We love your designs.”",
-    work: "Camsnett continues to bring elegance and creativity to their event setups through clean, captivating visuals.",
+    work: "Brought elegance and creativity to their events.",
+    avatar: testimonialAvatar2,
   },
   {
     client: "The Laundry Pipo",
     quote: "“We love your designs and videos so much.”",
-    work: "Our team keeps their brand fresh, relatable, and customer-focused through consistent visual storytelling.",
+    work: "Kept their brand fresh and customer-focused.",
+    avatar: testimonialAvatar3,
   },
 ];
 
@@ -66,12 +77,28 @@ const TestimonialsSection = () => {
                     <blockquote className="text-lg font-semibold leading-snug mb-4 flex-grow">
                       {testimonial.quote}
                     </blockquote>
-                    <p className="font-bold text-foreground mb-2">
-                      {testimonial.client}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      {testimonial.work}
-                    </p>
+                    <div className="flex items-center justify-end gap-3 mt-auto">
+                      <div className="text-right">
+                        <p className="font-bold text-foreground">
+                          {testimonial.client}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {testimonial.work}
+                        </p>
+                      </div>
+                      <Avatar>
+                        <AvatarImage
+                          src={testimonial.avatar}
+                          alt={testimonial.client}
+                        />
+                        <AvatarFallback>
+                          {testimonial.client
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")}
+                        </AvatarFallback>
+                      </Avatar>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
