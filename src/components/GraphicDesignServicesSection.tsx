@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Palette, Contact, Newspaper, Nfc } from "lucide-react";
 import logoDesignShowcase from "@/assets/logo-design-showcase.png";
+import businessCardShowcase from "@/assets/business-card-showcase.png";
 
 const designServices = [
   {
@@ -24,6 +25,7 @@ const designServices = [
       "We will design a professional business card that makes a lasting impression.",
     price: "From $15",
     deliverables: ["1 Day Delivery", "3 Digital Samples"],
+    image: businessCardShowcase,
   },
   {
     icon: <Newspaper className="h-8 w-8 text-brand-neon" />,
