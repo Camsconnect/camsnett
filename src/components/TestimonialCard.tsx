@@ -10,8 +10,6 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 
-const TRUNCATE_LENGTH = 150;
-
 interface Testimonial {
   client: string;
   quote: string;
@@ -25,60 +23,50 @@ interface TestimonialCardProps {
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const isLongQuote = testimonial.quote.length > TRUNCATE_LENGTH;
 
   return (
     <Card className="flex flex-col h-full text-left shadow-sm border">
       <CardContent className="p-6 flex flex-col flex-grow">
-        <div className="flex items-center gap-4 mb-4">
-          <Avatar>
-            <AvatarImage src={testimonial.avatar} alt={testimonial.client} />
-            <AvatarFallback>
-              {testimonial.client
-                .split(" ")
-                .map((n) => n[0])
-                .join("")}
-            </AvatarFallback>
-          </Avatar>
-          <div>
-            <p className="font-bold text-foreground">{testimonial.client}</p>
-            <p className="text-sm text-muted-foreground">{testimonial.work}</p>
+        <Collapsible
+          open={isOpen}
+          onOpenChange={setIsOpen}
+          className="flex flex-col flex-grow"
+        >
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <p className="font-bold text-foreground">{testimonial.client}</p>
+              <p className="text-sm text-muted-foreground">
+                {testimonial.work}
+              </p>
+            </div>
+            <Avatar>
+              <AvatarImage src={testimonial.avatar} alt={testimonial.client} />
+              <AvatarFallback>
+                {testimonial.client
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
+              </AvatarFallback>
+            </Avatar>
           </div>
-        </div>
 
-        <div className="flex-grow flex flex-col">
-          {isLongQuote ? (
-            <Collapsible
-              open={isOpen}
-              onOpenChange={setIsOpen}
-              className="flex-grow flex flex-col"
+          <div className="flex-grow mt-4">
+            <CollapsibleContent>
+              <blockquote className="text-base text-muted-foreground leading-relaxed border-l-2 pl-4 italic">
+                {testimonial.quote}
+              </blockquote>
+            </CollapsibleContent>
+          </div>
+
+          <CollapsibleTrigger asChild className="mt-auto pt-2">
+            <Button
+              variant="link"
+              className="p-0 h-auto text-brand-neon hover:text-brand-neon/80 justify-start"
             >
-              <div className="flex-grow">
-                <blockquote className="text-base text-muted-foreground leading-relaxed">
-                  {testimonial.quote.substring(0, TRUNCATE_LENGTH)}
-                  {!isOpen && "..."}
-                </blockquote>
-                <CollapsibleContent>
-                  <blockquote className="text-base text-muted-foreground leading-relaxed">
-                    {testimonial.quote.substring(TRUNCATE_LENGTH)}
-                  </blockquote>
-                </CollapsibleContent>
-              </div>
-              <CollapsibleTrigger asChild>
-                <Button
-                  variant="link"
-                  className="p-0 h-auto text-brand-neon hover:text-brand-neon/80 justify-start mt-2"
-                >
-                  {isOpen ? "Read Less" : "Read More"}
-                </Button>
-              </CollapsibleTrigger>
-            </Collapsible>
-          ) : (
-            <blockquote className="text-base text-muted-foreground leading-relaxed flex-grow">
-              {testimonial.quote}
-            </blockquote>
-          )}
-        </div>
+              {isOpen ? "Hide Quote" : "Read Quote"}
+            </Button>
+          </CollapsibleTrigger>
+        </Collapsible>
       </CardContent>
     </Card>
   );
