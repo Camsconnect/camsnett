@@ -74,18 +74,7 @@ const TestimonialsSection = () => {
               <div className="p-1 h-full">
                 <Card className="flex flex-col h-full text-left shadow-sm border">
                   <CardContent className="p-6 flex flex-col flex-grow">
-                    <blockquote className="text-lg font-semibold leading-snug mb-4 flex-grow">
-                      {testimonial.quote}
-                    </blockquote>
-                    <div className="flex items-center justify-end gap-3 mt-auto">
-                      <div className="text-right">
-                        <p className="font-bold text-foreground">
-                          {testimonial.client}
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          {testimonial.work}
-                        </p>
-                      </div>
+                    <div className="flex items-center gap-4 mb-4">
                       <Avatar>
                         <AvatarImage
                           src={testimonial.avatar}
@@ -98,7 +87,18 @@ const TestimonialsSection = () => {
                             .join("")}
                         </AvatarFallback>
                       </Avatar>
+                      <div>
+                        <p className="font-bold text-foreground">
+                          {testimonial.client}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {testimonial.work}
+                        </p>
+                      </div>
                     </div>
+                    <blockquote className="text-base text-muted-foreground leading-relaxed flex-grow">
+                      {testimonial.quote}
+                    </blockquote>
                   </CardContent>
                 </Card>
               </div>
