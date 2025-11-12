@@ -8,8 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import TestimonialCard from "./TestimonialCard"; // Updated import
 
 import testimonialAvatar1 from "@/assets/avatars/testimonial-1.png";
 import testimonialAvatar2 from "@/assets/avatars/testimonial-2.png";
@@ -72,35 +71,7 @@ const TestimonialsSection = () => {
           {testimonials.map((testimonial, index) => (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
               <div className="p-1 h-full">
-                <Card className="flex flex-col h-full text-left shadow-sm border">
-                  <CardContent className="p-6 flex flex-col flex-grow">
-                    <div className="flex items-center gap-4 mb-4">
-                      <Avatar>
-                        <AvatarImage
-                          src={testimonial.avatar}
-                          alt={testimonial.client}
-                        />
-                        <AvatarFallback>
-                          {testimonial.client
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-bold text-foreground">
-                          {testimonial.client}
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          {testimonial.work}
-                        </p>
-                      </div>
-                    </div>
-                    <blockquote className="text-base text-muted-foreground leading-relaxed flex-grow">
-                      {testimonial.quote}
-                    </blockquote>
-                  </CardContent>
-                </Card>
+                <TestimonialCard testimonial={testimonial} />
               </div>
             </CarouselItem>
           ))}
