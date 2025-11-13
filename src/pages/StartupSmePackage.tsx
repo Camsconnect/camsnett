@@ -15,6 +15,10 @@ import {
 } from "lucide-react";
 import SmeWebsiteSection from "@/components/SmeWebsiteSection";
 import SmeEmailsSection from "@/components/SmeEmailsSection";
+import SmeDesignSection from "@/components/SmeDesignSection";
+import SmeSocialsSection from "@/components/SmeSocialsSection";
+import SmeSalesSection from "@/components/SmeSalesSection";
+import SmeCustomersSection from "@/components/SmeCustomersSection";
 
 const StartupSmePackage = () => {
   const features = [
@@ -81,6 +85,10 @@ const StartupSmePackage = () => {
 
       <SmeWebsiteSection />
       <SmeEmailsSection />
+      <SmeDesignSection />
+      <SmeSocialsSection />
+      <SmeSalesSection />
+      <SmeCustomersSection />
     </Layout>
   );
 };
