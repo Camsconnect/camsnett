@@ -14,7 +14,7 @@ const StartupSmeSection = () => {
       <div className="absolute inset-0 bg-black/50" />
       <div className="relative container mx-auto px-4 text-center text-white">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-4xl font-light mb-4">
+          <h2 className="text-4xl font-bold mb-4">
             Startup for SMEs Package
           </h2>
           <p className="text-lg text-white/90 mb-8">
