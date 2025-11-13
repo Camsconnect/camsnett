@@ -88,9 +88,8 @@ const StartupSmePackage = () => {
             and effective start in the digital world.
           </p>
         </section>
+        <SmeWebsiteSection />
       </div>
-
-      <SmeWebsiteSection />
     </Layout>
   );
 };
