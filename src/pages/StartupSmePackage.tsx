@@ -13,6 +13,7 @@ import {
   Users,
   Brain,
 } from "lucide-react";
+import SmeWebsiteSection from "@/components/SmeWebsiteSection";
 
 const StartupSmePackage = () => {
   const features = [
@@ -83,10 +84,13 @@ const StartupSmePackage = () => {
             What's Included?
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            This package is designed to give your new business a professional and effective start in the digital world.
+            This package is designed to give your new business a professional
+            and effective start in the digital world.
           </p>
         </section>
       </div>
+
+      <SmeWebsiteSection />
     </Layout>
   );
 };
