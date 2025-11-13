@@ -35,7 +35,7 @@ const StartupSmePackage = () => {
         <div className="relative container mx-auto px-4 w-full">
           <div className="grid md:grid-cols-12 gap-8 items-center">
             <div className="md:col-span-4 lg:col-span-3">
-              <div className="w-full aspect-[3/4] bg-black/20 border border-white/20 rounded-lg flex flex-col items-center justify-center p-6 text-center mb-6 shadow-lg">
+              <div className="w-full aspect-[3/4] bg-black/20 border border-white/20 rounded-lg flex flex-col items-center justify-center p-6 text-center mb-6 shadow-lg max-w-sm mx-auto md:max-w-full">
                 <Brain className="h-16 w-16 text-brand-neon mb-4" />
                 <h3 className="text-xl font-semibold text-white">
                   All-In-One Package
@@ -46,21 +46,21 @@ const StartupSmePackage = () => {
               </div>
               <Button
                 size="lg"
-                className="w-full bg-brand-neon text-primary-foreground hover:bg-brand-neon/90 text-lg h-14"
+                className="w-full bg-brand-neon text-primary-foreground hover:bg-brand-neon/90 text-lg h-14 max-w-sm mx-auto md:max-w-full block"
               >
                 Get The Package for $750
               </Button>
             </div>
 
-            <div className="md:col-span-8 lg:col-span-9 md:pl-8">
+            <div className="md:col-span-8 lg:col-span-9 md:pl-8 text-center md:text-left">
               <h1 className="text-5xl md:text-7xl font-thin tracking-wider uppercase">
                 SME Start-up Pack
               </h1>
-              <p className="mt-6 text-lg md:text-xl text-white/80 max-w-2xl font-light">
+              <p className="mt-6 text-lg md:text-xl text-white/80 max-w-2xl font-light mx-auto md:mx-0">
                 Your complete digital foundation. We handle the setup, so you
                 can focus on your business.
               </p>
-              <div className="mt-8 grid grid-cols-3 sm:grid-cols-6 gap-4 max-w-xl">
+              <div className="mt-8 grid grid-cols-3 sm:grid-cols-6 gap-4 max-w-xl mx-auto md:mx-0">
                 {features.map((feature) => (
                   <div
                     key={feature.name}
