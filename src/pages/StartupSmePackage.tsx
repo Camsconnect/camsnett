@@ -28,7 +28,7 @@ const StartupSmePackage = () => {
   return (
     <Layout noPaddingTop>
       <section
-        className="relative bg-cover bg-center h-[80vh] min-h-[700px] flex items-center text-white"
+        className="relative bg-cover bg-center flex items-center text-white pt-40 pb-20"
         style={{ backgroundImage: `url(${startupImage})` }}
       >
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
