@@ -9,7 +9,10 @@ const StartupSmeSection = () => {
   return (
     <section
       className="relative w-full bg-cover bg-center py-24"
-      style={{ backgroundImage: `url(${startupImage})` }}
+      style={{
+        backgroundImage: `url(${startupImage})`,
+        backgroundAttachment: "fixed",
+      }}
     >
       <div className="absolute inset-0 bg-black/50" />
       <div className="relative container mx-auto px-4 text-center text-white">
