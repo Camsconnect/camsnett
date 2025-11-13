@@ -14,6 +14,7 @@ import {
   Brain,
 } from "lucide-react";
 import SmeWebsiteSection from "@/components/SmeWebsiteSection";
+import SmeEmailsSection from "@/components/SmeEmailsSection";
 
 const StartupSmePackage = () => {
   const features = [
@@ -79,6 +80,7 @@ const StartupSmePackage = () => {
       </section>
 
       <SmeWebsiteSection />
+      <SmeEmailsSection />
     </Layout>
   );
 };
