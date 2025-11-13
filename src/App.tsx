@@ -19,6 +19,7 @@ import ThreeDModeling from "./pages/ThreeDModeling";
 import BrandingAndGraphicDesign from "./pages/BrandingAndGraphicDesign";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
+import Policy from "./pages/Policy";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
             <Route path="/blog" element={<Blog />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/policy" element={<Policy />} />
             <Route
               path="/dashboard"
               element={
