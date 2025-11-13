@@ -78,18 +78,7 @@ const StartupSmePackage = () => {
         </div>
       </section>
 
-      <div className="container mx-auto px-4 py-16 max-w-screen-lg space-y-16">
-        <section className="text-center">
-          <h2 className="text-3xl font-semibold mb-4 text-foreground">
-            What's Included?
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            This package is designed to give your new business a professional
-            and effective start in the digital world.
-          </p>
-        </section>
-        <SmeWebsiteSection />
-      </div>
+      <SmeWebsiteSection />
     </Layout>
   );
 };
