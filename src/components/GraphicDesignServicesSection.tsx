@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Palette, Contact, Newspaper, Nfc } from "lucide-react";
 import logoDesignShowcase from "@/assets/logo-design-showcase.png";
 import businessCardShowcase from "@/assets/business-card-showcase.png";
+import flierDesignShowcase from "@/assets/flier-design-showcase.png";
 
 const designServices = [
   {
@@ -34,6 +35,7 @@ const designServices = [
       "We will design an eye-catching flier to promote your event, product, or service.",
     price: "From $25",
     deliverables: ["1 Day Delivery", "3 Digital Samples"],
+    image: flierDesignShowcase,
   },
   {
     icon: <Nfc className="h-8 w-8 text-brand-neon" />,
