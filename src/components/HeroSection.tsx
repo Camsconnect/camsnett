@@ -55,7 +55,10 @@ const HeroSection = () => {
             <CarouselItem key={index}>
               <div
                 className="relative w-full h-[70vh] min-h-[500px] flex bg-cover bg-center"
-                style={{ backgroundImage: `url(${slide.image})` }}
+                style={{
+                  backgroundImage: `url(${slide.image})`,
+                  backgroundAttachment: "fixed",
+                }}
               >
                 <div className="absolute inset-0 bg-black/30" />
                 <div className="relative container mx-auto px-4 md:px-6 max-w-screen-2xl pt-48">
