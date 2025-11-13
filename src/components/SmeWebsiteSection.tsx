@@ -45,7 +45,7 @@ const SmeWebsiteSection = () => {
 
   return (
     <section className="bg-gray-900 py-16 md:py-24">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 max-w-screen-2xl">
         <div className="bg-black/20 border border-white/10 rounded-xl overflow-hidden grid md:grid-cols-2 text-white">
           <div className="p-8 md:p-12">
             <h2 className="text-3xl font-semibold mb-4">
