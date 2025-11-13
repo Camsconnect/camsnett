@@ -20,6 +20,7 @@ import BrandingAndGraphicDesign from "./pages/BrandingAndGraphicDesign";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Policy from "./pages/Policy";
+import StartupSmePackage from "./pages/StartupSmePackage";
 
 const queryClient = new QueryClient();
 
@@ -69,6 +70,10 @@ const App = () => (
             <Route
               path="/services/branding-and-graphic-design"
               element={<BrandingAndGraphicDesign />}
+            />
+            <Route
+              path="/services/startup-sme-package"
+              element={<StartupSmePackage />}
             />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

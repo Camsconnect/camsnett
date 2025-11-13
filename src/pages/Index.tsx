@@ -10,6 +10,7 @@ import CamsConnectSection from "@/components/CamsConnectSection";
 import CamsBusketSection from "@/components/CamsBusketSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ServiceScroller from "@/components/ServiceScroller";
+import StartupSmeSection from "@/components/StartupSmeSection";
 import WhyWorkWithUsSection from "@/components/WhyWorkWithUsSection";
 import GraphicDesignServicesSection from "@/components/GraphicDesignServicesSection";
 import ClientLogosSection from "@/components/ClientLogosSection";
@@ -26,6 +27,7 @@ const Index = () => {
       <ServiceScroller />
       <div className="container mx-auto px-4 py-16 max-w-screen-2xl space-y-16">
         <ServicesSection />
+        <StartupSmeSection />
         <WhyWorkWithUsSection />
         <TechnologyStackSection />
         <CamsConnectSection />
