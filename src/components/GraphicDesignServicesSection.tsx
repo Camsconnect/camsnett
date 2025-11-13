@@ -8,6 +8,7 @@ import { Check, Palette, Contact, Newspaper, Nfc } from "lucide-react";
 import logoDesignShowcase from "@/assets/logo-design-showcase.png";
 import businessCardShowcase from "@/assets/business-card-showcase.png";
 import flierDesignShowcase from "@/assets/flier-design-showcase.png";
+import nfcCardShowcase from "@/assets/nfc-card-showcase.jpg";
 
 const designServices = [
   {
@@ -45,6 +46,7 @@ const designServices = [
     price: "From $7 / month",
     deliverables: ["Coming in DEC"],
     comingSoon: true,
+    image: nfcCardShowcase,
   },
 ];
 
