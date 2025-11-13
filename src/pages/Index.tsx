@@ -27,13 +27,13 @@ const Index = () => {
       <div className="container mx-auto px-4 py-16 max-w-screen-2xl space-y-16">
         <ServicesSection />
         <WhyWorkWithUsSection />
-        <ClientLogosSection />
         <TechnologyStackSection />
         <CamsConnectSection />
         <SubBrandsSection />
         <CamsBusketSection />
         <TestimonialsSection />
         <GraphicDesignServicesSection />
+        <ClientLogosSection />
       </div>
     </Layout>
   );
