@@ -22,7 +22,7 @@ const services = [
   },
   {
     title: "Web Design (up to 6 pages)",
-    price: "From $80",
+    price: "From $120",
     duration: "3 days delivery",
     description:
       "Modern, responsive websites that capture your brand and convert visitors into customers. Fully optimized for performance and SEO.",

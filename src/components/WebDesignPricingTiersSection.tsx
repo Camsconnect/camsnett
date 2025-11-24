@@ -8,7 +8,7 @@ import { Check } from "lucide-react";
 const tiers = [
   {
     name: "Starter Site",
-    price: "$80",
+    price: "$120",
     frequency: "one-time",
     description: "Perfect for portfolios, landing pages, and small businesses.",
     features: [
@@ -25,7 +25,7 @@ const tiers = [
   },
   {
     name: "Business Site",
-    price: "$250",
+    price: "$285",
     frequency: "one-time",
     description: "Ideal for growing businesses needing more features and content.",
     features: [
@@ -41,7 +41,7 @@ const tiers = [
   },
   {
     name: "E-commerce Store",
-    price: "$500+",
+    price: "$800+",
     frequency: "starting from",
     description: "A complete online store to sell your products and services.",
     features: [
@@ -49,6 +49,7 @@ const tiers = [
       "Full E-commerce Functionality",
       "Payment Gateway Integration",
       "Product & Inventory Management",
+      "AI Integration",
       "2-3 Weeks Delivery",
     ],
     cta: "Contact Us",
