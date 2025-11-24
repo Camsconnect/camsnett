@@ -21,11 +21,11 @@ const services = [
     link: "/services/social-media-management",
   },
   {
-    title: "Web Design (up to 6 pages)",
+    title: "Web Design & AI Solutions",
     price: "From $120",
     duration: "3 days delivery",
     description:
-      "Modern, responsive websites that capture your brand and convert visitors into customers. Fully optimized for performance and SEO.",
+      "Modern websites that capture your brand. From stunning starter sites to advanced AI-powered platforms that automate your business.",
     image: webDesignImage,
     link: "/services/web-design",
   },
