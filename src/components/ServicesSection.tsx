@@ -9,6 +9,7 @@ import businessAppImage from "@/assets/business-app-service.jpeg";
 import videographyImage from "@/assets/videography-service.jpeg";
 import threeDModelingImage from "@/assets/3d-modeling-service.jpeg";
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 const services = [
   {
@@ -69,36 +70,54 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section className="w-full text-foreground">
-      <h2 className="text-4xl font-light text-center mb-12">Our Services</h2>
+    <section className="w-full text-foreground relative">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-brand-neon/5 blur-[100px] -z-10 rounded-full" />
+      
+      <div className="text-center mb-16">
+        <h2 className="text-4xl md:text-5xl font-light mb-4 text-gradient">Our Services</h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          Comprehensive digital solutions tailored to elevate your brand in the modern age.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map((service, i) => (
-          <div key={i} className="group text-left flex flex-col">
-            <div className="overflow-hidden rounded-xl mb-4">
+          <div 
+            key={i} 
+            className="group glass-card rounded-2xl overflow-hidden flex flex-col h-full transform transition-all duration-300 hover:-translate-y-2"
+          >
+            <div className="relative overflow-hidden h-56">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
               <img
                 src={service.image}
                 alt={service.title}
-                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
-            </div>
-            <div className="flex flex-col flex-grow">
-              <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-              <div className="flex items-center text-sm text-muted-foreground mb-3">
-                <span>{service.price}</span>
-                <span className="mx-2">|</span>
-                <span>{service.duration}</span>
+              <div className="absolute bottom-4 left-4 z-20">
+                 <div className="flex items-center gap-2 text-xs font-medium bg-brand-neon/90 text-white px-3 py-1 rounded-full backdrop-blur-md w-fit mb-2">
+                    {service.price}
+                 </div>
               </div>
-              <p className="text-base text-muted-foreground font-light leading-relaxed flex-grow mb-4">
+            </div>
+            
+            <div className="p-6 flex flex-col flex-grow">
+              <h3 className="text-xl font-semibold mb-2 group-hover:text-brand-neon transition-colors">{service.title}</h3>
+              <div className="flex items-center text-xs text-muted-foreground mb-4 font-mono">
+                <span className="uppercase tracking-wider">{service.duration}</span>
+              </div>
+              <p className="text-sm text-gray-400 leading-relaxed flex-grow mb-6">
                 {service.description}
               </p>
+              
               <Button
                 asChild={!!service.link}
-                variant="outline"
-                className="mt-auto w-fit rounded-full px-6"
+                variant="ghost"
+                className="mt-auto w-full justify-between group/btn hover:bg-brand-neon/10 hover:text-brand-neon"
               >
                 {service.link ? (
-                  <Link to={service.link}>Learn More</Link>
+                  <Link to={service.link}>
+                    Learn More <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
+                  </Link>
                 ) : (
                   <span>Learn More</span>
                 )}

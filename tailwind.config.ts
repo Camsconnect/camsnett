@@ -19,7 +19,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Montserrat', 'sans-serif'], // Set Montserrat as default sans font
+        sans: ['Montserrat', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -66,9 +66,9 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         menubar: {
-          DEFAULT: "hsl(var(--menubar-background))", // Dark charcoal base
-          foreground: "hsl(var(--menubar-foreground))", // Light text for dark mode
-          border: "hsl(var(--menubar-border))", // White base for border
+          DEFAULT: "hsl(var(--menubar-background))",
+          foreground: "hsl(var(--menubar-foreground))",
+          border: "hsl(var(--menubar-border))",
         },
         brand: {
           50: '#e9f3f2',
@@ -82,7 +82,8 @@ export default {
           800: '#1e4a45',
           900: '#193d39',
           950: '#0f2523',
-          neon: '#225751',
+          neon: '#4fd1c5', // Brighter teal for dark mode glow
+          dark: '#225751', // Original dark teal
         },
       },
       borderRadius: {
@@ -92,28 +93,24 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
-        "breathing-glow": {
-          "0%, 100%": {
-            boxShadow: "0 0 10px hsl(var(--sidebar-primary)), 0 0 15px hsl(var(--sidebar-primary))",
-          },
-          "50%": {
-            boxShadow: "0 0 25px hsl(var(--sidebar-primary)), 0 0 40px hsl(var(--sidebar-primary))",
-          },
+        "float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "float-slow": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { opacity: "1", filter: "brightness(1)" },
+          "50%": { opacity: "0.8", filter: "brightness(1.2)" },
         },
         "infinite-scroll": {
           from: { transform: "translateX(0)" },
@@ -133,27 +130,30 @@ export default {
           "from": { opacity: "1", transform: "scale(1) translateY(0)" },
           "to": { opacity: "0", transform: "scale(0.3) translateY(1rem)" },
         },
+        "shimmer": {
+          "0%": { backgroundPosition: "200% 0" },
+          "100%": { backgroundPosition: "-200% 0" }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "breathing-glow": "breathing-glow 4s ease-in-out infinite",
+        "float": "float 6s ease-in-out infinite",
+        "float-slow": "float-slow 8s ease-in-out infinite",
+        "pulse-glow": "pulse-glow 3s ease-in-out infinite",
         "infinite-scroll": "infinite-scroll 40s linear infinite",
         "breathing-dot": "breathing-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "popup-in": "popup-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
         "popup-out": "popup-out 0.3s ease-out forwards",
+        "shimmer": "shimmer 8s linear infinite",
       },
       backdropBlur: {
-        '3xl': '30px', // Custom strong blur
+        'xs': '2px',
       },
       boxShadow: {
-        'outer-glass': '0 10px 40px rgba(0,0,0,0.35)', // Soft outer drop shadow
-        'inner-glass-bottom': 'inset 0 2px 14px rgba(0,0,0,0.35)', // Inner shadow for depth
-        'inner-glass-stroke': 'inset 0 0 0 1px rgba(255,255,255,0.08)', // Subtle inner white stroke
-        'cta-inner-glow': 'inset 0 0 8px rgba(34, 87, 81, 0.6)', // CTA inner glow
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'glow': '0 0 20px rgba(79, 209, 197, 0.5)',
+        'glow-sm': '0 0 10px rgba(79, 209, 197, 0.3)',
+        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
       },
     },
   },
