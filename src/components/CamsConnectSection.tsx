@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import camsConnectCard from "@/assets/cams-connect-card.png";
+import camsConnectImage from "@/assets/cams-connect-section-image.png";
 import { Badge } from "@/components/ui/badge";
 
 const CamsConnectSection = () => {
@@ -12,9 +12,9 @@ const CamsConnectSection = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="flex justify-center">
             <img
-              src={camsConnectCard}
-              alt="Cams-Connect NFC Card and packaging"
-              className="w-full max-w-lg h-auto object-contain"
+              src={camsConnectImage}
+              alt="3D illustration of professionals networking using digital tools"
+              className="w-full max-w-lg h-auto object-contain rounded-lg"
             />
           </div>
           <div className="text-center md:text-left">
