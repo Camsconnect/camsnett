@@ -31,15 +31,15 @@ const TechnologyStackSection = () => {
   );
 
   return (
-    <section className="w-full text-foreground text-center">
-      <h2 className="text-4xl font-light mb-12">Our Tech & Tools</h2>
+    <section className="w-full py-16 bg-white text-gray-900 text-center rounded-3xl shadow-xl">
+      <h2 className="text-4xl font-light mb-12 text-black">Our Tech & Tools</h2>
       <Carousel
         plugins={[plugin.current]}
         opts={{
           align: "start",
           loop: true,
         }}
-        className="w-full"
+        className="w-full max-w-screen-xl mx-auto px-8"
       >
         <CarouselContent className="-ml-4">
           {technologies.map((tech, index) => (
@@ -47,11 +47,11 @@ const TechnologyStackSection = () => {
               key={index}
               className="pl-4 basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6"
             >
-              <div className="flex items-center justify-center h-24 p-4">
+              <div className="flex items-center justify-center h-24 p-4 grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
                 <img
                   src={tech.logo}
                   alt={tech.name}
-                  className="max-h-16 max-w-full object-contain transition-all duration-300"
+                  className="max-h-16 max-w-full object-contain"
                 />
               </div>
             </CarouselItem>
