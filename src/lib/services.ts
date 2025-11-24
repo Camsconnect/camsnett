@@ -4,7 +4,7 @@ export const services = [
     { name: "Social Media Management - Premium", price: 300, brief: "Includes Standard plan features plus management of up to 4 platforms and weekly strategy calls." },
     { name: "Web Design - Starter Site", price: 120 },
     { name: "Web Design - Business Site", price: 285 },
-    { name: "Web Design - E-commerce Store", price: 800 },
+    { name: "Web Design - AI-Powered Store", price: 800 },
     { name: "Branding - Logo & Brand Identity", price: 150 },
     { name: "Branding - Corporate Kit", price: 250 },
     { name: "Videography - Social Media Reels", price: 150 },

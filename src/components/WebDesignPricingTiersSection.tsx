@@ -3,7 +3,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 
 const tiers = [
   {
@@ -40,19 +40,21 @@ const tiers = [
     popular: true,
   },
   {
-    name: "E-commerce Store",
+    name: "AI-Powered Store",
     price: "$800+",
     frequency: "starting from",
-    description: "A complete online store to sell your products and services.",
+    description: "A next-gen e-commerce platform integrated with AI for automation and sales.",
     features: [
       "Everything in Business, plus:",
+      "AI Customer Support Chatbot",
+      "Smart Product Recommendations",
+      "Automated Inventory Management",
       "Full E-commerce Functionality",
       "Payment Gateway Integration",
-      "Product & Inventory Management",
-      "AI Integration",
       "2-3 Weeks Delivery",
     ],
     cta: "Contact Us",
+    highlight: true,
   },
 ];
 
@@ -63,10 +65,15 @@ const WebDesignPricingTiersSection = () => {
         {tiers.map((tier) => (
           <Card
             key={tier.name}
-            className={`flex flex-col ${tier.popular ? "border-brand-neon border-2 shadow-lg" : ""}`}
+            className={`flex flex-col ${tier.popular ? "border-brand-neon border-2 shadow-lg" : ""} ${tier.highlight ? "border-purple-500 border-2 shadow-purple-200 shadow-lg" : ""}`}
           >
             <CardHeader>
-              <CardTitle className="text-2xl font-semibold">{tier.name}</CardTitle>
+              <div className="flex justify-between items-start">
+                <CardTitle className="text-2xl font-semibold flex items-center gap-2">
+                  {tier.name}
+                  {tier.highlight && <Sparkles className="h-5 w-5 text-purple-500 animate-pulse" />}
+                </CardTitle>
+              </div>
               <CardDescription>{tier.description}</CardDescription>
               <div className="flex items-baseline pt-4">
                 <span className="text-4xl font-bold tracking-tight">{tier.price}</span>
@@ -77,14 +84,14 @@ const WebDesignPricingTiersSection = () => {
               <ul className="space-y-3 text-muted-foreground flex-grow">
                 {tier.features.map((feature, index) => (
                   <li key={index} className="flex items-start">
-                    <Check className="h-5 w-5 text-brand-neon mr-2 flex-shrink-0 mt-1" />
+                    <Check className={`h-5 w-5 mr-2 flex-shrink-0 mt-1 ${tier.highlight ? "text-purple-500" : "text-brand-neon"}`} />
                     <span>{feature}</span>
                   </li>
                 ))}
               </ul>
               <Button
-                className={`w-full mt-8 ${tier.popular ? "bg-brand-neon hover:bg-brand-neon/90 text-primary-foreground" : ""}`}
-                variant={tier.popular ? "default" : "outline"}
+                className={`w-full mt-8 ${tier.popular ? "bg-brand-neon hover:bg-brand-neon/90 text-primary-foreground" : ""} ${tier.highlight ? "bg-purple-600 hover:bg-purple-700 text-white border-0" : ""}`}
+                variant={tier.popular || tier.highlight ? "default" : "outline"}
               >
                 {tier.cta}
               </Button>
