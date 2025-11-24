@@ -7,7 +7,6 @@ import ServicesSection from "@/components/ServicesSection";
 import SearchBar from "@/components/SearchBar";
 import TechnologyStackSection from "@/components/TechnologyStackSection";
 import CamsConnectSection from "@/components/CamsConnectSection";
-import CamsBusketSection from "@/components/CamsBusketSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ServiceScroller from "@/components/ServiceScroller";
 import StartupSmeSection from "@/components/StartupSmeSection";
@@ -43,7 +42,6 @@ const Index = () => {
         <TechnologyStackSection />
         <CamsConnectSection />
         <SubBrandsSection />
-        <CamsBusketSection />
         <TestimonialsSection />
         <GraphicDesignServicesSection />
         <ClientLogosSection />
