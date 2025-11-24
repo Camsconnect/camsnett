@@ -14,6 +14,7 @@ import StartupSmeSection from "@/components/StartupSmeSection";
 import WhyWorkWithUsSection from "@/components/WhyWorkWithUsSection";
 import GraphicDesignServicesSection from "@/components/GraphicDesignServicesSection";
 import ClientLogosSection from "@/components/ClientLogosSection";
+import AIAutomationSection from "@/components/AIAutomationSection";
 
 const Index = () => {
   return (
@@ -28,7 +29,7 @@ const Index = () => {
       <div className="container mx-auto px-4 py-16 max-w-screen-2xl space-y-16">
         <ServicesSection />
         <StartupSmeSection />
-        <WhyWorkWithUsSection />
+        <AIAutomationSection />
         <TechnologyStackSection />
         <CamsConnectSection />
         <SubBrandsSection />
