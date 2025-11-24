@@ -105,7 +105,7 @@ const ClientLogosSection = () => {
               key={index}
               className="pl-4 basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6"
             >
-              <div className="flex items-center justify-center h-24 p-4 grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+              <div className="flex items-center justify-center h-24 p-4 hover:scale-110 transition-all duration-300">
                 <img
                   src={logo.src}
                   alt={logo.name}
