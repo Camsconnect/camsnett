@@ -95,7 +95,9 @@ const GraphicDesignServicesSection = () => {
                 ))}
               </div>
               <div className="text-2xl font-bold mb-6">{service.price}</div>
-              <Button variant="outline" className="w-full mt-auto">
+              <Button 
+                className="w-full mt-auto bg-brand-neon text-white hover:bg-brand-neon/80"
+              >
                 Get Started
               </Button>
             </CardContent>

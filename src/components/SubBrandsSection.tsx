@@ -48,7 +48,8 @@ const SubBrandsSection = () => {
               {brand.description}
             </p>
             <Button 
-              className="mt-auto w-full bg-gray-900 text-white hover:bg-gray-800 hover:text-white"
+              variant="outline" 
+              className="mt-auto border-gray-300 bg-transparent text-gray-900 hover:bg-gray-100 hover:text-black w-full"
             >
               Find out more
             </Button>
