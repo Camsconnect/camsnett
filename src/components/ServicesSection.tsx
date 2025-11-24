@@ -70,7 +70,7 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section className="w-full text-foreground relative">
+    <section className="w-full text-foreground relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-brand-neon/5 blur-[100px] -z-10 rounded-full" />
       
       <div className="text-center mb-16">
