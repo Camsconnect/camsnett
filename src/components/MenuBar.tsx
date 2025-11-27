@@ -34,7 +34,6 @@ const MenuBar = () => {
     { name: "FAQ", path: "/faq" },
     { name: "Blog", path: "/blog" },
     { name: "About", path: "/about" },
-    { name: "Dashboard", path: "/dashboard" },
   ];
 
   return (
