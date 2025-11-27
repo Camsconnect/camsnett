@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 const services = [
   { name: "Social Media Management", link: "/services/social-media-management" },
+  { name: "YouTube SEO & Growth", link: "/services/youtube-seo" },
   { name: "Web Design", link: "/services/web-design" },
   { name: "Branding & Graphic Design", link: "/services/branding-and-graphic-design" },
   { name: "Business App Development", link: "/services/business-app-development" },

@@ -21,6 +21,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Policy from "./pages/Policy";
 import StartupSmePackage from "./pages/StartupSmePackage";
+import YouTubeSEO from "./pages/YouTubeSEO";
 
 const queryClient = new QueryClient();
 
@@ -74,6 +75,10 @@ const App = () => (
             <Route
               path="/services/startup-sme-package"
               element={<StartupSmePackage />}
+            />
+            <Route
+              path="/services/youtube-seo"
+              element={<YouTubeSEO />}
             />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

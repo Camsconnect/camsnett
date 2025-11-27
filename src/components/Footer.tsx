@@ -63,6 +63,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {[
                 { label: "Social Media", path: "/services/social-media-management" },
+                { label: "YouTube SEO", path: "/services/youtube-seo" },
                 { label: "Web & AI Design", path: "/services/web-design" },
                 { label: "Branding", path: "/services/branding-and-graphic-design" },
                 { label: "Videography", path: "/services/videography" },

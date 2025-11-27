@@ -22,6 +22,15 @@ const services = [
     link: "/services/social-media-management",
   },
   {
+    title: "YouTube SEO & Growth",
+    price: "From $197",
+    duration: "3 days delivery",
+    description:
+      "Optimize your channel for maximum reach with our tailored packages, from foundational setup to aggressive growth strategies.",
+    image: videographyImage,
+    link: "/services/youtube-seo",
+  },
+  {
     title: "Web Design & AI Solutions",
     price: "From $120",
     duration: "3 days delivery",
