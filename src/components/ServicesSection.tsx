@@ -8,6 +8,8 @@ import brandingGraphicsImage from "@/assets/branding-graphics-service.png";
 import businessAppImage from "@/assets/business-app-service.jpeg";
 import videographyImage from "@/assets/videography-service.jpeg";
 import threeDModelingImage from "@/assets/3d-modeling-service.jpeg";
+import n8nAutomationImage from "@/assets/n8n-automation-service.jpeg";
+import archVizImage from "@/assets/architectural-visualization-service.jpeg";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
@@ -23,7 +25,7 @@ const services = [
   },
   {
     title: "YouTube SEO & Growth",
-    price: "From $197",
+    price: "From $150",
     duration: "3 days delivery",
     description:
       "Optimize your channel for maximum reach with our tailored packages, from foundational setup to aggressive growth strategies.",
@@ -74,6 +76,24 @@ const services = [
       "Bring your ideas to life with stunning 3D models and animations. Perfect for product visualization, architectural walkthroughs, and more.",
     image: threeDModelingImage,
     link: "/services/3d-modeling",
+  },
+  {
+    title: "n8n Automation",
+    price: "From $200",
+    duration: "1 week delivery",
+    description:
+      "Automate your business processes with powerful workflow automation. Connect tools and integrate AI for smarter operations.",
+    image: n8nAutomationImage,
+    link: "/services/n8n-automation",
+  },
+  {
+    title: "Architectural Visualization",
+    price: "From $800",
+    duration: "1-2 weeks",
+    description:
+      "Transform architectural concepts into stunning visual experiences with photorealistic renders and VR walkthroughs.",
+    image: archVizImage,
+    link: "/services/architectural-visualization",
   },
 ];
 

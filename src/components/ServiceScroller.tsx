@@ -11,6 +11,8 @@ const services = [
   { name: "Business App Development", link: "/services/business-app-development" },
   { name: "Videography", link: "/services/videography" },
   { name: "3D Modeling & Animation", link: "/services/3d-modeling" },
+  { name: "n8n Automation", link: "/services/n8n-automation" },
+  { name: "Architectural Visualization", link: "/services/architectural-visualization" },
 ];
 
 const ServiceScroller = () => {

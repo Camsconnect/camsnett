@@ -68,6 +68,8 @@ const Footer = () => {
                 { label: "Branding", path: "/services/branding-and-graphic-design" },
                 { label: "Videography", path: "/services/videography" },
                 { label: "3D Modeling", path: "/services/3d-modeling" },
+                { label: "n8n Automation", path: "/services/n8n-automation" },
+                { label: "Architectural Viz", path: "/services/architectural-visualization" },
               ].map((link) => (
                 <li key={link.label}>
                   <Link to={link.path} className="text-sm text-gray-400 hover:text-brand-neon transition-colors">

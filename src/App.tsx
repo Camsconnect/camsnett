@@ -22,6 +22,8 @@ import Login from "./pages/Login";
 import Policy from "./pages/Policy";
 import StartupSmePackage from "./pages/StartupSmePackage";
 import YouTubeSEO from "./pages/YouTubeSEO";
+import N8nAutomation from "./pages/N8nAutomation";
+import ArchitecturalVisualization from "./pages/ArchitecturalVisualization";
 
 const queryClient = new QueryClient();
 
@@ -79,6 +81,14 @@ const App = () => (
             <Route
               path="/services/youtube-seo"
               element={<YouTubeSEO />}
+            />
+            <Route
+              path="/services/n8n-automation"
+              element={<N8nAutomation />}
+            />
+            <Route
+              path="/services/architectural-visualization"
+              element={<ArchitecturalVisualization />}
             />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

@@ -16,6 +16,8 @@ import VideographyPricingTiersSection from "@/components/VideographyPricingTiers
 import ThreeDPricingTiersSection from "@/components/ThreeDPricingTiersSection";
 import YouTubeSEOPricingTiersSection from "@/components/YouTubeSEOPricingTiersSection";
 import YouTubeSEOAddonsSection from "@/components/YouTubeSEOAddonsSection";
+import N8nAutomationPricingTiersSection from "@/components/N8nAutomationPricingTiersSection";
+import ArchitecturalVisualizationPricingTiersSection from "@/components/ArchitecturalVisualizationPricingTiersSection";
 import { Separator } from "@/components/ui/separator";
 
 const Pricing = () => {
@@ -33,7 +35,7 @@ const Pricing = () => {
         </section>
 
         <Tabs defaultValue="social-media" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-7 h-auto">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-9 h-auto">
             <TabsTrigger value="social-media">Social Media</TabsTrigger>
             <TabsTrigger value="youtube-seo">YouTube SEO</TabsTrigger>
             <TabsTrigger value="web-design">Web Design</TabsTrigger>
@@ -41,6 +43,8 @@ const Pricing = () => {
             <TabsTrigger value="app-dev">App Development</TabsTrigger>
             <TabsTrigger value="videography">Videography</TabsTrigger>
             <TabsTrigger value="3d-modeling">3D Modeling</TabsTrigger>
+            <TabsTrigger value="n8n-automation">n8n Automation</TabsTrigger>
+            <TabsTrigger value="arch-viz">Arch Viz</TabsTrigger>
           </TabsList>
           <div className="pt-8">
             <TabsContent value="social-media">
@@ -67,6 +71,12 @@ const Pricing = () => {
             </TabsContent>
             <TabsContent value="3d-modeling">
               <ThreeDPricingTiersSection />
+            </TabsContent>
+            <TabsContent value="n8n-automation">
+              <N8nAutomationPricingTiersSection />
+            </TabsContent>
+            <TabsContent value="arch-viz">
+              <ArchitecturalVisualizationPricingTiersSection />
             </TabsContent>
           </div>
         </Tabs>
