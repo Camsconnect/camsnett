@@ -2,7 +2,8 @@
 
 import React from "react";
 import Layout from "@/components/Layout";
-import n8nServiceImage from "@/assets/n8n-automation-service.jpeg";
+// Using placeholder image
+import n8nServiceImage from "@/assets/business-app-service.jpeg";
 import { Button } from "@/components/ui/button";
 import { Check, Zap, Cpu, Workflow } from "lucide-react";
 

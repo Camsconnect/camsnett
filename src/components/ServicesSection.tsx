@@ -8,8 +8,9 @@ import brandingGraphicsImage from "@/assets/branding-graphics-service.png";
 import businessAppImage from "@/assets/business-app-service.jpeg";
 import videographyImage from "@/assets/videography-service.jpeg";
 import threeDModelingImage from "@/assets/3d-modeling-service.jpeg";
-import n8nAutomationImage from "@/assets/n8n-automation-service.jpeg";
-import archVizImage from "@/assets/architectural-visualization-service.jpeg";
+// Using existing images as placeholders for missing assets
+import n8nAutomationImage from "@/assets/business-app-service.jpeg";
+import archVizImage from "@/assets/3d-modeling-service.jpeg";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 

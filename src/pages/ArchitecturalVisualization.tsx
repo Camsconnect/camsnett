@@ -2,7 +2,8 @@
 
 import React from "react";
 import Layout from "@/components/Layout";
-import archVizImage from "@/assets/architectural-visualization-service.jpeg";
+// Using placeholder image
+import archVizImage from "@/assets/3d-modeling-service.jpeg";
 import { Button } from "@/components/ui/button";
 import { Check, Home, Building, Eye, Zap } from "lucide-react";
 
