@@ -6,8 +6,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { ChevronRight } from "lucide-react";
 
@@ -120,12 +118,6 @@ const HeroSection = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-
-        {/* Navigation Arrows */}
-        <div className="hidden md:block">
-          <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/80 text-white border-none h-14 w-14 rounded-full" />
-          <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/80 text-white border-none h-14 w-14 rounded-full" />
-        </div>
       </Carousel>
     </section>
   );

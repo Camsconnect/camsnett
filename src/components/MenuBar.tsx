@@ -21,7 +21,7 @@ const MenuBar = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Services", path: "/#services" }, // Updated to anchor for now
+    { name: "Services", path: "/services" },
     { name: "Pricing", path: "/pricing" },
     { name: "About", path: "/about" },
     { name: "Blog", path: "/blog" },
