@@ -9,99 +9,109 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Badge } from "@/components/ui/badge";
 import { ChevronRight } from "lucide-react";
 
+// Slide data matching the services and requested count (4 slides)
 const slides = [
   {
-    badge: "Camsnett Digital",
+    subtitle: "AVAILABLE NOW",
     title: "Turn Attention into Sales",
-    description:
-      "We build your visual identity, shape your personality, and grow your brand presence online with data-driven strategies.",
-    primaryCta: "Start Growing",
-    secondaryCta: "View Packages",
-    image: "/hero-background.jpeg",
+    description: "We build your visual identity, shape your personality, and grow your brand presence online with data-driven strategies.",
+    primaryCta: "GET STARTED",
+    secondaryCta: "VIEW PACKAGES",
+    // Using the existing image
+    image: "/hero-background.jpeg", 
+    bgPosition: "center",
   },
   {
-    badge: "AI Innovation",
+    subtitle: "AI INNOVATION",
     title: "Drive Growth with Intelligence",
-    description:
-      "Leverage cutting-edge AI automation to scale your business operations and stay ahead of the competition effortlessly.",
-    primaryCta: "Explore Solutions",
-    secondaryCta: "Learn More",
+    description: "Leverage cutting-edge AI automation to scale your business operations and stay ahead of the competition effortlessly.",
+    primaryCta: "EXPLORE SOLUTIONS",
+    secondaryCta: "LEARN MORE",
+    // Using the existing image
     image: "/hero-background-tech.jpeg",
+    bgPosition: "center",
   },
   {
-    badge: "Creative Studio",
+    subtitle: "CREATIVE STUDIO",
     title: "Design That Inspires Action",
-    description:
-      "From stunning 3D visuals to compelling brand stories, we create designs that captivate audiences and convert visitors.",
-    primaryCta: "See Our Work",
-    secondaryCta: "Get in Touch",
-    image: "/hero-background-design.jpeg",
+    description: "From stunning 3D visuals to compelling brand stories, we create designs that captivate audiences and convert visitors.",
+    primaryCta: "SEE OUR WORK",
+    secondaryCta: "GET IN TOUCH",
+    // Placeholder for design
+    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
+    bgPosition: "center",
   },
+  {
+    subtitle: "WEB & APP DEVELOPMENT",
+    title: "Build Your Digital Empire",
+    description: "Robust, scalable, and beautiful web and mobile applications tailored to your specific business needs.",
+    primaryCta: "BUILD NOW",
+    secondaryCta: "OUR PROCESS",
+    // Placeholder for dev
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop",
+    bgPosition: "center",
+  }
 ];
 
 const HeroSection = () => {
   return (
-    <section className="w-full h-[90vh] min-h-[600px] relative overflow-hidden">
+    <section className="w-full relative bg-black text-white overflow-hidden">
       <Carousel
-        className="w-full h-full"
+        className="w-full"
         opts={{
           loop: true,
         }}
       >
-        <CarouselContent className="h-full ml-0">
+        <CarouselContent className="ml-0">
           {slides.map((slide, index) => (
-            <CarouselItem key={index} className="pl-0 h-full">
-              <div className="relative w-full h-full">
-                {/* Background Image with Scale Animation */}
-                <div 
-                  className="absolute inset-0 bg-cover bg-center animate-subtle-zoom"
+            <CarouselItem key={index} className="pl-0 relative w-full">
+              {/* Container for height */}
+              <div className="relative w-full h-[600px] md:h-[700px] flex items-center">
+                
+                {/* Background Image Layer */}
+                <div
+                  className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
                   style={{
                     backgroundImage: `url(${slide.image})`,
+                    backgroundPosition: slide.bgPosition,
                   }}
                 />
-                
-                {/* Modern Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/60 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
-                <div className="relative container mx-auto px-4 md:px-6 h-full flex items-center pt-20">
-                  <div className="max-w-3xl space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-                    <Badge
-                      variant="outline"
-                      className="bg-brand-neon/10 text-brand-neon border-brand-neon/50 px-4 py-1 text-sm tracking-widest uppercase backdrop-blur-md"
-                    >
-                      {slide.badge}
-                    </Badge>
+                {/* Heavy Gradient Overlay - mimicking the 'cutout' look on the left */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-transparent md:via-black/60" />
+                
+                {/* Mobile specific overlay for readability */}
+                <div className="absolute inset-0 bg-black/40 md:hidden" />
+
+                {/* Content Layer */}
+                <div className="relative container mx-auto px-6 md:px-12 lg:px-20 z-10">
+                  <div className="max-w-2xl space-y-6 animate-in fade-in slide-in-from-left-8 duration-700">
+                    <span className="inline-block bg-[#FFD700] text-black font-extrabold px-2 py-1 text-sm uppercase tracking-wider">
+                      {slide.subtitle}
+                    </span>
                     
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white leading-tight">
-                      {slide.title.split(' ').map((word, i) => (
-                        <span key={i} className={i === 1 || i === 2 ? "text-gradient-neon" : ""}>
-                          {word}{' '}
-                        </span>
-                      ))}
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight drop-shadow-lg">
+                      {slide.title}
                     </h1>
                     
-                    <p className="text-lg md:text-2xl text-gray-300 font-light max-w-2xl leading-relaxed">
+                    <p className="text-lg md:text-xl text-gray-200 font-medium max-w-xl drop-shadow-md leading-relaxed">
                       {slide.description}
                     </p>
                     
                     <div className="flex flex-wrap items-center gap-4 pt-4">
                       <Button
-                        size="lg"
-                        className="bg-brand-neon hover:bg-brand-neon/90 text-white px-8 py-6 text-lg rounded-full shadow-glow transition-all hover:scale-105"
+                        className="bg-brand-neon hover:bg-brand-neon/90 text-black font-bold text-base px-8 py-6 rounded-sm uppercase tracking-wide transition-transform hover:scale-105"
                       >
-                        {slide.primaryCta}
+                        {slide.primaryCta} <ChevronRight className="ml-2 h-5 w-5" />
                       </Button>
+                      
                       <Button
-                        size="lg"
-                        variant="outline"
-                        className="px-8 py-6 text-lg rounded-full border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40 backdrop-blur-sm"
+                        variant="link"
+                        className="text-white hover:text-brand-neon font-bold text-base px-4 py-6 uppercase tracking-wide flex items-center gap-2 decoration-0 hover:no-underline"
                       >
-                        {slide.secondaryCta}
-                        <ChevronRight className="ml-2 h-4 w-4" />
+                        {slide.secondaryCta} <ChevronRight className="h-5 w-5" />
                       </Button>
                     </div>
                   </div>
@@ -110,9 +120,11 @@ const HeroSection = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <div className="absolute bottom-12 right-12 flex gap-4 z-20">
-          <CarouselPrevious className="static translate-y-0 text-white bg-white/5 border-white/10 hover:bg-brand-neon hover:border-brand-neon rounded-full h-12 w-12" />
-          <CarouselNext className="static translate-y-0 text-white bg-white/5 border-white/10 hover:bg-brand-neon hover:border-brand-neon rounded-full h-12 w-12" />
+
+        {/* Navigation Arrows */}
+        <div className="hidden md:block">
+          <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/80 text-white border-none h-14 w-14 rounded-full" />
+          <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/80 text-white border-none h-14 w-14 rounded-full" />
         </div>
       </Carousel>
     </section>

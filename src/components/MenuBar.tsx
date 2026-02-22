@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Menubar,
@@ -10,117 +10,138 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { Button } from "@/components/ui/button";
-import { Brain, MenuIcon } from "lucide-react";
+import { Brain, MenuIcon, Search, ShoppingCart } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
 const MenuBar = () => {
   const isMobile = useIsMobile();
   const whatsappLink = "https://wa.me/27630498076";
-  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const navLinks = [
     { name: "Home", path: "/" },
+    { name: "Services", path: "/#services" }, // Updated to anchor for now
     { name: "Pricing", path: "/pricing" },
-    { name: "FAQ", path: "/faq" },
-    { name: "Blog", path: "/blog" },
     { name: "About", path: "/about" },
+    { name: "Blog", path: "/blog" },
+    { name: "FAQ", path: "/faq" },
   ];
 
   return (
-    <header className={cn(
-      "fixed top-0 left-0 right-0 z-50 w-full flex justify-center py-4 transition-all duration-300",
-      scrolled ? "py-2" : "py-6"
-    )}>
-      <div className={cn(
-        "container relative mx-auto flex items-center justify-between rounded-full transition-all duration-300",
-        scrolled 
-          ? "bg-background/80 backdrop-blur-xl border border-border shadow-lg max-w-screen-lg h-14 px-6" 
-          : "bg-background/60 backdrop-blur-md border border-border/50 max-w-screen-xl h-16 px-8"
-      )}>
-        <Link
-          to="/"
-          className="flex items-center gap-2 text-lg font-normal tracking-wide text-foreground hover:text-brand-neon transition-colors"
-        >
-          <div className="bg-brand-neon/20 p-1.5 rounded-full">
-             <Brain className="h-5 w-5 text-brand-neon" />
-          </div>
-          <span className="font-medium">Camsnett</span>
-        </Link>
+    <header className="sticky top-0 z-50 w-full bg-background border-b border-border/40">
+      <div className="container mx-auto flex h-14 items-center px-4 md:px-6">
+        {/* Left: Logo & Nav */}
+        <div className="flex items-center gap-8">
+          <Link
+            to="/"
+            className="flex items-center gap-2 text-lg font-semibold tracking-tight hover:opacity-80 transition-opacity"
+          >
+            <Brain className="h-6 w-6 text-brand-neon" />
+            <span className="hidden sm:inline-block">Camsnett</span>
+          </Link>
 
-        {isMobile ? (
-          <Menubar className="border-none bg-transparent">
-            <MenubarMenu>
-              <MenubarTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-foreground hover:bg-gray-100"
+          {!isMobile && (
+            <nav className="flex items-center gap-6 text-sm font-medium">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={cn(
+                    "transition-colors hover:text-brand-neon relative py-1",
+                    location.pathname === link.path 
+                      ? "text-foreground after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-brand-neon" 
+                      : "text-foreground/70"
+                  )}
                 >
-                  <MenuIcon className="h-6 w-6" />
-                  <span className="sr-only">Toggle menu</span>
-                </Button>
-              </MenubarTrigger>
-              <MenubarContent
-                align="end"
-                className="bg-background/95 backdrop-blur-xl border-border text-foreground min-w-[200px]"
-              >
-                {navLinks.map((link) => (
-                  <MenubarItem key={link.name} asChild className="focus:bg-gray-100 focus:text-brand-neon">
-                    <Link to={link.path} className="w-full py-2">
-                      {link.name}
-                    </Link>
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
+          )}
+        </div>
+
+        {/* Right: Actions */}
+        <div className="ml-auto flex items-center gap-2">
+          <Button variant="ghost" size="sm" className="hidden md:flex gap-2 text-sm font-medium">
+             <span>All Microsoft</span>
+             <ChevronDownIcon className="h-3 w-3 opacity-50" />
+          </Button>
+          
+          <Button variant="ghost" size="icon" className="h-9 w-9">
+            <Search className="h-4 w-4" />
+            <span className="sr-only">Search</span>
+          </Button>
+
+          <Button variant="ghost" size="icon" className="h-9 w-9 hidden sm:flex">
+             <ShoppingCart className="h-4 w-4" />
+             <span className="sr-only">Cart</span>
+          </Button>
+
+          <Button
+            asChild
+            size="sm"
+            className="hidden md:inline-flex bg-brand-neon text-white hover:bg-brand-neon/90 rounded-sm font-semibold px-4 ml-2"
+          >
+             <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                Chat
+             </a>
+          </Button>
+
+          {isMobile && (
+            <Menubar className="border-none bg-transparent shadow-none p-0 ml-1">
+              <MenubarMenu>
+                <MenubarTrigger asChild>
+                  <Button variant="ghost" size="icon" className="h-9 w-9">
+                    <MenuIcon className="h-5 w-5" />
+                  </Button>
+                </MenubarTrigger>
+                <MenubarContent align="end" className="min-w-[200px] mt-2">
+                  {navLinks.map((link) => (
+                    <MenubarItem key={link.name} asChild>
+                      <Link to={link.path} className="w-full py-2 cursor-pointer">
+                        {link.name}
+                      </Link>
+                    </MenubarItem>
+                  ))}
+                  <MenubarItem asChild className="p-0 mt-2 focus:bg-transparent">
+                     <a 
+                       href={whatsappLink} 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       className="w-full block bg-brand-neon text-white text-center py-2 text-sm font-medium cursor-pointer hover:bg-brand-neon/90"
+                     >
+                       Chat With Us
+                     </a>
                   </MenubarItem>
-                ))}
-                <MenubarItem
-                  onSelect={() => window.open(whatsappLink, '_blank')}
-                  className="p-2 mt-2 focus:bg-transparent"
-                >
-                  <div className="w-full bg-brand-neon text-white hover:bg-brand-neon/90 hover:shadow-glow transition-all rounded-md px-4 py-2 text-center cursor-pointer font-medium">
-                    Chat With Us
-                  </div>
-                </MenubarItem>
-              </MenubarContent>
-            </MenubarMenu>
-          </Menubar>
-        ) : (
-          <nav className="flex items-center space-x-1">
-            {navLinks.map((link) => (
-              <Button
-                key={link.name}
-                variant="ghost"
-                asChild
-                className={cn(
-                  "text-sm font-medium transition-all hover:bg-gray-100 hover:text-brand-neon rounded-full px-4",
-                  location.pathname === link.path ? "text-brand-neon bg-gray-100" : "text-muted-foreground"
-                )}
-              >
-                <Link to={link.path}>{link.name}</Link>
-              </Button>
-            ))}
-            <div className="w-px h-6 bg-border mx-2" />
-            <Button
-              asChild
-              className="bg-brand-neon text-white hover:bg-brand-neon/80 hover:shadow-glow transition-all duration-300 rounded-full px-6 font-medium"
-            >
-              <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                Chat With Us
-              </a>
-            </Button>
-          </nav>
-        )}
+                </MenubarContent>
+              </MenubarMenu>
+            </Menubar>
+          )}
+        </div>
       </div>
     </header>
   );
 };
+
+// Helper for the chevron
+function ChevronDownIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
 
 export default MenuBar;
