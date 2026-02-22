@@ -87,7 +87,7 @@ const ClientLogosSection = () => {
   );
 
   return (
-    <section className="w-full py-16 bg-white text-gray-900 text-center rounded-3xl shadow-xl">
+    <section className="w-full py-16 bg-white text-gray-900 text-center rounded-3xl border border-gray-100">
       <h2 className="text-4xl font-light mb-12 text-black">
         Join Leading Businesses That Work With Us
       </h2>
