@@ -4,11 +4,58 @@
 
 @layer base {
   :root {
-    /* Modern Dark Blue Theme as Default */
-    --background: 222 47% 11%; /* Deep rich blue */
+    /* Light Theme */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%; /* Deep rich blue text */
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222 47% 11%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --menubar-background: 0 0% 100%;
+    --menubar-foreground: 222 47% 11%;
+    --menubar-border: 214.3 31.8% 91.4%;
+  }
+
+  /* Keep dark mode variables for reference or if we add a toggle later, 
+     but for now we are switching to light mode as requested. */
+  .dark {
+    --background: 222 47% 11%;
     --foreground: 210 40% 98%;
 
-    --card: 217 33% 17%; /* Lighter blue-gray for cards */
+    --card: 217 33% 17%;
     --card-foreground: 210 40% 98%;
 
     --popover: 222 47% 11%;
@@ -32,21 +79,6 @@
     --border: 217 33% 17%;
     --input: 217 33% 17%;
     --ring: 212.7 26.8% 83.9%;
-
-    --radius: 0.75rem;
-
-    --sidebar-background: 222 47% 11%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 170 70% 50%; /* Brand Neon */
-    --sidebar-primary-foreground: 222 47% 11%;
-    --sidebar-accent: 217 33% 17%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 33% 17%;
-    --sidebar-ring: 170 70% 50%;
-
-    --menubar-background: 222 47% 11%;
-    --menubar-foreground: 210 40% 98%;
-    --menubar-border: 217 33% 17%;
   }
 }
 
@@ -58,26 +90,26 @@
   body {
     @apply bg-background text-foreground font-sans min-h-screen selection:bg-brand-neon/30 overflow-x-hidden;
     background-image: 
-      radial-gradient(circle at 15% 50%, rgba(79, 209, 197, 0.08), transparent 25%),
-      radial-gradient(circle at 85% 30%, rgba(56, 140, 126, 0.08), transparent 25%);
+      radial-gradient(circle at 15% 50%, rgba(79, 209, 197, 0.1), transparent 25%),
+      radial-gradient(circle at 85% 30%, rgba(56, 140, 126, 0.1), transparent 25%);
     background-attachment: fixed;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-glass;
+    @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-glass;
   }
   
   .glass-card {
-    @apply bg-card/40 backdrop-blur-md border border-white/10 hover:bg-card/60 transition-all duration-300 hover:border-brand-neon/50 hover:shadow-glow-sm;
+    @apply bg-white/60 backdrop-blur-md border border-gray-100 hover:bg-white/80 transition-all duration-300 hover:border-brand-neon/30 hover:shadow-glow-sm;
   }
   
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600;
   }
 
   .text-gradient-neon {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-neon to-brand-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400;
   }
 }

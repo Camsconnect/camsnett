@@ -44,13 +44,13 @@ const SmeWebsiteSection = () => {
   const hiddenFeatures = features.slice(3);
 
   return (
-    <section className="bg-gray-900 py-16 md:py-24 px-4 sm:px-8 md:px-12">
-      <div className="bg-black/20 border border-white/10 rounded-xl overflow-hidden grid md:grid-cols-2 text-white">
+    <section className="bg-white py-16 md:py-24 px-4 sm:px-8 md:px-12">
+      <div className="bg-white border border-gray-200 shadow-xl rounded-xl overflow-hidden grid md:grid-cols-2 text-foreground">
         <div className="p-8 md:p-12">
           <h2 className="text-3xl font-semibold mb-4">
             A Professional Website That Works for You
           </h2>
-          <p className="text-lg text-gray-400 mb-8">
+          <p className="text-lg text-muted-foreground mb-8">
             We build more than just websites; we build digital storefronts that
             are fast, smart, and easy to manage. Our goal is to give you a
             powerful online presence that you control.
@@ -62,7 +62,7 @@ const SmeWebsiteSection = () => {
                   <CheckCircle className="h-5 w-5 text-brand-neon mr-3 mt-1 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold">{feature.name}</h4>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-muted-foreground">
                       {feature.description}
                     </p>
                   </div>
@@ -76,7 +76,7 @@ const SmeWebsiteSection = () => {
                     <CheckCircle className="h-5 w-5 text-brand-neon mr-3 mt-1 flex-shrink-0" />
                     <div>
                       <h4 className="font-semibold">{feature.name}</h4>
-                      <p className="text-sm text-gray-400">
+                      <p className="text-sm text-muted-foreground">
                         {feature.description}
                       </p>
                     </div>

@@ -25,14 +25,14 @@ const features = [
 
 const SmeSalesSection = () => {
   return (
-    <section className="bg-gray-900 py-16 md:py-24 px-4 sm:px-8 md:px-12">
-      <div className="bg-black/20 border border-white/10 rounded-xl overflow-hidden grid md:grid-cols-2 text-white">
+    <section className="bg-white py-16 md:py-24 px-4 sm:px-8 md:px-12">
+      <div className="bg-white border border-gray-200 shadow-xl rounded-xl overflow-hidden grid md:grid-cols-2 text-foreground">
         <div className="p-8 md:p-12">
           <DollarSign className="h-10 w-10 text-brand-neon mb-4" />
           <h2 className="text-3xl font-semibold mb-4">
             Equip Your Business for Sales
           </h2>
-          <p className="text-lg text-gray-400 mb-8">
+          <p className="text-lg text-muted-foreground mb-8">
             Get the essential tools to manage your finances, present your
             services professionally, and make it easy for customers to pay you.
           </p>
@@ -42,7 +42,7 @@ const SmeSalesSection = () => {
                 <CheckCircle className="h-5 w-5 text-brand-neon mr-3 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold">{feature.name}</h4>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     {feature.description}
                   </p>
                 </div>

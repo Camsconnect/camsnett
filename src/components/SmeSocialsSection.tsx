@@ -25,8 +25,8 @@ const features = [
 
 const SmeSocialsSection = () => {
   return (
-    <section className="bg-gray-900 py-16 md:py-24 px-4 sm:px-8 md:px-12">
-      <div className="bg-black/20 border border-white/10 rounded-xl overflow-hidden grid md:grid-cols-2 text-white">
+    <section className="bg-white py-16 md:py-24 px-4 sm:px-8 md:px-12">
+      <div className="bg-white border border-gray-200 shadow-xl rounded-xl overflow-hidden grid md:grid-cols-2 text-foreground">
         <div className="relative min-h-[300px] md:min-h-0 order-1 md:order-2">
           <img
             src={smeSocialsImage}
@@ -39,7 +39,7 @@ const SmeSocialsSection = () => {
           <h2 className="text-3xl font-semibold mb-4">
             Launch Your Social Media Presence
           </h2>
-          <p className="text-lg text-gray-400 mb-8">
+          <p className="text-lg text-muted-foreground mb-8">
             We set up and brand your social media profiles on key platforms to
             help you start connecting with your audience from day one.
           </p>
@@ -49,7 +49,7 @@ const SmeSocialsSection = () => {
                 <CheckCircle className="h-5 w-5 text-brand-neon mr-3 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold">{feature.name}</h4>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     {feature.description}
                   </p>
                 </div>

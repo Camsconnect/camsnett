@@ -25,8 +25,8 @@ const benefits = [
 
 const SmeEmailsSection = () => {
   return (
-    <section className="bg-gray-900 py-16 md:py-24 px-4 sm:px-8 md:px-12">
-      <div className="bg-black/20 border border-white/10 rounded-xl overflow-hidden grid md:grid-cols-2 text-white">
+    <section className="bg-white py-16 md:py-24 px-4 sm:px-8 md:px-12">
+      <div className="bg-white border border-gray-200 shadow-xl rounded-xl overflow-hidden grid md:grid-cols-2 text-foreground">
         <div className="relative min-h-[300px] md:min-h-0 order-1 md:order-1">
           <img
             src={smeEmailsImage}
@@ -38,14 +38,14 @@ const SmeEmailsSection = () => {
           <h2 className="text-3xl font-semibold mb-4">
             Look Professional with Custom Email
           </h2>
-          <p className="text-lg text-gray-400 mb-6">
+          <p className="text-lg text-muted-foreground mb-6">
             Build trust and brand recognition with every email you send. Our
             package includes up to 15 custom email addresses linked to your
             domain.
           </p>
-          <div className="bg-white/10 border border-white/20 rounded-md p-4 flex items-center gap-3 mb-8">
+          <div className="bg-gray-100 border border-gray-200 rounded-md p-4 flex items-center gap-3 mb-8">
             <AtSign className="h-6 w-6 text-brand-neon flex-shrink-0" />
-            <p className="text-lg font-mono tracking-wider">
+            <p className="text-lg font-mono tracking-wider text-foreground">
               your.name@yourdomain.com
             </p>
           </div>
@@ -55,7 +55,7 @@ const SmeEmailsSection = () => {
                 <CheckCircle className="h-5 w-5 text-brand-neon mr-3 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold">{benefit.name}</h4>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     {benefit.description}
                   </p>
                 </div>

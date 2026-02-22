@@ -44,8 +44,8 @@ const MenuBar = () => {
       <div className={cn(
         "container relative mx-auto flex items-center justify-between rounded-full transition-all duration-300",
         scrolled 
-          ? "bg-background/70 backdrop-blur-xl border border-white/10 shadow-lg max-w-screen-lg h-14 px-6" 
-          : "bg-background/40 backdrop-blur-md border border-white/5 max-w-screen-xl h-16 px-8"
+          ? "bg-background/80 backdrop-blur-xl border border-border shadow-lg max-w-screen-lg h-14 px-6" 
+          : "bg-background/60 backdrop-blur-md border border-border/50 max-w-screen-xl h-16 px-8"
       )}>
         <Link
           to="/"
@@ -64,7 +64,7 @@ const MenuBar = () => {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-foreground hover:bg-white/10"
+                  className="text-foreground hover:bg-gray-100"
                 >
                   <MenuIcon className="h-6 w-6" />
                   <span className="sr-only">Toggle menu</span>
@@ -72,10 +72,10 @@ const MenuBar = () => {
               </MenubarTrigger>
               <MenubarContent
                 align="end"
-                className="bg-background/95 backdrop-blur-xl border-white/10 text-foreground min-w-[200px]"
+                className="bg-background/95 backdrop-blur-xl border-border text-foreground min-w-[200px]"
               >
                 {navLinks.map((link) => (
-                  <MenubarItem key={link.name} asChild className="focus:bg-white/10 focus:text-brand-neon">
+                  <MenubarItem key={link.name} asChild className="focus:bg-gray-100 focus:text-brand-neon">
                     <Link to={link.path} className="w-full py-2">
                       {link.name}
                     </Link>
@@ -100,14 +100,14 @@ const MenuBar = () => {
                 variant="ghost"
                 asChild
                 className={cn(
-                  "text-sm font-medium transition-all hover:bg-white/5 hover:text-brand-neon rounded-full px-4",
-                  location.pathname === link.path ? "text-brand-neon bg-white/5" : "text-muted-foreground"
+                  "text-sm font-medium transition-all hover:bg-gray-100 hover:text-brand-neon rounded-full px-4",
+                  location.pathname === link.path ? "text-brand-neon bg-gray-100" : "text-muted-foreground"
                 )}
               >
                 <Link to={link.path}>{link.name}</Link>
               </Button>
             ))}
-            <div className="w-px h-6 bg-white/10 mx-2" />
+            <div className="w-px h-6 bg-border mx-2" />
             <Button
               asChild
               className="bg-brand-neon text-white hover:bg-brand-neon/80 hover:shadow-glow transition-all duration-300 rounded-full px-6 font-medium"
