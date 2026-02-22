@@ -2,66 +2,98 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { 
-  Megaphone, 
-  Cpu, 
-  Palette, 
-  Code, 
-  Smartphone, 
-  Globe,
-  BarChart,
-  Camera
-} from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+
+import socialMediaImage from "@/assets/social-media-service.jpeg";
+import webDesignImage from "@/assets/web-design-service.jpeg";
+import brandingGraphicsImage from "@/assets/branding-graphics-service.png";
+import businessAppImage from "@/assets/business-app-service.jpeg";
+import videographyImage from "@/assets/videography-service.jpeg";
+import threeDModelingImage from "@/assets/3d-modeling-service.jpeg";
 
 const services = [
   {
-    title: "Brand Strategy",
-    description: "Define your voice and build a lasting identity.",
-    icon: Megaphone,
-    price: "From R5,000",
+    title: "Social Media Management",
+    price: "From $100 per month",
+    duration: "Weekly reports",
+    description:
+      "We help businesses grow and stand out online through strategic content, consistent branding, and performance-driven marketing.",
+    image: socialMediaImage,
+    link: "/services/social-media-management",
   },
   {
-    title: "AI Automation",
-    description: "Streamline operations with custom AI solutions.",
-    icon: Cpu,
-    price: "Custom Quote",
+    title: "YouTube SEO & Growth",
+    price: "From $150",
+    duration: "3 days delivery",
+    description:
+      "Optimize your channel for maximum reach with our tailored packages, from foundational setup to aggressive growth strategies.",
+    image: videographyImage,
+    link: "/services/youtube-seo",
   },
   {
-    title: "Graphic Design",
-    description: "Visuals that communicate and captivate.",
-    icon: Palette,
-    price: "From R2,500",
+    title: "Web Design & AI Solutions",
+    price: "From $120",
+    duration: "3 days delivery",
+    description:
+      "Modern websites that capture your brand. From stunning starter sites to advanced AI-powered platforms that automate your business.",
+    image: webDesignImage,
+    link: "/services/web-design",
   },
   {
-    title: "Web Development",
-    description: "High-performance websites built for growth.",
-    icon: Code,
-    price: "From R8,500",
+    title: "Branding & Graphic Design",
+    price: "From $150",
+    duration: "Printing and delivery",
+    description:
+      "Crafting unique brand identities and stunning visuals that tell your story, from logos to complete brand guidelines.",
+    image: brandingGraphicsImage,
+    link: "/services/branding-and-graphic-design",
   },
   {
-    title: "App Development",
-    description: "Native and cross-platform mobile applications.",
-    icon: Smartphone,
-    price: "From R15,000",
+    title: "Business App Development",
+    price: "From $300",
+    duration: "3 weeks",
+    description:
+      "Custom applications to streamline your operations, enhance customer engagement, and drive business growth.",
+    image: businessAppImage,
+    link: "/services/business-app-development",
   },
   {
-    title: "SEO & Marketing",
-    description: "Get found online and drive qualified traffic.",
-    icon: Globe,
-    price: "From R3,000/mo",
+    title: "Videography",
+    price: "From $300",
+    duration: "1 week",
+    description:
+      "Professional video production to showcase your brand, products, or services. From concept to final cut, we create compelling visual stories.",
+    image: videographyImage,
+    link: "/services/videography",
   },
   {
-    title: "Data Analytics",
-    description: "Turn data into actionable business insights.",
-    icon: BarChart,
-    price: "Custom Quote",
+    title: "3D Modeling & Animation",
+    price: "From $1500",
+    duration: "2-4 weeks",
+    description:
+      "Bring your ideas to life with stunning 3D models and animations. Perfect for product visualization, architectural walkthroughs, and more.",
+    image: threeDModelingImage,
+    link: "/services/3d-modeling",
   },
   {
-    title: "Content Creation",
-    description: "Photography and videography for your brand.",
-    icon: Camera,
-    price: "From R3,500",
-  }
+    title: "n8n Automation",
+    price: "From $200",
+    duration: "1 week delivery",
+    description:
+      "Automate your business processes with powerful workflow automation. Connect tools and integrate AI for smarter operations.",
+    image: businessAppImage, // Reusing related image
+    link: "/services/n8n-automation",
+  },
+  {
+    title: "Architectural Visualization",
+    price: "From $800",
+    duration: "1-2 weeks",
+    description:
+      "Transform architectural concepts into stunning visual experiences with photorealistic renders and VR walkthroughs.",
+    image: threeDModelingImage, // Reusing related image
+    link: "/services/architectural-visualization",
+  },
 ];
 
 const ServicesGrid = () => {
@@ -75,25 +107,47 @@ const ServicesGrid = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div 
-              key={index}
-              className="bg-white p-8 rounded-xl border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group"
+             <div 
+              key={index} 
+              className="group glass-card rounded-2xl overflow-hidden flex flex-col h-full transform transition-all duration-300 hover:-translate-y-2 bg-white border border-gray-100 shadow-sm hover:shadow-xl"
             >
-              <div className="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-neon transition-colors duration-300">
-                <service.icon className="w-7 h-7 text-gray-900" />
+              <div className="relative overflow-hidden h-56">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute bottom-4 left-4 z-20">
+                   <div className="flex items-center gap-2 text-xs font-medium bg-brand-neon/90 text-white px-3 py-1 rounded-full backdrop-blur-md w-fit mb-2">
+                      {service.price}
+                   </div>
+                </div>
               </div>
               
-              <h3 className="text-xl font-bold mb-3 text-gray-900">{service.title}</h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                {service.description}
-              </p>
-              
-              <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
-                <span className="text-sm font-semibold text-gray-500">{service.price}</span>
-                <Button variant="link" className="text-brand-neon p-0 h-auto font-bold hover:no-underline">
-                  Details
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-xl font-semibold mb-2 group-hover:text-brand-neon transition-colors">{service.title}</h3>
+                <div className="flex items-center text-xs text-muted-foreground mb-4 font-mono">
+                  <span className="uppercase tracking-wider">{service.duration}</span>
+                </div>
+                <p className="text-sm text-gray-500 leading-relaxed flex-grow mb-6">
+                  {service.description}
+                </p>
+                
+                <Button
+                  asChild={!!service.link}
+                  variant="ghost"
+                  className="mt-auto w-full justify-between group/btn hover:bg-brand-neon/10 hover:text-brand-neon"
+                >
+                  {service.link ? (
+                    <Link to={service.link}>
+                      Learn More <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
+                    </Link>
+                  ) : (
+                    <span>Learn More</span>
+                  )}
                 </Button>
               </div>
             </div>

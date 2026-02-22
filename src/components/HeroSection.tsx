@@ -9,7 +9,10 @@ import {
 } from "@/components/ui/carousel";
 import { ChevronRight } from "lucide-react";
 
-// Slide data matching the services and requested count (4 slides)
+// Importing local assets
+import threeDImage from "@/assets/3d-modeling-service.jpeg";
+import appImage from "@/assets/business-app-service.jpeg";
+
 const slides = [
   {
     subtitle: "AVAILABLE NOW",
@@ -17,7 +20,6 @@ const slides = [
     description: "We build your visual identity, shape your personality, and grow your brand presence online with data-driven strategies.",
     primaryCta: "GET STARTED",
     secondaryCta: "VIEW PACKAGES",
-    // Using the existing image
     image: "/hero-background.jpeg", 
     bgPosition: "center",
   },
@@ -27,7 +29,6 @@ const slides = [
     description: "Leverage cutting-edge AI automation to scale your business operations and stay ahead of the competition effortlessly.",
     primaryCta: "EXPLORE SOLUTIONS",
     secondaryCta: "LEARN MORE",
-    // Using the existing image
     image: "/hero-background-tech.jpeg",
     bgPosition: "center",
   },
@@ -37,8 +38,7 @@ const slides = [
     description: "From stunning 3D visuals to compelling brand stories, we create designs that captivate audiences and convert visitors.",
     primaryCta: "SEE OUR WORK",
     secondaryCta: "GET IN TOUCH",
-    // Placeholder for design
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
+    image: threeDImage,
     bgPosition: "center",
   },
   {
@@ -47,8 +47,7 @@ const slides = [
     description: "Robust, scalable, and beautiful web and mobile applications tailored to your specific business needs.",
     primaryCta: "BUILD NOW",
     secondaryCta: "OUR PROCESS",
-    // Placeholder for dev
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop",
+    image: appImage,
     bgPosition: "center",
   }
 ];
