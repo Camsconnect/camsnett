@@ -31,8 +31,8 @@ const TechnologyStackSection = () => {
   );
 
   return (
-    <section className="w-full py-16 bg-white text-gray-900 text-center rounded-3xl border border-gray-100">
-      <h2 className="text-4xl font-light mb-12 text-black">Our Tech & Tools</h2>
+    <section className="w-full py-16 bg-white/50 backdrop-blur-sm text-gray-900 text-center rounded-lg border border-gray-200">
+      <h2 className="text-4xl font-serif mb-12 text-gray-900 tracking-tight">Our Tech & Tools</h2>
       <Carousel
         plugins={[plugin.current]}
         opts={{

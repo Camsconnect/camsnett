@@ -98,48 +98,48 @@ const services = [
 
 const ServicesGrid = () => {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-transparent">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl font-bold mb-4 text-gray-900">Our Expertise</h2>
-          <p className="text-lg text-gray-600">
+          <h2 className="text-4xl font-serif text-gray-900 mb-4 tracking-tight">Our Expertise</h2>
+          <p className="text-lg text-gray-600 font-sans">
             Comprehensive digital solutions tailored to elevate your business in the modern landscape.
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-             <div 
-              key={index} 
-              className="group glass-card rounded-2xl overflow-hidden flex flex-col h-full transform transition-all duration-300 hover:-translate-y-2 bg-white border border-gray-100 shadow-sm hover:shadow-xl"
+             <div
+              key={index}
+              className="group bg-white rounded-lg overflow-hidden flex flex-col h-full border border-gray-200 transition-all duration-300 hover:border-brand-orange/50 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]"
             >
-              <div className="relative overflow-hidden h-56">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
+              <div className="relative overflow-hidden h-56 border-b border-gray-100">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute bottom-4 left-4 z-20">
-                   <div className="flex items-center gap-2 text-xs font-medium bg-brand-neon/90 text-white px-3 py-1 rounded-full backdrop-blur-md w-fit mb-2">
+                   <div className="flex items-center gap-2 text-xs font-sans font-medium bg-white text-gray-900 px-3 py-1 rounded-md shadow-sm">
                       {service.price}
                    </div>
                 </div>
               </div>
               
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-brand-neon transition-colors">{service.title}</h3>
-                <div className="flex items-center text-xs text-muted-foreground mb-4 font-mono">
-                  <span className="uppercase tracking-wider">{service.duration}</span>
+                <h3 className="text-2xl font-serif text-gray-900 mb-2 group-hover:text-brand-orange transition-colors">{service.title}</h3>
+                <div className="flex items-center text-xs text-brand-orange mb-4 font-sans font-medium uppercase tracking-wider">
+                  <span>{service.duration}</span>
                 </div>
-                <p className="text-sm text-gray-500 leading-relaxed flex-grow mb-6">
+                <p className="text-sm text-gray-600 leading-relaxed flex-grow mb-6 font-sans">
                   {service.description}
                 </p>
                 
                 <Button
                   asChild={!!service.link}
                   variant="ghost"
-                  className="mt-auto w-full justify-between group/btn hover:bg-brand-neon/10 hover:text-brand-neon"
+                  className="mt-auto w-full justify-between group/btn hover:bg-brand-orange/5 hover:text-brand-orange text-gray-900 font-sans font-medium rounded-md px-4"
                 >
                   {service.link ? (
                     <Link to={service.link}>

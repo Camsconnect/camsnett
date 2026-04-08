@@ -2,122 +2,65 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-import { ChevronRight } from "lucide-react";
-
-// Importing local assets
-import threeDImage from "@/assets/3d-modeling-service.jpeg";
-import appImage from "@/assets/business-app-service.jpeg";
-
-const slides = [
-  {
-    subtitle: "AVAILABLE NOW",
-    title: "Turn Attention into Sales",
-    description: "We build your visual identity, shape your personality, and grow your brand presence online with data-driven strategies.",
-    primaryCta: "GET STARTED",
-    secondaryCta: "VIEW PACKAGES",
-    image: "/hero-background.jpeg", 
-    bgPosition: "center",
-  },
-  {
-    subtitle: "AI INNOVATION",
-    title: "Drive Growth with Intelligence",
-    description: "Leverage cutting-edge AI automation to scale your business operations and stay ahead of the competition effortlessly.",
-    primaryCta: "EXPLORE SOLUTIONS",
-    secondaryCta: "LEARN MORE",
-    image: "/hero-background-tech.jpeg",
-    bgPosition: "center",
-  },
-  {
-    subtitle: "CREATIVE STUDIO",
-    title: "Design That Inspires Action",
-    description: "From stunning 3D visuals to compelling brand stories, we create designs that captivate audiences and convert visitors.",
-    primaryCta: "SEE OUR WORK",
-    secondaryCta: "GET IN TOUCH",
-    image: threeDImage,
-    bgPosition: "center",
-  },
-  {
-    subtitle: "WEB & APP DEVELOPMENT",
-    title: "Build Your Digital Empire",
-    description: "Robust, scalable, and beautiful web and mobile applications tailored to your specific business needs.",
-    primaryCta: "BUILD NOW",
-    secondaryCta: "OUR PROCESS",
-    image: appImage,
-    bgPosition: "center",
-  }
-];
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="w-full relative bg-black text-white overflow-hidden">
-      <Carousel
-        className="w-full"
-        opts={{
-          loop: true,
-        }}
-      >
-        <CarouselContent className="ml-0">
-          {slides.map((slide, index) => (
-            <CarouselItem key={index} className="pl-0 relative w-full">
-              {/* Container for height */}
-              <div className="relative w-full h-[600px] md:h-[700px] flex items-center">
-                
-                {/* Background Image Layer */}
-                <div
-                  className="absolute inset-0 bg-cover bg-no-repeat transition-transform duration-1000"
-                  style={{
-                    backgroundImage: `url(${slide.image})`,
-                    backgroundPosition: slide.bgPosition,
-                  }}
-                />
+    <section className="relative w-full min-h-[85vh] flex flex-col justify-center overflow-hidden border-b border-gray-200">
+      {/* Background is handled by the global math grid, but we can add a subtle gradient fade to ensure text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/50 pointer-events-none" />
 
-                {/* Heavy Gradient Overlay - mimicking the 'cutout' look on the left */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-transparent md:via-black/60" />
-                
-                {/* Mobile specific overlay for readability */}
-                <div className="absolute inset-0 bg-black/40 md:hidden" />
+      <div className="relative container mx-auto px-6 md:px-12 lg:px-20 z-10 py-20">
+        <div className="max-w-4xl space-y-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          
+          <div className="inline-flex items-center rounded-full border border-brand-orange/30 bg-brand-orange/5 px-3 py-1 text-sm text-brand-orange font-medium">
+            <span className="flex h-2 w-2 rounded-full bg-brand-orange mr-2"></span>
+            Intelligence Meets Design
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-gray-900 leading-[1.1] tracking-tight">
+            Your digital presence, <br className="hidden md:block" />
+            <span className="italic font-light text-brand-orange">reimagined.</span>
+          </h1>
+          
+          <p className="text-xl md:text-2xl text-gray-600 font-sans max-w-2xl leading-relaxed">
+            We build your visual identity, shape your personality, and grow your brand online with data-driven strategies and AI automation.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-8">
+            <Button
+              asChild
+              className="bg-brand-orange hover:bg-[#c26547] text-white font-sans text-base px-8 py-6 rounded-md transition-all shadow-sm"
+            >
+              <Link to="/services">
+                Explore Services <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            
+            <Button
+              asChild
+              variant="outline"
+              className="bg-transparent border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900 font-sans text-base px-8 py-6 rounded-md transition-all"
+            >
+              <Link to="/about">
+                Read our story
+              </Link>
+            </Button>
+          </div>
+        </div>
 
-                {/* Content Layer */}
-                <div className="relative container mx-auto px-6 md:px-12 lg:px-20 z-10">
-                  <div className="max-w-2xl space-y-6 animate-in fade-in slide-in-from-left-8 duration-700">
-                    <span className="inline-block bg-[#FFD700] text-black font-extrabold px-2 py-1 text-sm uppercase tracking-wider">
-                      {slide.subtitle}
-                    </span>
-                    
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight drop-shadow-lg">
-                      {slide.title}
-                    </h1>
-                    
-                    <p className="text-lg md:text-xl text-gray-200 font-medium max-w-xl drop-shadow-md leading-relaxed">
-                      {slide.description}
-                    </p>
-                    
-                    <div className="flex flex-wrap items-center gap-4 pt-4">
-                      <Button
-                        className="bg-brand-neon hover:bg-brand-neon/90 text-black font-bold text-base px-8 py-6 rounded-sm uppercase tracking-wide transition-transform hover:scale-105"
-                      >
-                        {slide.primaryCta} <ChevronRight className="ml-2 h-5 w-5" />
-                      </Button>
-                      
-                      <Button
-                        variant="link"
-                        className="text-white hover:text-brand-neon font-bold text-base px-4 py-6 uppercase tracking-wide flex items-center gap-2 decoration-0 hover:no-underline"
-                      >
-                        {slide.secondaryCta} <ChevronRight className="h-5 w-5" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+        {/* Abstract decorative elements giving that research/technical vibe */}
+        <div className="absolute right-10 top-1/2 -translate-y-1/2 hidden lg:block opacity-40 pointer-events-none">
+          <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="200" cy="200" r="199" stroke="#DA7756" strokeWidth="2" strokeDasharray="4 12"/>
+            <circle cx="200" cy="200" r="140" stroke="#DA7756" strokeWidth="1" opacity="0.5"/>
+            <path d="M200 0V400" stroke="#DA7756" strokeWidth="1" opacity="0.3"/>
+            <path d="M0 200H400" stroke="#DA7756" strokeWidth="1" opacity="0.3"/>
+            <circle cx="200" cy="200" r="4" fill="#DA7756"/>
+          </svg>
+        </div>
+      </div>
     </section>
   );
 };

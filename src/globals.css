@@ -1,39 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* Light Theme */
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%; /* Deep rich blue text */
+    /* Light Theme (Anthropic inspired) */
+    --background: 30 33% 98%; /* Warm, paper-like white #FAF9F6 */
+    --foreground: 0 0% 12%; /* Very dark gray text */
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 0 0% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 0 0% 12%;
 
-    --primary: 222 47% 11%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 15 63% 60%; /* Anthropic Orange #DA7756 */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 0 0% 95%;
+    --secondary-foreground: 0 0% 12%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 15 63% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222 47% 11%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 15 63% 60%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem; /* Crisper corners */
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -44,41 +46,32 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --menubar-background: 0 0% 100%;
-    --menubar-foreground: 222 47% 11%;
-    --menubar-border: 214.3 31.8% 91.4%;
+    --menubar-background: 30 33% 98%;
+    --menubar-foreground: 0 0% 12%;
+    --menubar-border: 0 0% 90%;
   }
 
-  /* Keep dark mode variables for reference or if we add a toggle later, 
-     but for now we are switching to light mode as requested. */
   .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-
-    --card: 217 33% 17%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
-
+    /* Mapping dark mode just in case, though app is light */
+    --background: 0 0% 10%;
+    --foreground: 30 33% 98%;
+    --card: 0 0% 12%;
+    --card-foreground: 30 33% 98%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 30 33% 98%;
+    --primary: 15 63% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 30 33% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 15 63% 60%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 212.7 26.8% 83.9%;
+    --destructive-foreground: 30 33% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 15 63% 60%;
   }
 }
 
@@ -88,28 +81,32 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans min-h-screen selection:bg-brand-neon/30 overflow-x-hidden;
+    @apply bg-background text-foreground font-sans min-h-screen selection:bg-brand-orange/30 overflow-x-hidden;
+    
+    /* Anthropic-style Math Grid */
     background-image: 
-      radial-gradient(circle at 15% 50%, rgba(79, 209, 197, 0.1), transparent 25%),
-      radial-gradient(circle at 85% 30%, rgba(56, 140, 126, 0.1), transparent 25%);
+      linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: center top;
     background-attachment: fixed;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-glass;
+    @apply bg-white/80 backdrop-blur-md border border-gray-200;
   }
   
   .glass-card {
-    @apply bg-white/60 backdrop-blur-md border border-gray-100 hover:bg-white/80 transition-all duration-300 hover:border-brand-neon/30 hover:shadow-glow-sm;
+    @apply bg-white/90 backdrop-blur-sm border border-gray-200 transition-all duration-300 hover:border-brand-orange/40;
   }
   
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600;
+    @apply text-foreground; /* Remove gradient for cleaner look */
   }
 
   .text-gradient-neon {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400;
+    @apply text-brand-orange;
   }
 }

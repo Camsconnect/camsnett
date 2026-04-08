@@ -29,29 +29,28 @@ const MenuBar = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background border-b border-border/40">
-      <div className="container mx-auto flex h-14 items-center px-4 md:px-6">
+    <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-gray-200">
+      <div className="container mx-auto flex h-16 items-center px-4 md:px-8">
         {/* Left: Logo & Nav */}
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-10">
           <Link
             to="/"
-            className="flex items-center gap-2 text-lg font-semibold tracking-tight hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2 text-2xl font-serif font-medium tracking-tight text-gray-900 hover:text-brand-orange transition-colors"
           >
-            <Brain className="h-6 w-6 text-brand-neon" />
-            <span className="hidden sm:inline-block">Camsnett</span>
+            Camsnett
           </Link>
 
           {!isMobile && (
-            <nav className="flex items-center gap-6 text-sm font-medium">
+            <nav className="flex items-center gap-8 text-sm font-sans font-medium">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
                   className={cn(
-                    "transition-colors hover:text-brand-neon relative py-1",
-                    location.pathname === link.path 
-                      ? "text-foreground after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-brand-neon" 
-                      : "text-foreground/70"
+                    "transition-colors hover:text-brand-orange relative py-1",
+                    location.pathname === link.path
+                      ? "text-brand-orange"
+                      : "text-gray-600"
                   )}
                 >
                   {link.name}
@@ -62,26 +61,16 @@ const MenuBar = () => {
         </div>
 
         {/* Right: Actions */}
-        <div className="ml-auto flex items-center gap-2">
-          <Button variant="ghost" size="sm" className="hidden md:flex gap-2 text-sm font-medium">
-             <span>All Microsoft</span>
-             <ChevronDownIcon className="h-3 w-3 opacity-50" />
-          </Button>
-          
-          <Button variant="ghost" size="icon" className="h-9 w-9">
-            <Search className="h-4 w-4" />
+        <div className="ml-auto flex items-center gap-4">
+          <Button variant="ghost" size="icon" className="h-9 w-9 text-gray-600 hover:text-brand-orange">
+            <Search className="h-5 w-5" />
             <span className="sr-only">Search</span>
-          </Button>
-
-          <Button variant="ghost" size="icon" className="h-9 w-9 hidden sm:flex">
-             <ShoppingCart className="h-4 w-4" />
-             <span className="sr-only">Cart</span>
           </Button>
 
           <Button
             asChild
             size="sm"
-            className="hidden md:inline-flex bg-brand-neon text-white hover:bg-brand-neon/90 rounded-sm font-semibold px-4 ml-2"
+            className="hidden md:inline-flex bg-brand-orange text-white hover:bg-[#c26547] rounded-md font-sans font-medium px-5 py-2 shadow-sm"
           >
              <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
                 Chat
@@ -105,11 +94,11 @@ const MenuBar = () => {
                     </MenubarItem>
                   ))}
                   <MenubarItem asChild className="p-0 mt-2 focus:bg-transparent">
-                     <a 
-                       href={whatsappLink} 
-                       target="_blank" 
+                     <a
+                       href={whatsappLink}
+                       target="_blank"
                        rel="noopener noreferrer"
-                       className="w-full block bg-brand-neon text-white text-center py-2 text-sm font-medium cursor-pointer hover:bg-brand-neon/90"
+                       className="w-full block bg-brand-orange text-white text-center py-2 text-sm font-medium cursor-pointer hover:bg-[#c26547] rounded-md"
                      >
                        Chat With Us
                      </a>
