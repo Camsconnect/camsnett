@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { Globe, TrendingUp, Cpu, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import PlatformSliderSection from "@/components/PlatformSliderSection";
 import {
   Accordion,
   AccordionContent,
@@ -47,8 +48,11 @@ const Index = () => {
           </div>
         </section>
 
+        {/* PLATFORMS SLIDER */}
+        <PlatformSliderSection />
+
         {/* SECTION 3 — WEB DESIGN PACKAGES */}
-        <section id="web-packages" className="py-20 bg-white border-t border-gray-200">
+        <section id="web-packages" className="py-20 bg-[#FAF9F6] border-t border-gray-200">
           <div className="container mx-auto px-6 max-w-6xl">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-serif text-gray-900 mb-4 tracking-tight">Web Design Packages</h2>
@@ -117,7 +121,7 @@ const Index = () => {
         </section>
 
         {/* SECTION 4 — DIGITAL MARKETING PACKAGES */}
-        <section id="marketing-packages" className="py-20 bg-[#FAF9F6] border-t border-gray-200">
+        <section id="marketing-packages" className="py-20 bg-white border-t border-gray-200">
           <div className="container mx-auto px-6 max-w-5xl">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-serif text-gray-900 mb-4 tracking-tight">Digital Marketing</h2>
@@ -174,7 +178,7 @@ const Index = () => {
         </section>
 
         {/* SECTION 5 — AI BUSINESS INTEGRATION */}
-        <section id="ai-integration" className="py-20 bg-white border-t border-gray-200">
+        <section id="ai-integration" className="py-20 bg-[#FAF9F6] border-t border-gray-200">
           <div className="container mx-auto px-6 max-w-6xl">
             <div className="mb-16">
               <h2 className="text-4xl font-serif text-gray-900 mb-4 tracking-tight">Your Own Private AI</h2>
@@ -207,7 +211,7 @@ const Index = () => {
                 </div>
               </div>
               
-              <div className="bg-[#FAF9F6] p-8 rounded-lg border border-gray-200">
+              <div className="bg-white p-8 rounded-lg border border-gray-200 shadow-sm">
                 <ul className="space-y-5">
                   {[
                     "Business scope & use case assessment",
@@ -230,7 +234,7 @@ const Index = () => {
         </section>
 
         {/* SECTION 6 — HOW IT WORKS */}
-        <section className="py-20 bg-[#FAF9F6] border-t border-gray-200">
+        <section className="py-20 bg-white border-t border-gray-200">
           <div className="container mx-auto px-6 max-w-6xl">
             <h2 className="text-4xl font-serif text-gray-900 mb-16 text-center tracking-tight">How it works</h2>
             
@@ -270,12 +274,12 @@ const Index = () => {
         </section>
 
         {/* SECTION 7 — FAQ */}
-        <section className="py-20 bg-white border-t border-gray-200">
+        <section className="py-20 bg-[#FAF9F6] border-t border-gray-200">
           <div className="container mx-auto px-6 max-w-3xl">
             <h2 className="text-4xl font-serif text-gray-900 mb-12 text-center tracking-tight">Common questions</h2>
             
             <Accordion type="single" collapsible className="w-full space-y-4">
-              <AccordionItem value="item-1" className="bg-[#FAF9F6] border border-gray-200 rounded-lg px-6">
+              <AccordionItem value="item-1" className="bg-white border border-gray-200 rounded-lg px-6 shadow-sm">
                 <AccordionTrigger className="text-left font-serif text-lg hover:no-underline hover:text-brand-orange py-6">
                   How long does a website take?
                 </AccordionTrigger>
@@ -285,7 +289,7 @@ const Index = () => {
                 </AccordionContent>
               </AccordionItem>
               
-              <AccordionItem value="item-2" className="bg-[#FAF9F6] border border-gray-200 rounded-lg px-6">
+              <AccordionItem value="item-2" className="bg-white border border-gray-200 rounded-lg px-6 shadow-sm">
                 <AccordionTrigger className="text-left font-serif text-lg hover:no-underline hover:text-brand-orange py-6">
                   Do I get my own hosting and domain?
                 </AccordionTrigger>
@@ -296,7 +300,7 @@ const Index = () => {
                 </AccordionContent>
               </AccordionItem>
               
-              <AccordionItem value="item-3" className="bg-[#FAF9F6] border border-gray-200 rounded-lg px-6">
+              <AccordionItem value="item-3" className="bg-white border border-gray-200 rounded-lg px-6 shadow-sm">
                 <AccordionTrigger className="text-left font-serif text-lg hover:no-underline hover:text-brand-orange py-6">
                   Do you offer .co.za domains?
                 </AccordionTrigger>
@@ -307,7 +311,7 @@ const Index = () => {
                 </AccordionContent>
               </AccordionItem>
               
-              <AccordionItem value="item-4" className="bg-[#FAF9F6] border border-gray-200 rounded-lg px-6">
+              <AccordionItem value="item-4" className="bg-white border border-gray-200 rounded-lg px-6 shadow-sm">
                 <AccordionTrigger className="text-left font-serif text-lg hover:no-underline hover:text-brand-orange py-6">
                   Do you take full payment upfront?
                 </AccordionTrigger>
@@ -317,7 +321,7 @@ const Index = () => {
                 </AccordionContent>
               </AccordionItem>
               
-              <AccordionItem value="item-5" className="bg-[#FAF9F6] border border-gray-200 rounded-lg px-6">
+              <AccordionItem value="item-5" className="bg-white border border-gray-200 rounded-lg px-6 shadow-sm">
                 <AccordionTrigger className="text-left font-serif text-lg hover:no-underline hover:text-brand-orange py-6">
                   Can I see your work before committing?
                 </AccordionTrigger>
