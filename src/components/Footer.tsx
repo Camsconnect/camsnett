@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   return (
@@ -11,8 +12,8 @@ const Footer = () => {
           
           {/* Logo & Tagline */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center gap-2 text-2xl font-serif font-medium tracking-tight hover:text-brand-orange transition-colors">
-              Camsnett
+            <Link to="/" className="inline-block">
+              <img src={logo} alt="Camsnett Creative Minds" className="h-14 w-auto object-contain" />
             </Link>
             <p className="text-gray-600 max-w-sm">
               Own your data. Control your website. Earn from your investment.
