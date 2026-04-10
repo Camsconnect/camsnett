@@ -21,6 +21,8 @@ import ArchitecturalVisualizationPricingTiersSection from "@/components/Architec
 import { Separator } from "@/components/ui/separator";
 
 const Pricing = () => {
+  const tabTriggerClass = "data-[state=active]:bg-transparent data-[state=active]:border-b-2 data-[state=active]:border-brand-orange data-[state=active]:text-brand-orange rounded-none px-4 py-4 text-gray-500 font-sans font-medium data-[state=active]:shadow-none transition-none whitespace-nowrap";
+
   return (
     <Layout noPaddingTop>
       {/* HERO SECTION */}
@@ -50,46 +52,46 @@ const Pricing = () => {
 
       <div className="container mx-auto px-6 py-20 max-w-screen-xl space-y-16">
         <Tabs defaultValue="web-design" className="w-full">
-          <div className="flex justify-center mb-12">
-            <TabsList className="flex flex-wrap justify-center h-auto bg-gray-100 p-1 rounded-lg gap-1 max-w-full overflow-x-auto">
-              <TabsTrigger value="web-design" className="data-[state=active]:bg-white data-[state=active]:text-brand-orange px-4 py-2">Web Design</TabsTrigger>
-              <TabsTrigger value="social-media" className="data-[state=active]:bg-white data-[state=active]:text-brand-orange px-4 py-2">Social Media</TabsTrigger>
-              <TabsTrigger value="youtube-seo" className="data-[state=active]:bg-white data-[state=active]:text-brand-orange px-4 py-2">YouTube SEO</TabsTrigger>
-              <TabsTrigger value="branding" className="data-[state=active]:bg-white data-[state=active]:text-brand-orange px-4 py-2">Branding</TabsTrigger>
-              <TabsTrigger value="app-dev" className="data-[state=active]:bg-white data-[state=active]:text-brand-orange px-4 py-2">App Development</TabsTrigger>
-              <TabsTrigger value="videography" className="data-[state=active]:bg-white data-[state=active]:text-brand-orange px-4 py-2">Videography</TabsTrigger>
-              <TabsTrigger value="n8n-automation" className="data-[state=active]:bg-white data-[state=active]:text-brand-orange px-4 py-2">n8n Automation</TabsTrigger>
-              <TabsTrigger value="3d-modeling" className="data-[state=active]:bg-white data-[state=active]:text-brand-orange px-4 py-2">3D & Arch Viz</TabsTrigger>
+          <div className="flex justify-start sm:justify-center overflow-x-auto no-scrollbar border-b border-gray-200 mb-12">
+            <TabsList className="flex h-auto bg-transparent p-0 gap-2 sm:gap-6 rounded-none min-w-max">
+              <TabsTrigger value="web-design" className={tabTriggerClass}>Web Design</TabsTrigger>
+              <TabsTrigger value="social-media" className={tabTriggerClass}>Social Media</TabsTrigger>
+              <TabsTrigger value="youtube-seo" className={tabTriggerClass}>YouTube SEO</TabsTrigger>
+              <TabsTrigger value="branding" className={tabTriggerClass}>Branding</TabsTrigger>
+              <TabsTrigger value="app-dev" className={tabTriggerClass}>App Development</TabsTrigger>
+              <TabsTrigger value="videography" className={tabTriggerClass}>Videography</TabsTrigger>
+              <TabsTrigger value="n8n-automation" className={tabTriggerClass}>n8n Automation</TabsTrigger>
+              <TabsTrigger value="3d-modeling" className={tabTriggerClass}>3D & Arch Viz</TabsTrigger>
             </TabsList>
           </div>
           
           <div className="pt-4">
-            <TabsContent value="web-design" className="animate-in fade-in duration-500">
+            <TabsContent value="web-design" className="animate-in fade-in slide-in-from-bottom-4 duration-700">
               <WebDesignPricingTiersSection />
             </TabsContent>
-            <TabsContent value="social-media" className="animate-in fade-in duration-500">
+            <TabsContent value="social-media" className="animate-in fade-in slide-in-from-bottom-4 duration-700">
               <PricingTiersSection />
             </TabsContent>
-            <TabsContent value="youtube-seo" className="animate-in fade-in duration-500">
+            <TabsContent value="youtube-seo" className="animate-in fade-in slide-in-from-bottom-4 duration-700">
               <div className="space-y-16">
                 <YouTubeSEOPricingTiersSection />
                 <Separator className="bg-gray-200" />
                 <YouTubeSEOAddonsSection />
               </div>
             </TabsContent>
-            <TabsContent value="branding" className="animate-in fade-in duration-500">
+            <TabsContent value="branding" className="animate-in fade-in slide-in-from-bottom-4 duration-700">
               <BrandingPricingTiersSection />
             </TabsContent>
-            <TabsContent value="app-dev" className="animate-in fade-in duration-500">
+            <TabsContent value="app-dev" className="animate-in fade-in slide-in-from-bottom-4 duration-700">
               <BusinessAppPricingTiersSection />
             </TabsContent>
-            <TabsContent value="videography" className="animate-in fade-in duration-500">
+            <TabsContent value="videography" className="animate-in fade-in slide-in-from-bottom-4 duration-700">
               <VideographyPricingTiersSection />
             </TabsContent>
-            <TabsContent value="n8n-automation" className="animate-in fade-in duration-500">
+            <TabsContent value="n8n-automation" className="animate-in fade-in slide-in-from-bottom-4 duration-700">
               <N8nAutomationPricingTiersSection />
             </TabsContent>
-            <TabsContent value="3d-modeling" className="space-y-16 animate-in fade-in duration-500">
+            <TabsContent value="3d-modeling" className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
               <ThreeDPricingTiersSection />
               <Separator className="bg-gray-200" />
               <ArchitecturalVisualizationPricingTiersSection />
