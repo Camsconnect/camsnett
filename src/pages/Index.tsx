@@ -9,6 +9,7 @@ import { Globe, TrendingUp, Cpu, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PlatformSliderSection from "@/components/PlatformSliderSection";
 import OfficeBannerSection from "@/components/OfficeBannerSection";
+import AIPartnerSection from "@/components/AIPartnerSection";
 import {
   Accordion,
   AccordionContent,
@@ -180,6 +181,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* AI PARTNERSHIP BANNER */}
+        <AIPartnerSection />
 
         {/* SECTION 5 — AI BUSINESS INTEGRATION */}
         <section id="ai-integration" className="py-20 bg-[#FAF9F6] border-t border-gray-200">
