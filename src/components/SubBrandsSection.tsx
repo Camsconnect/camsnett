@@ -26,7 +26,7 @@ const subBrands = [
 
 const SubBrandsSection = () => {
   return (
-    <section className="w-full py-16 bg-white/50 backdrop-blur-sm text-gray-900 text-center rounded-lg border border-gray-200">
+    <section className="w-full py-16 bg-transparent text-gray-900 text-center">
       <h2 className="text-4xl font-serif text-gray-900 text-center mb-12 tracking-tight">
         Our Ecosystem
       </h2>
@@ -34,9 +34,9 @@ const SubBrandsSection = () => {
         {subBrands.map((brand) => (
           <div
             key={brand.name}
-            className="relative z-10 flex flex-col items-center p-8 rounded-md bg-white text-gray-900 border border-gray-200 text-center hover:border-brand-orange/40 transition-all duration-300"
+            className="relative z-10 flex flex-col items-center p-4 text-gray-900 text-center"
           >
-            <div className="w-full h-48 mb-6 flex items-center justify-center p-4 bg-[#FAF9F6] rounded-md border border-gray-100">
+            <div className="w-full h-48 mb-6 flex items-center justify-center p-6 bg-white rounded-xl shadow-sm">
               <img
                 src={brand.logo}
                 alt={`${brand.name} logo`}
@@ -49,7 +49,7 @@ const SubBrandsSection = () => {
             </p>
             <Button
               variant="outline"
-              className="mt-auto border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 hover:text-gray-900 w-full font-sans font-medium rounded-md"
+              className="mt-auto border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 w-full font-sans font-medium rounded-md shadow-sm"
             >
               Find out more
             </Button>
