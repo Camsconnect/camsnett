@@ -35,7 +35,7 @@ const MenuBar = () => {
         {/* Left: Logo & Nav */}
         <div className="flex items-center gap-10">
           <Link to="/" className="flex items-center shrink-0">
-            <img src={logo} alt="Camsnett Creative Minds" className="h-12 w-auto object-contain" />
+            <img src={logo} alt="Camsnett Creative Minds" className="h-12 w-auto object-contain mix-blend-multiply" />
           </Link>
 
           {!isMobile && (

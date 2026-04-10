@@ -13,7 +13,7 @@ const Footer = () => {
           {/* Logo & Tagline */}
           <div className="space-y-4">
             <Link to="/" className="inline-block">
-              <img src={logo} alt="Camsnett Creative Minds" className="h-14 w-auto object-contain" />
+              <img src={logo} alt="Camsnett Creative Minds" className="h-14 w-auto object-contain mix-blend-multiply" />
             </Link>
             <p className="text-gray-600 max-w-sm">
               Own your data. Control your website. Earn from your investment.
