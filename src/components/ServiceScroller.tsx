@@ -20,16 +20,18 @@ const ServiceScroller = () => {
   const extendedServices = [...services, ...services];
 
   return (
-    <div className="w-full py-3 overflow-hidden bg-background border-y">
-      <div className="flex animate-infinite-scroll">
+    <div className="w-full py-4 overflow-hidden bg-white border-b border-gray-200">
+      <div className="flex animate-infinite-scroll items-center">
         {extendedServices.map((service, index) => (
-          <Link
-            key={index}
-            to={service.link}
-            className="text-muted-foreground hover:text-foreground transition-colors duration-300 px-6 text-sm whitespace-nowrap"
-          >
-            {service.name}
-          </Link>
+          <div key={index} className="flex items-center">
+            <Link
+              to={service.link}
+              className="text-gray-500 hover:text-brand-orange font-sans font-medium transition-colors duration-300 px-8 text-sm uppercase tracking-wider whitespace-nowrap"
+            >
+              {service.name}
+            </Link>
+            <span className="text-gray-300">•</span>
+          </div>
         ))}
       </div>
     </div>
