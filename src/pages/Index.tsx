@@ -8,6 +8,7 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { Globe, TrendingUp, Cpu, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PlatformSliderSection from "@/components/PlatformSliderSection";
+import OfficeBannerSection from "@/components/OfficeBannerSection";
 import {
   Accordion,
   AccordionContent,
@@ -50,6 +51,9 @@ const Index = () => {
 
         {/* PLATFORMS SLIDER */}
         <PlatformSliderSection />
+
+        {/* OFFICE BANNER (Break section) */}
+        <OfficeBannerSection />
 
         {/* SECTION 3 — WEB DESIGN PACKAGES */}
         <section id="web-packages" className="py-20 bg-[#FAF9F6] border-t border-gray-200">
